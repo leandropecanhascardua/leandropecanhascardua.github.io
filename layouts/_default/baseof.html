@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ .Site.Language.Lang }}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>{{ block "title" . }}{{ if not .IsHome }}{{ .Title }} - {{ end }}{{ .Site.Title }}{{ end }}</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Params.Description }}{{ end }}">
+	{{- if .Site.Params.opengraph }}
+		{{ if and (not .Params.images) (.Params.thumbnail) }}<meta property="og:image" content="{{ .Params.thumbnail | absURL }}" />{{ end }}
+		{{ template "_internal/opengraph.html" . }}
+	{{- end }}
+	{{- if .Site.Params.schema }}
+		{{ template "_internal/schema.html" . }}
+	{{- end }}
+	{{- if .Site.Params.twitter_cards }}
+		{{ if and (not .Params.images) (.Params.thumbnail) }}<meta property="twitter:image" content="{{ .Params.thumbnail | absURL }}" />{{ end }}
+		{{ template "_internal/twitter_cards.html" . }}
+	{{- end }}
+
+	{{ $style := resources.Get "css/style.css" | resources.ExecuteAsTemplate "css/style.css" . -}}
+	<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+	{{- range .Site.Params.customCSS }}
+		<link rel="stylesheet" href="{{ . | relURL }}">
+	{{- end }}
+	{{- range .Params.customCSS }}
+		<link rel="stylesheet" href="{{ . | relURL }}">
+	{{- end }}
+
+	{{- with .OutputFormats.Get "rss" }}
+		{{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .RelPermalink $.Site.Title | safeHTML }}
+	{{- end }}
+
+	{{ partial "favicon" . }}
+	{{ partial "perpagehead" . }}
+	{{- if not .Site.IsServer }}
+		{{ template "_internal/google_analytics_async.html" . }}
+	{{- end }}
+</head>
+<body class="body">
+	{{ partial "header" . }}
+	<div class="container wrapper flex">
+		<div class="primary">
+		{{ block "main" . }}
+			{{ with .Content }}
+			<div class="content main__content clearfix">
+				{{ . }}
+			</div>
+			{{ end }}
+		{{ end }}
+		</div>
+		{{ partial "sidebar.html" . }}
+	</div>
+	{{ partial "footer" . }}
+	<script async defer src="{{ "js/menu.js" | relURL }}"></script>
+	{{ range .Site.Params.customJS -}}
+		<script src="{{ . | relURL }}"></script>
+	{{- end }}
+	{{ if .Site.Params.customPartial }}{{ partial .Site.Params.customPartial . }}{{ end }}
+	{{ partial "perpagebody" . }}
+</body>
+</html>

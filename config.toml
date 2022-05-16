@@ -1,0 +1,81 @@
+baseurl = "https://leandropecanhascardua.github.io"
+title = "Leandro Peçanha Scardua"
+languageCode = "de"
+DefaultContentLanguage = "de"
+paginate = "4" # Number of posts per page
+theme = "hugo-dpsg"
+
+[Author] # Used in authorbox
+  name = "Scout Master"
+  bio = "The Scout Master is the leader of this local scout group"
+  avatar = "img/avatar.png"
+
+[Params]
+  description = "Página pessoal de Leandro Peçanha Scardua" # Site description. Used in meta description
+  copyright = "Leandro Peçanha Scardua" # Footer copyright holder, otherwise will use site title
+  opengraph = true # Enable OpenGraph if true
+  schema = true # Enable Schema
+  twitter_cards = true # Enable Twitter Cards if true
+  readmore = false # Show "Read more" button in list if true
+  authorbox = true # Show authorbox at bottom of pages if true
+  toc = true # Enable Table of Contents
+  pager = true # Show pager navigation (prev/next links) at the bottom of pages if true
+  indexPager = false # Show pager navigation on index page
+  post_meta = ["author", "date", "categories", "translations"] # Order of post meta information
+  mainSections = ["post", "blog", "news"] # Specify section pages to show on home page and the "Recent articles" widget
+  photosSections = ["photos"] # Specify section pages to show on home page and the "Recent photos" widget
+  photoTag = "photos" # Specify one tag to show on home page and the "Recent photos" widget. Similar as photoSections, but with 1 tag instead of 1 or multiple sections
+  dateformat = "02.01.2006" # Change the format of dates
+  customCSS = ["css/custom.css"] # Include custom CSS files, can also be used per-page as front matter attribute
+  customJS = ["js/custom.js"] # Include custom JS files
+#  customPartial = "piwik.html" # Include custom partials at the end of the page, e.g. tracking codes
+ # belowTitlePartial = "alert.html" # Include custom partial below the pages title
+
+[Params.style.vars]
+  highlightColor = "#003056" # Override main theme color
+
+[Params.logo]
+  image = "img/placeholder.png" # Logo image. Path relative to "static"
+  image_alt = "Logo image" # alt text for logo image, be screen reader friendly!
+  header = "img/header.jpg" # Header image. Path relative to "static"
+  title = "Leandro Peçanha Scardua" # Logo title, otherwise will use site title
+  subtitle = "Tecnologia e Desenvolvimento de sistemas" # Logo subtitle
+
+[Params.sidebar]
+  home = "right" # Configure layout for home page
+  list = "left"  # Configure layout for list pages
+  single = false # Configure layout for single pages
+  # Enable widgets in given order
+  widgets = ["search", "recent", "recent_photos", "recent_photos_tags", "categories", "taglist", "social", "languages"]
+  # alternatively "ddg-search" can be used, to search via DuckDuckGo
+  # widgets = ["ddg-search", "recent", "categories", "taglist", "social", "languages"]
+
+[Params.footer]
+  text = "[Imprint and Privacy](/imprint)" # Extra text in footer row, understands markdown
+  right = "Donate!" # Right-aligned text in footer row, optional, understands markdown
+
+[Params.widgets]
+  recent_num = 5 # Set the number of articles in the "Recent articles" widget
+  tags_counter = false # Enable counter for each tag in "Tags" widget
+
+#[Params.widgets.social]
+# Enable parts of social widget
+#  facebook = "username"
+#  twitter = "username"
+#  instagram = "username"
+#  linkedin = "username"
+#  telegram = "username"
+#  github = "username"
+#  gitlab = "username"
+#  bitbucket = "username"
+#  email = "example@example.com"
+
+# Custom social links
+#[[Params.widgets.social.custom]]
+#  title = "Youtube"
+#  url = "https://youtube.com/user/username"
+#  icon = "youtube.svg" # Optional. Path relative to "layouts/partials"
+
+#[[Params.widgets.social.custom]]
+#  title = "My Home Page"
+#  url = "http://example.com"
