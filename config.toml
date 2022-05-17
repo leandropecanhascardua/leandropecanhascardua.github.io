@@ -35,7 +35,7 @@ theme = "hugo-dpsg"
   highlightColor = "#003056" # Override main theme color
 
 [Params.logo]
-  image = "img/placeholder.png" # Logo image. Path relative to "static"
+  image = "img/rei-leao.png" # Logo image. Path relative to "static"
   image_alt = "Logo image" # alt text for logo image, be screen reader friendly!
   header = "img/header.jpg" # Header image. Path relative to "static"
   title = "Leandro Peçanha Scardua" # Logo title, otherwise will use site title
@@ -50,9 +50,9 @@ theme = "hugo-dpsg"
   # alternatively "ddg-search" can be used, to search via DuckDuckGo
   # widgets = ["ddg-search", "recent", "categories", "taglist", "social", "languages"]
 
-[Params.footer]
-  text = "[Imprint and Privacy](/imprint)" # Extra text in footer row, understands markdown
-  right = "Donate!" # Right-aligned text in footer row, optional, understands markdown
+#[Params.footer]
+#  text = "[Imprint and Privacy](/imprint)" # Extra text in footer row, understands markdown
+#  right = "Donate!" # Right-aligned text in footer row, optional, understands markdown
 
 [Params.widgets]
   recent_num = 5 # Set the number of articles in the "Recent articles" widget
