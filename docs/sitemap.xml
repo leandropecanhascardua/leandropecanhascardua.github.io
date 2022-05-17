@@ -1,14 +1,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
-      <loc>http://127.0.0.1/</loc>
+      <loc>https://leandropecanhascardua.github.io/</loc>
     </url>
     
     <url>
-      <loc>http://127.0.0.1/categories/</loc>
+      <loc>https://leandropecanhascardua.github.io/categories/</loc>
     </url>
     
     <url>
-      <loc>http://127.0.0.1/tags/</loc>
+      <loc>https://leandropecanhascardua.github.io/tags/</loc>
     </url>
     </urlset>
