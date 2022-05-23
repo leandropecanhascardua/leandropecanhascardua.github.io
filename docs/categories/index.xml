@@ -5,10 +5,20 @@
     <link>https://leandropecanhascardua.github.io/categories/</link>
     <description>Recent content in Categories on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>de</language>
+    <language>pt</language>
+    <lastBuildDate>Wed, 18 May 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux</title>
+      <link>https://leandropecanhascardua.github.io/categories/linux/</link>
+      <pubDate>Wed, 18 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/categories/linux/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

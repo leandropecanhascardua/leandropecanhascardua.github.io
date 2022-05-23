@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="de">
+<html class="no-js" lang="pt">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,6 +29,7 @@
 
 	
 		
+	 <link rel="stylesheet" href="/post.css">
 </head>
 <body class="body">
 	<header class="header">
@@ -51,13 +52,13 @@
 <nav class="menu">
 	<div class="container">
 		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
-			<span class="menu__btn-title" tabindex="-1">Menü</span>
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
 		</button>
 		<ul class="menu__list">
 			<li class="menu__item">
 				<a class="menu__link" href="/">
 					
-					<span class="menu__text">Início</span>
+					<span class="menu__text">Home</span>
 					
 				</a>
 			</li>
@@ -72,8 +73,8 @@
 		
 <main class="main" role="main">
 	<div class="warning">
-		<h1 class="warning__headline">404. Seite nicht gefunden</h1>
-		<p class="warning__text">Die gesuchte Seite existiert nicht, wurde verschoben oder gelöscht. Bitte nutzen Sie die Suche oder gehen Sie zur <a href="/">Startseite</a>.</p>
+		<h1 class="warning__headline">404. Página não encontrada</h1>
+		<p class="warning__text">A página que você estava procurando parece ter sido excluída ou não existe. Por favor, use a pesquisa ou vá para <a href="/">página principal</a>.</p>
 	</div>
 </main>
 
@@ -82,15 +83,42 @@
 <aside class="sidebar sidebar--left"><div class="widget-search widget">
 	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
 		<label>
-			<input class="widget-search__field" type="search" placeholder="Suche..." value="" name="q" aria-label="Suche...">
+			<input class="widget-search__field" type="search" placeholder="BUSCAR..." value="" name="q" aria-label="BUSCAR...">
 		</label>
 		<input class="widget-search__submit" type="submit" value="Search">
 		<input type="hidden" name="sitesearch" value="https://leandropecanhascardua.github.io" />
 	</form>
 </div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Postagens recentes</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/obtendo-dados-do-tempo-no-ubuntu-linux/">Obtendo dados meteorológicos no Linux</a></li>
+		</ul>
+	</div>
+</div>
 
 
 
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categorias</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/linux/">Linux</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/inxi/" title="inxi">inxi</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/meteorologia/" title="meteorologia">meteorologia</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ubuntu/" title="ubuntu">ubuntu</a>
+	</div>
+</div>
 </aside>
 	</div>
 	<footer class="footer">
@@ -98,7 +126,7 @@
 		
 		<div class="footer__copyright">
 			&copy; 2022 Leandro Peçanha Scardua.
-			<span class="footer__copyright-credits">Erstellt mit <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> und <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a> Theme.</span>
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
 			
 		</div>
 		
