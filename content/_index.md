@@ -2,8 +2,6 @@
 page: true
 menu:
   main:
-    name: "Início"
+    name: "Home"
     weight: 1
 ---
-
-

@@ -1,13 +1,13 @@
 baseurl = "https://leandropecanhascardua.github.io"
 title = "Leandro Peçanha Scardua"
-languageCode = "de"
-DefaultContentLanguage = "de"
+languageCode = "pt"
+DefaultContentLanguage = "pt"
 paginate = "4" # Number of posts per page
 theme = "hugo-dpsg"
 
 [Author] # Used in authorbox
-  name = "Scout Master"
-  bio = "The Scout Master is the leader of this local scout group"
+  name = "Leandro Peçanha Scardua"
+  bio = "Desenvolvedor e entusiasta de Software Livre"
   avatar = "img/avatar.png"
 
 [Params]
@@ -18,9 +18,9 @@ theme = "hugo-dpsg"
   twitter_cards = true # Enable Twitter Cards if true
   readmore = false # Show "Read more" button in list if true
   authorbox = true # Show authorbox at bottom of pages if true
-  toc = true # Enable Table of Contents
+  toc = false # Enable Table of Contents
   pager = true # Show pager navigation (prev/next links) at the bottom of pages if true
-  indexPager = false # Show pager navigation on index page
+  indexPager = true # Show pager navigation on index page
   post_meta = ["author", "date", "categories", "translations"] # Order of post meta information
   mainSections = ["post", "blog", "news"] # Specify section pages to show on home page and the "Recent articles" widget
   photosSections = ["photos"] # Specify section pages to show on home page and the "Recent photos" widget
