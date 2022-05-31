@@ -11,7 +11,7 @@
 		{{ . }}
 	</div>
 	{{- end }}
-	{{- range .Paginator.Pages.ByDate }}
+	{{- range .Paginator.Pages.ByDate.Reverse }}
 		{{- .Render "summary" }}
 	{{- end }}
 </main>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Rodando um aplicativo em modo Kiosk no Ubuntu Linux 20.04 - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="Rodando um aplicativo em modo Kiosk no Ubuntu Linux 20.04" />
+<meta property="og:description" content="O modo kiosk (ou quiosque) é um modo de operação que disponibiliza para o usuário um único aplicativo ou aplicação em tela cheia e sem bordas ou barras de ferramentas. Seu principal uso é nos totens de auto atendimento, como os caixas automáticos e filas de atendimento." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/post/rodando-aplica%C3%A7%C3%A3o-em-modo-kiosk-no-ubuntu/" />
+<meta property="article:published_time" content="2022-05-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-30T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Rodando um aplicativo em modo Kiosk no Ubuntu Linux 20.04">
+<meta itemprop="description" content="O modo kiosk (ou quiosque) é um modo de operação que disponibiliza para o usuário um único aplicativo ou aplicação em tela cheia e sem bordas ou barras de ferramentas. Seu principal uso é nos totens de auto atendimento, como os caixas automáticos e filas de atendimento.">
+<meta itemprop="datePublished" content="2022-05-30T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-05-30T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1391">
+
+
+
+<meta itemprop="keywords" content="ubuntu,linux,kiosk," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Rodando um aplicativo em modo Kiosk no Ubuntu Linux 20.04"/>
+<meta name="twitter:description" content="O modo kiosk (ou quiosque) é um modo de operação que disponibiliza para o usuário um único aplicativo ou aplicação em tela cheia e sem bordas ou barras de ferramentas. Seu principal uso é nos totens de auto atendimento, como os caixas automáticos e filas de atendimento."/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Rodando um aplicativo em modo Kiosk no Ubuntu Linux 20.04</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-05-30T00:00:00Z">30.05.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>O modo kiosk (ou quiosque) é um modo de operação que disponibiliza para o usuário um único aplicativo ou aplicação em tela cheia e sem bordas ou barras de ferramentas. Seu principal uso é nos totens de auto atendimento, como os caixas automáticos e filas de atendimento.</p>
+<p>Nesse modo de operação o usuário interage com um único aplicativo,isto é, não possui acesso aos demais recursos do sistema operacional. Além disso, o sistema não pode
+hibernar por ociosidade ou desligar o monitor. A funcionalidade de proteção de tela também deve ser desabilitada, mas, por vezes, esse recurso é habilitado para
+mostrar alguma mensagem de propaganda.</p>
+<h2 id="iniciando-sem-interface-gráfica">Iniciando sem Interface Gráfica</h2>
+<p>A primeira coisa que devemos saber é que teremos de desabilitar o ambiente desktop, para isso vamos configurar o sistema operacional para iniciar sem interface gráfica, mas com suporte à conexão em rede
+(Runlevel 3 ou target multi-user na linguagem systemd)</p>
+<blockquote>
+<p>sudo systemctl set-default multi-user.target</p>
+</blockquote>
+<p>Nossa aplicação de exemplo será um menu construído em html disponível localmente no próprio HD, mas poderia ser um site da web ou um sistema na rede local. Nós vamos abrir esse
+site com o firefox. Caso não o tenha instalado, você pode rodar:</p>
+<blockquote>
+<p>sudo apt install firefox</p>
+</blockquote>
+<p>é necessário passar o caminho completo para o firefox, para evitar qualquer problema relacionado à variável PATH.
+Para encontrar o caminho para o binário, você pode rodar:</p>
+<blockquote>
+<p>leandro@leandro:~$ whereis firefox<br>
+firefox: /usr/bin/firefox /usr/lib/firefox /etc/firefox /usr/share/man/man1/firefox.1.gz</p>
+</blockquote>
+<p>Como podemos ver acima, o firefox está instalado em /usr/bin/</p>
+<h2 id="configurando-a-aplicação">Configurando a aplicação</h2>
+<p>Precisaremos criar um arquivo de nome .xinitrc dentro do diretório home do usuário. Esse é um arquivo de configuração para o xinit e o startx. A Wikipedia nos informa que:</p>
+<blockquote>
+<p>&ldquo;O programa xinit permite que um usuário inicie manualmente um servidor de exibição Xorg. O script startx(1) é um front-end para xinit(1).&rdquo;</p>
+</blockquote>
+<p>Esse arquivo não pode ficar em qualquer lugar, nem pode ter qualquer nome ou extensão. Para criar adicionando conteúdo usando o editor Nano, execute</p>
+<blockquote>
+<p>nano ~/.xinitrc</p>
+</blockquote>
+<p>e insira o conteúdo abaixo</p>
+<blockquote>
+<p>#!/usr/bin/env bash<br>
+xset -dpms<br>
+xset s off<br>
+xset s noblank<br>
+unclutter &amp;<br>
+exec /usr/bin/firefox &ndash;kiosk -width 800 -height 600 -url ~/menu.html</p>
+</blockquote>
+<p>Os Comandos <strong>xset</strong> vão configurar ajustes no monitor. Coisas como desabilitar stand-by, desabilitar proteção de tela e impedir que a tela fique inteiramente branca por ociosidade.</p>
+<p>A quinta linha chama o commando unclutter em background. Esse comando permite ocultar o ponteiro do mouse depois de um tempo sem interação e deixa nossa aplicação mais, digamos, charmosa.</p>
+<p>Esse comando não vem instalado por padrão, então, para adicioná-lo ao
+sistema faça:</p>
+<blockquote>
+<p>sudo apt install unclutter</p>
+</blockquote>
+<p>A últimalinha chama o firefox em modo quiosque com tamanho de 800 pixels de comprimento por 600 pixels de altura e abrindo
+o arquivo menu.html que está na pasta home do usuário.O comando exec substitui o processo do shell pelo do Firefox. Isso é para evitar que em caso de algum erro inesperado o usuário receba um shell de presente.</p>
+<p>Salve o arquivo (ctrl+O). Como não estaremos usando um ambiente desktop (como KDE, Xfce, Gnome etc) não teremos as informações relacionadas à tela. Por isso adotamos uma resolução conservadora de 800x600, suportada por quase
+todos os monitores.</p>
+<p>Precisamos também modificar o arquivo .bashrc que é executado após a autenticação para configurar o ambiente. Novamente abra usando o editor Nano:</p>
+<blockquote>
+<p>nano .bashrc</p>
+</blockquote>
+<p>e adicione o seguinte trecho no final do arquivo:</p>
+<blockquote>
+<p>if [[ !$DISPLAY &amp;&amp; $XDG_VTNR -eq 1 ]]; then<br>
+exec startx<br>
+fi</p>
+</blockquote>
+<p>É necessário muita atenção para não modificar outras partes deste arquivo, pois ele é de fundamental importância para o funcionamento correto do sistema.
+Aperte ctrl+O para salvar a modificação.</p>
+<h2 id="configurando-autologin-em-modo-texto">Configurando autologin em modo texto</h2>
+<p>Agora precisamos configurar o sistema para fazer autologin, isto é, logar automaticamente em uma conta de usuário sem necessidade de informar a senha pelo teclado. O mesmo recurso presente nos ambientes gráficos, mas aqui em modo texto.</p>
+<p>Vamos editar o arquivo de configuração do serviço getty@tty1, que é responsável por criar e gerenciar os terminais em modo texto (geralmente disponíveis entre F1 e F6). Para ver o status deste serviço no seu sistema, rode:</p>
+<blockquote>
+<p>leandro@leandro:~$ sudo systemctl status  getty@tty1<br>
+● <a href="mailto:getty@tty1.service">getty@tty1.service</a> - Getty on tty1<br>
+Loaded: loaded (/lib/systemd/system/getty@.service; enabled; vendor preset: enabled)<br>
+Active: active (running) since Fri 2022-05-27 21:35:50 -03; 45min ago<br>
+Docs: man:agetty(8)<br>
+man:systemd-getty-generator(8)<br>
+<a href="http://0pointer.de/blog/projects/serial-console.html">http://0pointer.de/blog/projects/serial-console.html</a><br>
+Main PID: 811 (agetty)<br>
+Tasks: 1 (limit: 4499)<br>
+Memory: 288.0K<br>
+CGroup: /system.slice/system-getty.slice/getty@tty1.service<br>
+└─811 /sbin/agetty -o -p &ndash; \u &ndash;noclear tty1 linux</p>
+<p>mai 27 21:35:50 leandro systemd[1]: Started Getty on tty1.</p>
+</blockquote>
+<p>Você vai precisar obter o nome de login do usuário que será logado automaticamente, para isso rode:</p>
+<blockquote>
+<p>leandro@leandro:~$ whoami<br>
+<strong>leandro</strong></p>
+</blockquote>
+<p>Vamos configurar o autologin rodando o comando:</p>
+<blockquote>
+<p>sudo systemctl edit getty@tty1</p>
+</blockquote>
+<p>Isso vai abrir o editor de texto configurado como padrão no sistema. No meu sistema é o Nano, na sua instalação pode não ser. Caso queira conferir qual o editor configurado ou mesmo alterar a opção, rode o <strong>update-alternatives</strong>:</p>
+<blockquote>
+<p>leandro@leandro:~/projetos/site/leandropecanhascardua.github.io$ update-alternatives &ndash;config editor<br>
+Existem 3 escolhas para a alternativa editor (disponibiliza /usr/bin/editor).</p>
+<p>Selecção   Caminho            Prioridade Estado<br>
+-&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;<br>
+* 0            /bin/nano         40      modo automático<br>
+1            /bin/ed           -100        modo manual<br>
+2            /bin/nano         40       modo manual<br>
+3            /usr/bin/vim.tiny   15        modo manual</p>
+<p>Pressione <!-- raw HTML omitted --> para manter a escolha actual[*], ou digite o número da selecção:</p>
+</blockquote>
+<p>Basta digitar um número que esteja na coluna &ldquo;Seleção&rdquo; e a modificação estará feita. Apenas apertando Enter o programa encerra a execução sem fazer nenhuma alteração.</p>
+<p>Adicione o conteúdo abaixo com o cuidado de não digitar errado.</p>
+<blockquote>
+<p>[Service]<br>
+ExecStart=<br>
+ExecStart=-/usr/sbin/agetty  &ndash;autologin leandro &ndash;noclear %I $TERM</p>
+</blockquote>
+<p>Apertando ctrl+O e a configuração estará salva (se o editor padrão do sistema for o Nano). No nosso caso, configuramos o autologin no usuário leandro (por exemplo).</p>
+<p>Se o serviço getty@tty1 não estiver habilitado, habilite-o:</p>
+<blockquote>
+<p>sudo systemctl enable getty@tty1</p>
+</blockquote>
+<p>Se porventura alguma coisa sair errado e for necessário voltar à configuração padrão do serviço getty@tty1. Rode</p>
+<blockquote>
+<p>sudo systemctl revert getty@tty1</p>
+</blockquote>
+<h2 id="criando-uma-aplicação-de-teste">Criando uma aplicação de teste</h2>
+<p>crie um arquivo menu.html com o sistema a ser executado. Como exemplo eu fiz o seguinte:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"> &lt;<span style="color:#f92672">html</span>&gt;  
+ &lt;<span style="color:#f92672">head</span>&gt;  
+ &lt;<span style="color:#f92672">style</span>&gt;  
+ .<span style="color:#a6e22e">item_menu</span> {  
+	<span style="color:#66d9ef">width</span>:<span style="color:#ae81ff">40</span><span style="color:#66d9ef">%</span>;  
+	<span style="color:#66d9ef">height</span>:<span style="color:#ae81ff">30</span><span style="color:#66d9ef">%</span>;  
+	<span style="color:#66d9ef">margin-bottom</span>:<span style="color:#ae81ff">5</span><span style="color:#66d9ef">%</span>;  
+	<span style="color:#66d9ef">display</span>:<span style="color:#66d9ef">flex</span>;  
+	<span style="color:#66d9ef">justify-content</span>: <span style="color:#66d9ef">center</span>;  
+	<span style="color:#66d9ef">align-items</span>: <span style="color:#66d9ef">center</span>;  
+}  
+<span style="color:#f92672">a</span>:<span style="color:#a6e22e">link</span> {  
+	<span style="color:#66d9ef">color</span>:<span style="color:#66d9ef">white</span>;  
+	<span style="color:#66d9ef">text-decoration</span>: <span style="color:#66d9ef">none</span>;  
+}  
+<span style="color:#f92672">a</span>:<span style="color:#a6e22e">hover</span> {  
+	<span style="color:#66d9ef">text-decoration</span>: <span style="color:#66d9ef">bold</span>;  
+}  
+ &lt;/<span style="color:#f92672">style</span>&gt;  
+ &lt;/<span style="color:#f92672">head</span>&gt;  
+ &lt;<span style="color:#f92672">body</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width:785px;height:570px;margin:auto;text-align:center;&#34;</span>&gt;  
+	&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;height:20%;&#34;</span>&gt;  
+		&lt;<span style="color:#f92672">h1</span> &gt;Terminal de Auto Atendimento &lt;/<span style="color:#f92672">h1</span>&gt;  
+	&lt;/<span style="color:#f92672">div</span>&gt;  
+	&lt;<span style="color:#f92672">div</span> &gt;  
+		&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;background-color:SteelBlue;float:left;&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;item_menu&#34;</span>&gt;  
+			&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#&#34;</span> &gt;Segunda Via da Conta &lt;/<span style="color:#f92672">a</span>&gt;  
+		&lt;/<span style="color:#f92672">div</span>&gt;    
+		&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;background-color:DeepSkyBlue;float:right;&#34;</span>  <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;item_menu&#34;</span>&gt;  
+			&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#&#34;</span> &gt;Consulta de Protocolo&lt;/<span style="color:#f92672">a</span>&gt;  
+		&lt;/<span style="color:#f92672">div</span>&gt;    
+		&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;background-color:ForestGreen;float:left;float:right;&#34;</span>  <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;item_menu&#34;</span>&gt;  
+			&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#&#34;</span> &gt;Religação de Instalação&lt;/<span style="color:#f92672">a</span>&gt;  
+		&lt;/<span style="color:#f92672">div</span>&gt;    
+		&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;background-color:DarkOrange;&#34;</span>  <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;item_menu&#34;</span>&gt;  
+			&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#&#34;</span> &gt;Rede Credenciada&lt;/<span style="color:#f92672">a</span>&gt;  
+		&lt;/<span style="color:#f92672">div</span>&gt;  
+	&lt;/<span style="color:#f92672">div</span>&gt;  
+&lt;/<span style="color:#f92672">body</span>&gt;  
+&lt;/<span style="color:#f92672">html</span>&gt;  
+</code></pre></div><p>A partir daqui o sistema pode ser reiniciado e testado. Mas é importante lembrar que em caso de erro pode ser que o sistema fique inacessível (principalmente testando numa máquina virtual).</p>
+<p>É uma boa ideia instalar um servidor ssh e acessar por meio dele. Para encerrar a aplicação e Para voltar à linha de comando na máquina totem, rode:</p>
+<blockquote>
+<p>kilall firefox</p>
+</blockquote>
+<h2 id="considerações-finais">Considerações Finais</h2>
+<p>O modo quiosque é um recurso pouco explorado no ambiente Linux, mas amplamente usado em vários sistemas e aplicações dos mais variados ramos e atividades.</p>
+<p>Nosso exemplo usou o Firefox e uma página html simples para simular um sistema de autoatendimento.</p>
+<p>O resultado pode ter deixado a desejar um pouco, principalmente no quesito performance. Achei o tempo de carregamento muito alto. Mas se levarmos em conta que usei a instalação completa do  XUbuntu e que o firefox é um comedor de memória , saio satisfeito com o resultado.
+Há um grande potencial de melhoria!</p>
+<p>Rodar o exemplo para outra distribuição implica em modificar algumas partes do exemplo,pois nem todas as ditros usam SystemD, mas a substituição do Firefox ou o uso de uma
+aplicação própria construída somente para isso pode indicar novos rumos.</p>
+<p>No material de consulta eu vi que é possível enxugar o sistema instalando apenas alguns pacotes-chave. Talvez eu refaça este exemplo em uma distribuição Ubuntu Minimal como teste de hipótese no futuro.
+Outro ponto interessante a ressaltar é a necessidade de instalar um servidor ssh na máquina, visto que um possível erro pode deixar o sistema operacional inacessível para correção. Assim, um servidor ssh é recomendável, ou saber acessar o sistema pelo menu do <strong>GRUB</strong>.</p>
+<p>Enquanto eu escrevia esse capítulo final eu li sobre usar o modo quisque para rodar jogos sem o peso de um ambiente gráfico. Eu confesso que me senti desafiado a tentar fazer essa adaptação, mas, por ora, este aqui já é suficiente
+e há outros assuntos em pauta para os próximos artigos.</p>
+<h4 id="fontes">Fontes:</h4>
+<p><a href="https://wiki.archlinux.org/title/Xinit_(Portugu%C3%AAs)">https://wiki.archlinux.org/title/Xinit_(Portugu%C3%AAs)</a></p>
+<p><a href="https://sylvaindurand.org/launch-chromium-in-kiosk-mode/">https://sylvaindurand.org/launch-chromium-in-kiosk-mode/</a></p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/kiosk/" rel="tag">kiosk</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/post/obtendo-dados-do-tempo-no-ubuntu-linux/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">Obtendo dados meteorológicos no Linux</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+</body>
+</html>
