@@ -1,6 +1,6 @@
 ---
 title: Alterando a data e hora de uma máquina Ubuntu Linux 
-date: 2022-05-01
+date: 2022-06-01
 tags:
   - "ubuntu"
   - "linux"
