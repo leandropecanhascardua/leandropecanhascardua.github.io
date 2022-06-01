@@ -13,10 +13,10 @@
     
     <item>
       <title>Obtendo dados meteorológicos no Linux</title>
-      <link>https://leandropecanhascardua.github.io/post/obtendo-dados-do-tempo-no-ubuntu-linux/</link>
+      <link>https://leandropecanhascardua.github.io/artigos/obtendo-dados-do-tempo-no-ubuntu-linux/</link>
       <pubDate>Wed, 18 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://leandropecanhascardua.github.io/post/obtendo-dados-do-tempo-no-ubuntu-linux/</guid>
+      <guid>https://leandropecanhascardua.github.io/artigos/obtendo-dados-do-tempo-no-ubuntu-linux/</guid>
       <description>&lt;p&gt;Uma das ferramentas mais versáteis do Linux é o inxi. Desenvolvida para fornecer detalhes sobre a configuração do sistema para fóruns de suporte, ela pode ir muito além
 e informar também dados meteorológicos como temperatura, umidade relativa do ar, pressão atmosférica entre outros, tudo pela linha de comando.&lt;/p&gt;</description>
     </item>

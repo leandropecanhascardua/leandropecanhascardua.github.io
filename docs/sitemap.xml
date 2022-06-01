@@ -6,6 +6,16 @@
     </url>
     
     <url>
+      <loc>https://leandropecanhascardua.github.io/categories/artigo/</loc>
+      <lastmod>2022-05-30T00:00:00+00:00</lastmod>
+    </url>
+    
+    <url>
+      <loc>https://leandropecanhascardua.github.io/artigos/</loc>
+      <lastmod>2022-05-30T00:00:00+00:00</lastmod>
+    </url>
+    
+    <url>
       <loc>https://leandropecanhascardua.github.io/categories/</loc>
       <lastmod>2022-05-30T00:00:00+00:00</lastmod>
     </url>
@@ -26,12 +36,7 @@
     </url>
     
     <url>
-      <loc>https://leandropecanhascardua.github.io/post/</loc>
-      <lastmod>2022-05-30T00:00:00+00:00</lastmod>
-    </url>
-    
-    <url>
-      <loc>https://leandropecanhascardua.github.io/post/rodando-aplica%C3%A7%C3%A3o-em-modo-kiosk-no-ubuntu/</loc>
+      <loc>https://leandropecanhascardua.github.io/artigos/rodando-aplica%C3%A7%C3%A3o-em-modo-kiosk-no-ubuntu/</loc>
       <lastmod>2022-05-30T00:00:00+00:00</lastmod>
     </url>
     
@@ -56,7 +61,27 @@
     </url>
     
     <url>
-      <loc>https://leandropecanhascardua.github.io/post/obtendo-dados-do-tempo-no-ubuntu-linux/</loc>
+      <loc>https://leandropecanhascardua.github.io/artigos/obtendo-dados-do-tempo-no-ubuntu-linux/</loc>
       <lastmod>2022-05-18T00:00:00+00:00</lastmod>
+    </url>
+    
+    <url>
+      <loc>https://leandropecanhascardua.github.io/dicas/alterar-data-e-hora-do-sistema-ubuntu/</loc>
+      <lastmod>2022-05-02T00:00:00+00:00</lastmod>
+    </url>
+    
+    <url>
+      <loc>https://leandropecanhascardua.github.io/categories/dicas/</loc>
+      <lastmod>2022-05-02T00:00:00+00:00</lastmod>
+    </url>
+    
+    <url>
+      <loc>https://leandropecanhascardua.github.io/dicas/</loc>
+      <lastmod>2022-05-02T00:00:00+00:00</lastmod>
+    </url>
+    
+    <url>
+      <loc>https://leandropecanhascardua.github.io/tags/terminal/</loc>
+      <lastmod>2022-05-02T00:00:00+00:00</lastmod>
     </url>
     </urlset>
