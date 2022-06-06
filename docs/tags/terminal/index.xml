@@ -6,7 +6,7 @@
     <description>Recent content in terminal on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Mon, 02 May 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jun 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/terminal/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Alterando a data e hora de uma máquina Ubuntu Linux</title>
       <link>https://leandropecanhascardua.github.io/dicas/alterar-data-e-hora-do-sistema-ubuntu/</link>
-      <pubDate>Mon, 02 May 2022 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://leandropecanhascardua.github.io/dicas/alterar-data-e-hora-do-sistema-ubuntu/</guid>
       <description>Recentemente eu estava fazendo testes no meu sistema de bolão para a Copa do Mundo e precisei alterar a data do sistema para 2018 de modo a averiguar as validações de data. Foi então que percebi que não conseguia fazer isso com facilidade com date/hwclock como fazia antigamente.
