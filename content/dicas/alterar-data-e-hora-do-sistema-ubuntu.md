@@ -11,7 +11,7 @@ categories:
 ---
 Recentemente eu estava fazendo testes no meu sistema de bolão para a Copa do Mundo e precisei alterar a data do sistema para 2018 de modo a averiguar as validações de data. 
 Foi então que percebi que não conseguia fazer isso com facilidade com date/hwclock como fazia antigamente. 
-<!-- more -->
+<!--more-->
 Bem, eu havia criado uma regra de validação para que não fosse permitido registrar um palpite para uma partida já encerrada. Um dos critérios para definir isso era a data da partida, ou seja, não é possível alterar a 
 data de uma partida no passado, que já passou.
 

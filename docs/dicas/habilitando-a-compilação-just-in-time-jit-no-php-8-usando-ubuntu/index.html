@@ -10,7 +10,8 @@
 		
 		<meta property="og:title" content="Habilitando a compilação JIT (Just In Time) para o PHP8 no Ubuntu" />
 <meta property="og:description" content="O recurso Just In Time foi adicionado à versão 8 do PHP lançada em 2020 e promete ganhos interessantes de performance.
-Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.
+Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar
+um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.
 O Just In time, porém, é um passo além: Ele permite guardar um trecho já processado diretamente código binário nativo para a máquina, eliminando momentaneamente o interpretador para turbinar a aplicação!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://leandropecanhascardua.github.io/dicas/habilitando-a-compila%C3%A7%C3%A3o-just-in-time-jit-no-php-8-usando-ubuntu/" />
@@ -19,7 +20,8 @@ O Just In time, porém, é um passo além: Ele permite guardar um trecho já pro
 
 		<meta itemprop="name" content="Habilitando a compilação JIT (Just In Time) para o PHP8 no Ubuntu">
 <meta itemprop="description" content="O recurso Just In Time foi adicionado à versão 8 do PHP lançada em 2020 e promete ganhos interessantes de performance.
-Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.
+Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar
+um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.
 O Just In time, porém, é um passo além: Ele permite guardar um trecho já processado diretamente código binário nativo para a máquina, eliminando momentaneamente o interpretador para turbinar a aplicação!">
 <meta itemprop="datePublished" content="2022-06-05T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2022-06-05T00:00:00&#43;00:00" />
@@ -32,7 +34,8 @@ O Just In time, porém, é um passo além: Ele permite guardar um trecho já pro
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Habilitando a compilação JIT (Just In Time) para o PHP8 no Ubuntu"/>
 <meta name="twitter:description" content="O recurso Just In Time foi adicionado à versão 8 do PHP lançada em 2020 e promete ganhos interessantes de performance.
-Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.
+Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar
+um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.
 O Just In time, porém, é um passo além: Ele permite guardar um trecho já processado diretamente código binário nativo para a máquina, eliminando momentaneamente o interpretador para turbinar a aplicação!"/>
 
 
@@ -115,7 +118,6 @@ O Just In time, porém, é um passo além: Ele permite guardar um trecho já pro
 <p>Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar
 um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.</p>
 <p>O Just In time, porém, é um passo além: Ele permite guardar um trecho já processado diretamente código binário nativo para a máquina, eliminando momentaneamente o interpretador para turbinar a aplicação!</p>
-<!-- raw HTML omitted -->
 <p>É claro que não são todas as aplicações que vão se beneficiar deste recurso, mas isso já uma outra história.</p>
 <p>Na instalação padrão do PHP esse recurso vem desabilitado (Até o momento da escrita deste artigo). Então vamos verificar como está a configuração do ambiente primeiro.</p>
 <h2 id="verificar-se-jit-está-habilitado">Verificar se JIT está habilitado</h2>
@@ -187,7 +189,6 @@ xdebug.mode=Off</p>
 <h2 id="conclusão">Conclusão:</h2>
 <p>Embora a nova versão do PHP tenha trazido novidades interessantes para o quesito performance,pelo menos no momento atual elas não vêm configuradas por padrão, sendo necessário proceder à modificação dos arquivos do sistema.</p>
 <p>Eu usei nesta dica o servidor interno do PHP disponível pela linha de comando, mas as modificações serão as mesmas para o servidor Apache (não testei usando NGinx ou outros servidores http).</p>
-
 		</div>
 		<footer class="post__footer">
 			
@@ -226,6 +227,12 @@ xdebug.mode=Off</p>
 		<a class="pager__link" href="/dicas/alterar-data-e-hora-do-sistema-ubuntu/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;Anterior</span>
 			<p class="pager__title">Alterando a data e hora de uma máquina Ubuntu Linux</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/dicas/encontrar-senha-wifi-ubuntu/" rel="next">
+			<span class="pager__subtitle">Próximo&thinsp;»</span>
+			<p class="pager__title">Encontrando a senha da rede wifi gravada no Ubuntu Linux</p>
 		</a>
 	</div>
 </nav>

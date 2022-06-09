@@ -15,8 +15,7 @@ Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) 
 um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance. 
 
 O Just In time, porém, é um passo além: Ele permite guardar um trecho já processado diretamente código binário nativo para a máquina, eliminando momentaneamente o interpretador para turbinar a aplicação!
-
-<!-- more -->
+<!--more-->
 É claro que não são todas as aplicações que vão se beneficiar deste recurso, mas isso já uma outra história.
 
 Na instalação padrão do PHP esse recurso vem desabilitado (Até o momento da escrita deste artigo). Então vamos verificar como está a configuração do ambiente primeiro. 

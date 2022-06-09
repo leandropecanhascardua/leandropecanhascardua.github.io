@@ -6,10 +6,21 @@
     <description>Recent content in Linux on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Wed, 01 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jun 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Encontrando a senha da rede wifi gravada no Ubuntu Linux</title>
+      <link>https://leandropecanhascardua.github.io/dicas/encontrar-senha-wifi-ubuntu/</link>
+      <pubDate>Wed, 08 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/encontrar-senha-wifi-ubuntu/</guid>
+      <description>&lt;p&gt;Esta é uma dica rápida e fruto de uma necessidade comum: Configurar a senha da rede wifi em um novo dispositivo.&lt;/p&gt;
+&lt;p&gt;Não se trata de hackear a senha, ou seja, descobrir a senha para a qual não temos acesso legítimo. Trata-se de recuperar a senha armazenada em um dispositivo configurado
+que acessa uma rede wifi para a qual temos acesso legítimo.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Alterando a data e hora de uma máquina Ubuntu Linux</title>
@@ -17,8 +28,8 @@
       <pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://leandropecanhascardua.github.io/dicas/alterar-data-e-hora-do-sistema-ubuntu/</guid>
-      <description>Recentemente eu estava fazendo testes no meu sistema de bolão para a Copa do Mundo e precisei alterar a data do sistema para 2018 de modo a averiguar as validações de data. Foi então que percebi que não conseguia fazer isso com facilidade com date/hwclock como fazia antigamente.
-Bem, eu havia criado uma regra de validação para que não fosse permitido registrar um palpite para uma partida já encerrada. Um dos critérios para definir isso era a data da partida, ou seja, não é possível alterar a data de uma partida no passado, que já passou.</description>
+      <description>&lt;p&gt;Recentemente eu estava fazendo testes no meu sistema de bolão para a Copa do Mundo e precisei alterar a data do sistema para 2018 de modo a averiguar as validações de data.
+Foi então que percebi que não conseguia fazer isso com facilidade com date/hwclock como fazia antigamente.&lt;/p&gt;</description>
     </item>
     
     <item>

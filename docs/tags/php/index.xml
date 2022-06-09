@@ -17,9 +17,10 @@
       <pubDate>Sun, 05 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://leandropecanhascardua.github.io/dicas/habilitando-a-compila%C3%A7%C3%A3o-just-in-time-jit-no-php-8-usando-ubuntu/</guid>
-      <description>O recurso Just In Time foi adicionado à versão 8 do PHP lançada em 2020 e promete ganhos interessantes de performance.
-Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.
-O Just In time, porém, é um passo além: Ele permite guardar um trecho já processado diretamente código binário nativo para a máquina, eliminando momentaneamente o interpretador para turbinar a aplicação!</description>
+      <description>&lt;p&gt;O recurso Just In Time foi adicionado à versão 8 do PHP lançada em 2020 e promete ganhos interessantes de performance.&lt;/p&gt;
+&lt;p&gt;Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar
+um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.&lt;/p&gt;
+&lt;p&gt;O Just In time, porém, é um passo além: Ele permite guardar um trecho já processado diretamente código binário nativo para a máquina, eliminando momentaneamente o interpretador para turbinar a aplicação!&lt;/p&gt;</description>
     </item>
     
   </channel>
