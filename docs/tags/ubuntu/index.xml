@@ -6,10 +6,21 @@
     <description>Recent content in ubuntu on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Wed, 08 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Debugando aplicações PHP usando phpdbg - parte 01</title>
+      <link>https://leandropecanhascardua.github.io/artigos/debug_phpdgb-parte01/</link>
+      <pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/artigos/debug_phpdgb-parte01/</guid>
+      <description>&lt;p&gt;O PHP é uma linguagem voltada para a web e vem daí sua força, desde sua criação. O que é sua força, também é sua fraqueza e a depuração de erros pode se tornar
+uma experiência difícil para os iniciantes.&lt;/p&gt;
+&lt;p&gt;O PHP tem ferramentas para auxiliar o programador a encontrar e corrigir os erros, entre eles o Xdebug e o phpdbg.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Encontrando a senha da rede wifi gravada no Ubuntu Linux</title>
