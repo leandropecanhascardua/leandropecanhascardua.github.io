@@ -6,20 +6,20 @@
     <description>Recent content in terminal on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Wed, 08 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jun 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/terminal/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Encontrando a senha da rede wifi gravada no Ubuntu Linux</title>
+      <title>Configurando uma versão padrão para comandos no Ubuntu Linux 20.04</title>
       <link>https://leandropecanhascardua.github.io/dicas/encontrar-senha-wifi-ubuntu/</link>
-      <pubDate>Wed, 08 Jun 2022 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 15 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://leandropecanhascardua.github.io/dicas/encontrar-senha-wifi-ubuntu/</guid>
-      <description>&lt;p&gt;Esta é uma dica rápida e fruto de uma necessidade comum: Configurar a senha da rede wifi em um novo dispositivo.&lt;/p&gt;
-&lt;p&gt;Não se trata de hackear a senha, ou seja, descobrir a senha para a qual não temos acesso legítimo. Trata-se de recuperar a senha armazenada em um dispositivo configurado
-que acessa uma rede wifi para a qual temos acesso legítimo.&lt;/p&gt;</description>
+      <description>&lt;p&gt;A necessidade desta dica veio de um problema: O ubuntu instala por padrão duas versões do Python: a versão 2.7 e a versão 3.8.&lt;/p&gt;
+&lt;p&gt;À medida em que o python é a base de construção dos ambientes gráficos, pode tornar-se confuso
+gerenciar a versão padrão a ser usada quando chamamos o interpretador na linha de comando. Mas esse problema atinge outros utilitários do sistema.&lt;/p&gt;</description>
     </item>
     
     <item>
