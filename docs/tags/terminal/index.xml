@@ -6,10 +6,20 @@
     <description>Recent content in terminal on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sun, 19 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jun 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/terminal/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Desfragmentando discos no Ubuntu Linux</title>
+      <link>https://leandropecanhascardua.github.io/dicas/desframentacao-disco/</link>
+      <pubDate>Wed, 22 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/desframentacao-disco/</guid>
+      <description>&lt;p&gt;Há um mito de que sistemas Linux não precisam de desfragmentação. Será verdade?&lt;/p&gt;
+&lt;p&gt;Nossa pesquisa se resume apenas ao sistema de arquivos ext4 e não desfragmentamos discos, mas diretórios e arquivos.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Rastreando sniffer encondido na rede usando Linux</title>

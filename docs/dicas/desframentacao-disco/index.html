@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Desfragmentando discos no Ubuntu Linux - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="Desfragmentando discos no Ubuntu Linux" />
+<meta property="og:description" content="Há um mito de que sistemas Linux não precisam de desfragmentação. Será verdade?
+Nossa pesquisa se resume apenas ao sistema de arquivos ext4 e não desfragmentamos discos, mas diretórios e arquivos." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/dicas/desframentacao-disco/" />
+<meta property="article:published_time" content="2022-06-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-22T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Desfragmentando discos no Ubuntu Linux">
+<meta itemprop="description" content="Há um mito de que sistemas Linux não precisam de desfragmentação. Será verdade?
+Nossa pesquisa se resume apenas ao sistema de arquivos ext4 e não desfragmentamos discos, mas diretórios e arquivos.">
+<meta itemprop="datePublished" content="2022-06-22T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-06-22T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="842">
+
+
+
+<meta itemprop="keywords" content="linux,terminal,HD," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Desfragmentando discos no Ubuntu Linux"/>
+<meta name="twitter:description" content="Há um mito de que sistemas Linux não precisam de desfragmentação. Será verdade?
+Nossa pesquisa se resume apenas ao sistema de arquivos ext4 e não desfragmentamos discos, mas diretórios e arquivos."/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/artigos/">
+					
+					<span class="menu__text">Artigos</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/dicas/">
+					
+					<span class="menu__text">Dicas</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Desfragmentando discos no Ubuntu Linux</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-06-22T00:00:00Z">22.06.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>, <a class="meta__link" href="/categories/dicas/" rel="category">Dicas</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>Há um mito de que sistemas Linux não precisam de desfragmentação. Será verdade?</p>
+<p>Nossa pesquisa se resume apenas ao sistema de arquivos ext4 e não desfragmentamos discos, mas diretórios e arquivos.</p>
+<p>Para saber qual sistemas de arquivos sua instalação está usando, rode o <strong>findmnt</strong> ou <strong>lsblk</strong></p>
+<blockquote>
+<p>leandro@leandro:~$ findmnt /<br>
+TARGET SOURCE    FSTYPE OPTIONS<br>
+/      /dev/sda6 <strong>ext4</strong>   rw,relatime,errors=remount-ro</p>
+</blockquote>
+<blockquote>
+<p>leandro@leandro:~$ lsblk -f<br>
+NAME   FSTYPE   LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINT<br>
+loop0  squashfs                                                  0   100% /snap/compress-video/23<br>
+loop1  squashfs                                                  0   100% /snap/bare/5<br>
+loop2  squashfs                                                  0   100% /snap/core18/2344<br>
+loop3  squashfs                                                  0   100% /snap/core18/2409<br>
+loop4  squashfs                                                  0   100% /snap/core20/1518<br>
+loop5  squashfs                                                  0   100% /snap/gnome-3-28-1804/161<br>
+loop6  squashfs                                                  0   100% /snap/gtk-common-themes/1519<br>
+loop7  squashfs                                                  0   100% /snap/gtk-common-themes/1534<br>
+loop8  squashfs                                                  0   100% /snap/snapd/15904<br>
+loop9  squashfs                                                  0   100% /snap/snapd/16010<br>
+loop10 squashfs                                                  0   100% /snap/vlc/3008<br>
+sda<br>
+├─sda1 vfat           5C52-66F4                             480,8M     1% /boot/efi<br>
+├─sda2 ext4     mint  104b7e91-c286-429b-a3c2-3387acf555f6<br>
+├─sda3 vfat           5C2C-1816<br>
+├─sda5 swap           e3f23f0f-1bea-483f-96e0-7e130b58d6a9<br>
+└─<strong>sda6 ext4           0d8fd723-9e58-4ec5-9345-3abe7557af80   30,7G    58% /</strong><br>
+sr0</p>
+</blockquote>
+<p>Podemos ver também que estamos usando 58% do espaço em disco disponível. Guarde essa informação porque ela será útil daqui a pouco!</p>
+<p>O ext4 tem vários mecanismos para diminuir a fragmentação do sistema de arquivos, porém mesmo assim ele pode ficar fragmentado.</p>
+<p>Os sistemas ext2 e ext3 fragmentavam de forma considerável (em relação ao ext4) porque usavam alocação em bloco enquanto o ext4 usa alocação por extent(extensão) que  é um conjunto de blocos físicos contíguos, o que melhora o desempenho.</p>
+<p>Mesmo assim ainda eram melhores que o NTFS da Microft, pois O NTFS guarda a informação nos blocos de uma forma contígua, o que faz com que vá surgindo pequenos fragmentos (tenta colocar os arquivos próximos um do outro),
+ou seja, não tenta alocar os blocos de forma inteligente.</p>
+<p>Já o Linux dispersa os ficheiros ao longo do disco, deixando uma quantidade de espaço considerável entre eles - o próprio sistema pode reduzir os espaços sem necessidade de recorrer a ferramentas de desfragmentação</p>
+<p>Mesmo assim quando a unidade de armazenamento está quase cheia os novos dados gravados irão se fragmentar (acima de 85%), ou seja, quando a unidade ficar com 10% de espaço livre (ou menos) a fragmentação será suficiente para
+justificar uma desfragmentação.</p>
+<p>Além disso, arquivos muitos grandes e que vivem enchendo e esvaziando a unidade de armazenamento, como applicances de máquinas virtuais, provavelmente sofrerão fragmentação considerável.</p>
+<p>Ou seja, em ambos os casos, se você tem problemas com fragmentação no Linux, provavelmente precisa de um disco maior.</p>
+<h1 id="checando-o-nível-de-fragmentação-do-disco">CHECANDO O NÍVEL DE FRAGMENTAÇÃO DO DISCO</h1>
+<p>Para checar o nível de fragmentação usaremo o comando <strong>e4defrag</strong> que no Ubuntu faz parte do pacote <strong>e2fsprogs</strong>. Para instalar basta fazer:</p>
+<blockquote>
+<p>leandro@leandro:~$ sudo apt install e2fsprogs</p>
+</blockquote>
+<p>Então para saber o nível de fragmentação do sistema rodamos:</p>
+<blockquote>
+<p>leandro@leandro:~$ sudo e4defrag -c /<br>
+[sudo] senha para leandro:<br>
+e4defrag 1.45.5 (07-Jan-2020)<br>
+<!-- raw HTML omitted -->                                                     now/best       size/ext<br>
+1. /var/log/wtmp                                                     94/1              4 KB<br>
+2. /home/leandro/.ssr/logs/log-2022-04-05_22.20.36.txt               14/1              4 KB<br>
+3. /var/log/unattended-upgrades/unattended-upgrades-dpkg.log         11/1              4 KB<br>
+4. /home/leandro/snap/vlc/common/.cache/mesa_shader_cache/index      21/1              4 KB<br>
+5. /home/leandro/.ssr/logs/log-2022-03-12_17.55.44.txt               11/1              4 KB</p>
+<p>Total/best extents				445812/436810<br>
+Average size per extent			116 KB<br>
+<strong>Fragmentation score				1</strong><br>
+[0-30 no problem: 31-55 a little bit fragmented: 56- needs defrag]<br>
+This directory (/) does not need defragmentation.<br>
+Done.</p>
+</blockquote>
+<p>Importante mencionar que a opção -c faz o e4defrag verificar a fragmentação do sistema, mas não vai desfragmentar nada.</p>
+<p>O primeiro campo a analisar é  resultado no campo <strong>Fragmentation Score</strong>. No nosso caso o valor é 1. De acordo com a seguinte tabela:</p>
+<blockquote>
+<p>0 a 30      =&gt; sem problemas<br>
+31 a 55     =&gt; pequena fragmentação<br>
+acima de 55 =&gt; sistema de ser desfragmentado</p>
+</blockquote>
+<p>Vemos que não temos problemas de fragmentação, pois somente resultado acima de 56 é necessário realizar desfragmentação.</p>
+<p>Mas ao mesmo tempo o relatório mostra uma lista de arquivos que parecem fragmentados. Há cinco arquivos ou diretórios e, na terceira coluna(now/best) uma contagem de fragmentos usados e de fragmentos ideais.</p>
+<p>Veja que há duas entradas que estão dentro do diretório /var/log e outras duas dentro da pasta de usuário(/home/leandro). Devemos fazer alguma coisa?</p>
+<p>A resposta é: não devemos, mas podemos!</p>
+<p>É que o valor de Fragmentation Score nos informa um valor indicando que não há necessidade de desfragmentar nada, mas o comando e4defrag permite desfragmentar arquivos e diretórios individualmente. Para desfragmentar, basta
+rodar o comando somente com o nome do arquivo ou diretório (sem o parâmetro -c).</p>
+<blockquote>
+<p>leandro@leandro:~$ sudo e4defrag /var/log/wtmp<br>
+[sudo] senha para leandro:<br>
+e4defrag 1.45.5 (07-Jan-2020)<br>
+ext4 defragmentation for /var/log/wtmp</p>
+<p>[1/1]/var/log/wtmp:	100%	[ OK ]<br>
+Success:			[1/1]</p>
+</blockquote>
+<blockquote>
+<p>leandro@leandro:~$ sudo e4defrag /var/log/unattended-upgrades/unattended-upgrades-dpkg.log<br>
+e4defrag 1.45.5 (07-Jan-2020)<br>
+ext4 defragmentation for /var/log/unattended-upgrades/unattended-upgrades-dpkg.log</p>
+<p>[1/1]/var/log/unattended-upgrades/unattended-upgrades-dpkg.log:	100%	[ OK ]<br>
+Success:			[1/1]</p>
+</blockquote>
+<p>Se eu quisesse desfragmentar o diretório raiz(/), poderia rodar</p>
+<blockquote>
+<p>sudo e4defrag /</p>
+</blockquote>
+<p>Importante mencionar que o e4defrag não funciona na partição de SWAP e que se pode usar o e4defrag como usuário normal, mas nesse caso só vai verificar e corrigir arquivos pertencentes ao usuário.</p>
+<p>E também que unidades SSD não devem ser desfragmentadas pois pode diminuir sua vida útil.</p>
+<p>E, por último, há uma outra forma de desfragmentar o disco : copiar todos os arquivos para outro disco, apagar os arquivos originais e copiá-los de volta. O sistema vai alocar os arquivos de forma eficiente
+à medida em que os copia para o disco.</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/terminal/" rel="tag">terminal</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/hd/" rel="tag">HD</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/dicas/descobrindo-sniffer-na-rede/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">Rastreando sniffer encondido na rede usando Linux</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2217338589613653"
+     crossorigin="anonymous"></script>
+</body>
+</html>
