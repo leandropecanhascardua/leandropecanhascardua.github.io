@@ -6,10 +6,22 @@
     <description>Recent content in ubuntu on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Wed, 15 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 26 Jun 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Remover App de operadora Claro ou Vivo do celular Android usando Linux</title>
+      <link>https://leandropecanhascardua.github.io/dicas/remover-app-claro-vivo-do-celular-usando-linux/</link>
+      <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/remover-app-claro-vivo-do-celular-usando-linux/</guid>
+      <description>&lt;p&gt;Todo chip de operadora de telefonia no Brasil instala junto consigo um App. Geralmente é apenas um aplicativo
+de relacionamento com cliente, para oferecer ofertas promocionais e descontos em pacotes.&lt;/p&gt;
+&lt;p&gt;Só que, de vez em quando, esses aplicativos se tornam invasivos, abrindo um menu pop-up a todo
+momento de forma inconveniente ou sem controle, aborrecendo o usuário, principalmente clientes de planos pré-pagos.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Configurando uma versão padrão para comandos no Ubuntu Linux 20.04</title>
