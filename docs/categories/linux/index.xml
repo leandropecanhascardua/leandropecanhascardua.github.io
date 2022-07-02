@@ -6,10 +6,22 @@
     <description>Recent content in Linux on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sun, 26 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 Jul 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Debugando aplicações PHP usando phpdbg - parte 02</title>
+      <link>https://leandropecanhascardua.github.io/artigos/debug_phpdgb-parte02/</link>
+      <pubDate>Sat, 02 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/artigos/debug_phpdgb-parte02/</guid>
+      <description>&lt;p&gt;Embora possamos criar aplicações de linha de comando em PHP, o ambiente mais comum é em
+aplicações web.&lt;/p&gt;
+&lt;p&gt;Assim, precisamos usar ou simular um contexto web para explorar nosso código. É isso o que
+faremos agora.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Remover App de operadora Claro ou Vivo do celular Android usando Linux</title>

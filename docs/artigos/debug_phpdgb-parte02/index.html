@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Debugando aplicações PHP usando phpdbg - parte 02 - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="Debugando aplicações PHP usando phpdbg - parte 02" />
+<meta property="og:description" content="Embora possamos criar aplicações de linha de comando em PHP, o ambiente mais comum é em
+aplicações web.
+Assim, precisamos usar ou simular um contexto web para explorar nosso código. É isso o que
+faremos agora." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/artigos/debug_phpdgb-parte02/" />
+<meta property="article:published_time" content="2022-07-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-02T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Debugando aplicações PHP usando phpdbg - parte 02">
+<meta itemprop="description" content="Embora possamos criar aplicações de linha de comando em PHP, o ambiente mais comum é em
+aplicações web.
+Assim, precisamos usar ou simular um contexto web para explorar nosso código. É isso o que
+faremos agora.">
+<meta itemprop="datePublished" content="2022-07-02T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-07-02T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="577">
+
+
+
+<meta itemprop="keywords" content="ubuntu,linux,PHP,PHPDBG," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Debugando aplicações PHP usando phpdbg - parte 02"/>
+<meta name="twitter:description" content="Embora possamos criar aplicações de linha de comando em PHP, o ambiente mais comum é em
+aplicações web.
+Assim, precisamos usar ou simular um contexto web para explorar nosso código. É isso o que
+faremos agora."/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/artigos/">
+					
+					<span class="menu__text">Artigos</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/dicas/">
+					
+					<span class="menu__text">Dicas</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Debugando aplicações PHP usando phpdbg - parte 02</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-07-02T00:00:00Z">02.07.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>, <a class="meta__link" href="/categories/php/" rel="category">PHP</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>Embora possamos criar aplicações de linha de comando em PHP, o ambiente mais comum é em
+aplicações web.</p>
+<p>Assim, precisamos usar ou simular um contexto web para explorar nosso código. É isso o que
+faremos agora.</p>
+<p>Na primeira parte deste artigo, que pode ser visto <a href="/artigos/debug_phpdgb-parte01/">aqui</a> vimos
+os comandos iniciais do <strong>phpdbg</strong>. Agora é hora de aumentar nosso conhecimento.</p>
+<p>Tomemos o código de exemplo abaixo, típicamente web:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span> <span style="color:#75715e">//teste.php
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>($_POST){
+                $nome  <span style="color:#f92672">=</span> $_POST[<span style="color:#e6db74">&#39;nome&#39;</span>];
+                $senha <span style="color:#f92672">=</span> $_POST[<span style="color:#e6db74">&#39;senha&#39;</span>];
+
+                <span style="color:#66d9ef">echo</span>(<span style="color:#e6db74">&#34;Nome: </span><span style="color:#e6db74">$nome</span><span style="color:#e6db74"> &lt;br&gt;&#34;</span>);
+                <span style="color:#66d9ef">echo</span>(<span style="color:#e6db74">&#34;Senha: </span><span style="color:#e6db74">$senha</span><span style="color:#e6db74"> &lt;br&gt;&#34;</span>);
+                <span style="color:#66d9ef">die</span>();
+        }
+<span style="color:#75715e">?&gt;</span>
+&lt;<span style="color:#f92672">html</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+        &lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span>&gt;
+                &lt;<span style="color:#f92672">p</span>&gt;Nome:&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nome&#34;</span> /&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+                &lt;<span style="color:#f92672">p</span>&gt;Senha:&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;senha&#34;</span> /&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+                &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Enviar&#34;</span> /&gt;
+        &lt;/<span style="color:#f92672">form</span>&gt;
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>Há dois campos de textos em um formulário e quando o usuário clica em enviar, os dados são
+submetidos via http para o servidor para processamento. A saída pode ser vista abaixo:</p>
+<p><img src="/img/post/art02/phpdbg01.png" alt="resultado do script"></p>
+<p>Se rodarmos esse código dentro do debugador, como fizemos no artigo anterior, teríamos:</p>
+<blockquote>
+<p>leandro@leandro:/tmp/teste$ phpdbg teste.php<br>
+[Welcome to phpdbg, the interactive PHP debugger, v8.0.20]<br>
+To get help using phpdbg type &ldquo;help&rdquo; and press enter<br>
+[Please report bugs to <a href="http://bugs.php.net/report.php">http://bugs.php.net/report.php</a>]<br>
+[Successful compilation of /tmp/teste/teste.php]<br>
+prompt&gt; r<br>
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+ 	&lt;form action=&rdquo;&rdquo; method=&quot;post&quot;&gt;<br>
+   	&lt;p&gt;Nome:<!-- raw HTML omitted --><!-- raw HTML omitted --><br>
+   	&lt;p&gt;Senha:<!-- raw HTML omitted --><!-- raw HTML omitted --><br>
+   	&lt;input type=&quot;submit&rdquo; value=&quot;Enviar&rdquo; /&gt;<br>
+ 	&lt;/form&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;<br>
+[Script ended normally]<br>
+prompt&gt;</p>
+</blockquote>
+<p>Como podemos ver o debugador mostrou a saída corretamente, mas como vamos passar os dados
+dos campos do formulário?</p>
+<p>É simples, vamos passar como variável por script usando o comando <strong>ev</strong>(help ev, para mais detalhes) do phpdbg.</p>
+<p>A variável $_POST é um array associativo super global, assim como <strong>$_GET</strong>, <strong>$SESSION</strong> entre outros.</p>
+<p><img src="/img/post/art02/phpdbg02.png" alt="resultado do script"></p>
+<p>Para saber qual o conteúdo que devemos passar, podemos usar a função interna var_dump do PHP, como mostrado
+abaixo.</p>
+<p>A saída será mostrada abaixo com o conteúdo que nos interessa destacado.</p>
+<p><img src="/img/post/art02/phpdbg03.png" alt="resultado do vardump"></p>
+<p>Podemos ver que $_POST é um array associativo. Agora podemos rodar nosso script dentro do phpdbg setando o valor apropriado para $_POST</p>
+<blockquote>
+<p>$_POST= [&ldquo;nome&quot;=&gt; &ldquo;leandro&rdquo;, &ldquo;senha&quot;=&gt; &ldquo;leandro&rdquo;];</p>
+</blockquote>
+<p>Assim nossa sessão de debugação será:</p>
+<blockquote>
+<p>leandro@leandro:/tmp/teste$ phpdbg teste.php<br>
+[Welcome to phpdbg, the interactive PHP debugger, v8.0.20]<br>
+To get help using phpdbg type &ldquo;help&rdquo; and press enter<br>
+[Please report bugs to <a href="http://bugs.php.net/report.php">http://bugs.php.net/report.php</a>]<br>
+[Successful compilation of /tmp/teste/teste.php]<br>
+prompt&gt; <strong>ev $_POST= [&ldquo;nome&quot;=&gt; &ldquo;leandro&rdquo;, &ldquo;senha&quot;=&gt; &ldquo;leandro&rdquo;];</strong> <br>
+Array<br>
+(<br>
+[nome] =&gt; leandro<br>
+[senha] =&gt; leandro<br>
+)</p>
+<p>prompt&gt; r<br>
+Nome: leandro <!-- raw HTML omitted -->Senha: leandro <!-- raw HTML omitted --><br>
+[Script ended normally]<br>
+prompt&gt;</p>
+</blockquote>
+<p>Perfeito!!! Mas&hellip;</p>
+<p>Em cada sessão vamos precisar digitar o valor de $_POST, o que significa se não salvarmos
+em algum lugar será extremamente desgastante passar o valor de $POST a todo momento.</p>
+<p>Podemos melhorar? Sim! Podemos! Então vamos ver!</p>
+<p>Salvamos o contéudo da variável $POST em um arquivo como script PHP e vamos importar em
+nosso código. Digamos que eu tenha salvo o arquivo debug01.php com o conteúdo abaixo:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span> <span style="color:#75715e">//debug01.php
+</span><span style="color:#75715e"></span>        $_POST<span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;nome&#34;</span><span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;leandro&#34;</span>, <span style="color:#e6db74">&#34;senha&#34;</span><span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;leandro&#34;</span>];
+<span style="color:#75715e">?&gt;</span>
+</code></pre></div><p>Criamos um script que apenas seta o valor de uma variável. Como vamos usá-la no phpdbg?</p>
+<p>Vamos usar o comando include do PHP e o comando <strong>ev</strong> do phpdbg.</p>
+<blockquote>
+<p>leandro@leandro:/tmp/teste$ phpdbg teste.php<br>
+[Welcome to phpdbg, the interactive PHP debugger, v8.0.20]<br>
+To get help using phpdbg type &ldquo;help&rdquo; and press enter<br>
+[Please report bugs to <a href="http://bugs.php.net/report.php">http://bugs.php.net/report.php</a>]<br>
+[Successful compilation of /tmp/teste/teste.php]<br>
+prompt&gt; <strong>ev include(&ldquo;debug01.php&rdquo;)</strong><br>
+1<br>
+prompt&gt; r<br>
+Nome: leandro <!-- raw HTML omitted -->Senha: leandro <!-- raw HTML omitted --><br>
+[Script ended normally]<br>
+prompt&gt;</p>
+</blockquote>
+<p>Como podemos ver isso facilitou nossa vida e flexibilizou bastante nossa sessão de debugação.</p>
+<p>Agora podemos criar vários arquivos e em cada um deles um valor diferente para a variável $_POST,
+estabelecendo, assim, vários perfis, correspondendo a diversos cenários de debugação.</p>
+<p>Ficou com dúvida em alguma coisa? Releia o primeiro artigo:</p>
+<p><a href="/artigos/debug_phpdgb-parte01/">Debugando aplicações PHP usando phpdbg - parte 01</a></p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/php/" rel="tag">PHP</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/phpdbg/" rel="tag">PHPDBG</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/artigos/debug_phpdgb-parte01/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">Debugando aplicações PHP usando phpdbg - parte 01</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2217338589613653"
+     crossorigin="anonymous"></script>
+</body>
+</html>
