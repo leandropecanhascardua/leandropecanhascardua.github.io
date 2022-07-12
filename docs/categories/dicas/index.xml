@@ -6,10 +6,23 @@
     <description>Recent content in Dicas on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sun, 26 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 12 Jul 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/categories/dicas/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Recarregar o arquivo .bashrc no Linux</title>
+      <link>https://leandropecanhascardua.github.io/dicas/recarregar-bashrc/</link>
+      <pubDate>Tue, 12 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/recarregar-bashrc/</guid>
+      <description>&lt;p&gt;Essa é uma dica ligeira e muito útil.&lt;/p&gt;
+&lt;p&gt;Por vezes é necessário modificar o script de personalização de ambiente de usuário .bashrc seja
+para modificar a variável PATH, seja para carregar alguma aplicação após o login do usuário.&lt;/p&gt;
+&lt;p&gt;Após a modificação é necessário efetuar logoff e depois login para carregar novamente o arquivo, mas
+para tornar esse logoff desnecessário, podemos carregar este arquivo na sessão atual.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Remover App de operadora Claro ou Vivo do celular Android usando Linux</title>
