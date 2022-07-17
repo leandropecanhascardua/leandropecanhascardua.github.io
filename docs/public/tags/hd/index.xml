@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HD on Leandro Peçanha Scardua</title>
+    <link>https://leandropecanhascardua.github.io/tags/hd/</link>
+    <description>Recent content in HD on Leandro Peçanha Scardua</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt</language>
+    <lastBuildDate>Wed, 22 Jun 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://leandropecanhascardua.github.io/tags/hd/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Desfragmentando discos no Ubuntu Linux</title>
+      <link>https://leandropecanhascardua.github.io/dicas/desframentacao-disco/</link>
+      <pubDate>Wed, 22 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/desframentacao-disco/</guid>
+      <description>&lt;p&gt;Há um mito de que sistemas Linux não precisam de desfragmentação. Será verdade?&lt;/p&gt;
+&lt;p&gt;Nossa pesquisa se resume apenas ao sistema de arquivos ext4 e não desfragmentamos discos, mas diretórios e arquivos.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

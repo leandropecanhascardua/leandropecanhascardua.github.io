@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Habilitando a compilação JIT (Just In Time) para o PHP8 no Ubuntu - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="Habilitando a compilação JIT (Just In Time) para o PHP8 no Ubuntu" />
+<meta property="og:description" content="O recurso Just In Time foi adicionado à versão 8 do PHP lançada em 2020 e promete ganhos interessantes de performance.
+Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar
+um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.
+O Just In time, porém, é um passo além: Ele permite guardar um trecho já processado diretamente código binário nativo para a máquina, eliminando momentaneamente o interpretador para turbinar a aplicação!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/dicas/habilitando-a-compila%C3%A7%C3%A3o-just-in-time-jit-no-php-8-usando-ubuntu/" />
+<meta property="article:published_time" content="2022-06-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-05T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Habilitando a compilação JIT (Just In Time) para o PHP8 no Ubuntu">
+<meta itemprop="description" content="O recurso Just In Time foi adicionado à versão 8 do PHP lançada em 2020 e promete ganhos interessantes de performance.
+Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar
+um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.
+O Just In time, porém, é um passo além: Ele permite guardar um trecho já processado diretamente código binário nativo para a máquina, eliminando momentaneamente o interpretador para turbinar a aplicação!">
+<meta itemprop="datePublished" content="2022-06-05T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-06-05T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="634">
+
+
+
+<meta itemprop="keywords" content="ubuntu,linux,php," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Habilitando a compilação JIT (Just In Time) para o PHP8 no Ubuntu"/>
+<meta name="twitter:description" content="O recurso Just In Time foi adicionado à versão 8 do PHP lançada em 2020 e promete ganhos interessantes de performance.
+Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar
+um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.
+O Just In time, porém, é um passo além: Ele permite guardar um trecho já processado diretamente código binário nativo para a máquina, eliminando momentaneamente o interpretador para turbinar a aplicação!"/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/artigos/">
+					
+					<span class="menu__text">Artigos</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/dicas/">
+					
+					<span class="menu__text">Dicas</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Habilitando a compilação JIT (Just In Time) para o PHP8 no Ubuntu</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-06-05T00:00:00Z">05.06.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/php/" rel="category">PHP</a>, <a class="meta__link" href="/categories/dicas/" rel="category">Dicas</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>O recurso Just In Time foi adicionado à versão 8 do PHP lançada em 2020 e promete ganhos interessantes de performance.</p>
+<p>Esse recurso pode ser entendido como uma evolução do OPCache (que já existe) e que permite guardar
+um trecho de código já processado em memória compartilhada, eliminando alguns passos de processamento para melhorar a performance.</p>
+<p>O Just In time, porém, é um passo além: Ele permite guardar um trecho já processado diretamente código binário nativo para a máquina, eliminando momentaneamente o interpretador para turbinar a aplicação!</p>
+<p>É claro que não são todas as aplicações que vão se beneficiar deste recurso, mas isso já uma outra história.</p>
+<p>Na instalação padrão do PHP esse recurso vem desabilitado (Até o momento da escrita deste artigo). Então vamos verificar como está a configuração do ambiente primeiro.</p>
+<h2 id="verificar-se-jit-está-habilitado">Verificar se JIT está habilitado</h2>
+<p>Primeiramente, vamos criar um script auxiliar para explorar as configurações do ambiente. Abra seu editor de textos favorito e digite o seguinte código:</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Salve com o nome teste.php</p>
+<p>Nosso teste será com o servidor interno do PHP executado pela linha de comando, mas os passos serão os mesmos para o Apache, o que mudará será apenas o arquivo de configuração php.ini.</p>
+<p>Vamos então rodar o servidor na porta 9000 na mesma pasta onde está o arquivo teste.php:</p>
+<blockquote>
+<p>$ php -S localhost:9000</p>
+</blockquote>
+<p>Agora verificamos a configuração acessando http://localhost:9000/teste.php no navegador:</p>
+<p><img src="/img/post/dica01/jit_01_mod.png" alt="Verificando a configuração"></p>
+<p>Podemos ver que estamos usando o arquivo /etc/php/8.0/cli/php.ini  olhando o item &ldquo;Loaded Configuration File&rdquo;. É esse arquivo que vamos modificar.</p>
+<p>Agora vamos verificar se o recurso JIT está ou não habilitado. Descemos a página até encontrar o item &ldquo;JIT&rdquo; na seção &ldquo;Zend OPcache&rdquo;</p>
+<p><img src="/img/post/dica01/jit_02_mod.png" alt="Verificando a configuração"></p>
+<p>Como podemos ver, está desabilitado</p>
+<h2 id="modificando-o-arquivo-de-configuração-phpini">Modificando o arquivo de configuração php.ini</h2>
+<p>Primeiramente vamos verificar algumas configurações relacionadas ao opcache:</p>
+<blockquote>
+<p>leandro@leandro:~$ grep zend_extension /etc/php/8.0/apache2/php.ini<br>
+;zend_extension=opcache</p>
+</blockquote>
+<blockquote>
+<p>leandro@leandro:~$ grep opcache.enable /etc/php/8.0/apache2/php.ini<br>
+;opcache.enable=1<br>
+;opcache.enable_cli=1<br>
+;opcache.enable_file_override=0</p>
+</blockquote>
+<p>Como podemos ver as linhas estão comentadas, o que significa que o recurso está desabilitado. Pode ser que a linha opcache.enable esteja com valor (opcache.enable=0). Neste caso modifique para o valor 1 e salve o conteúdo.</p>
+<p>Precisamos adicionar as seguintes linhas ao final do arquivo:</p>
+<blockquote>
+<p>opcache.jit_buffer_size=100M<br>
+opcache.jit=1235<br>
+opcache.jit_debug=1</p>
+</blockquote>
+<p>Pode acontecer de o recurso JIT não ser habilitado por causa de incompatibilidade com outro plugin ou extensão. Veríamos uma mensagem como a seguinte:</p>
+<blockquote>
+<p>leandro@leandro:/tmp$ php -S localhost:9000<br>
+Cannot load Zend OPcache - it was already loaded<br>
+[Sun Jun  5 23:06:44 2022] <strong>PHP Warning:  JIT is incompatible with third party extensions that override zend_execute_ex(). JIT disabled. in Unknown on line 0</strong><br>
+<!-- raw HTML omitted --><br>
+<!-- raw HTML omitted -->Warning<!-- raw HTML omitted -->:  JIT is incompatible with third party extensions that override zend_execute_ex(). JIT disabled. in <!-- raw HTML omitted -->Unknown<!-- raw HTML omitted --> on line <!-- raw HTML omitted -->0<!-- raw HTML omitted --><!-- raw HTML omitted --><br>
+[Sun Jun  5 23:06:44 2022] PHP 8.0.17 Development Server (http://localhost:9000) started</p>
+</blockquote>
+<p>No meu caso, a incompatibilidade foi com a extensão XDebug, usada durante o desenvolvimento para finalidades de depuração. Será necessário desabilitar essa extensão.
+Normalmente as extensões são instaladas num diretório conf.d junto ao arquivo php.ini. No meu caso seria /etc/php/8.0/cli/conf.d/
+Para facilitar já temos um arquivo com o nome da extensão:</p>
+<blockquote>
+<p>leandro@leandro:~$ cat  /etc/php/8.0/cli/conf.d/20-xdebug.ini<br>
+zend_extension=xdebug.so<br>
+xdebug.mode = debug</p>
+</blockquote>
+<p>Como podemos ver, a extensão está habilitada. Vamos desabilitar apenas setando o valor Off</p>
+<blockquote>
+<p>leandro@leandro:~$ cat  /etc/php/8.0/cli/conf.d/20-xdebug.ini<br>
+zend_extension=xdebug.so<br>
+;xdebug.mode = debug<br>
+xdebug.mode=Off</p>
+</blockquote>
+<p>A partir daqui o recurso já está configurado e operacional se todas as extensões incompatíveis estiverem desabilitadas.</p>
+<p>Para testar, precisamos reiniciar o nosso servidor de linha comando (rodar novamente) e se estivermos configurando o Apache precisamos reiniciar o servidor</p>
+<blockquote>
+<p>sudo systemctl restart apache2</p>
+</blockquote>
+<p>Agora acessamos novamente http://localhost:9000/teste.php para verificar o status:</p>
+<p><img src="/img/post/dica01/jit_03_mod.png" alt="Verificando a configuração"></p>
+<h2 id="conclusão">Conclusão:</h2>
+<p>Embora a nova versão do PHP tenha trazido novidades interessantes para o quesito performance,pelo menos no momento atual elas não vêm configuradas por padrão, sendo necessário proceder à modificação dos arquivos do sistema.</p>
+<p>Eu usei nesta dica o servidor interno do PHP disponível pela linha de comando, mas as modificações serão as mesmas para o servidor Apache (não testei usando NGinx ou outros servidores http).</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/php/" rel="tag">php</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/dicas/alterar-data-e-hora-do-sistema-ubuntu/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">Alterando a data e hora de uma máquina Ubuntu Linux</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/dicas/encontrar-senha-wifi-ubuntu/" rel="next">
+			<span class="pager__subtitle">Próximo&thinsp;»</span>
+			<p class="pager__title">Encontrando a senha da rede wifi gravada no Ubuntu Linux</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2217338589613653"
+     crossorigin="anonymous"></script>
+</body>
+</html>

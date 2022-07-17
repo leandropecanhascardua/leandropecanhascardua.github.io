@@ -1,0 +1,19 @@
+blockquote{
+  padding: 0.em 0.5em 0.3em 0.7em;
+  border-left: 11px solid #B5B5B5;
+  margin: 1.7em 0 1.7em 0.3em;
+  overflow: auto;
+  width: 100%;
+  background-color:#ededff;
+  line-height: 1.1em;
+}
+
+blockquote p{
+  font-family: "Courier New", Courier, monospace, sans-serif;
+  font-size: 15px;
+}
+
+p{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size: 18px;
+}
