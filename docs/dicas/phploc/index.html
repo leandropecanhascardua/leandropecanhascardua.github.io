@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Avaliando a qualidade do código PHP com Phploc - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="Avaliando a qualidade do código PHP com Phploc" />
+<meta property="og:description" content="Em muitas situações é necessário entrar em contato com código desconhecido, desenvolvido por outra pessoa.
+Como etapa preliminar, pode ser útil obter estatísticas que informem algo sobre o código ,
+seja como medida de qualidade ou como informação da estruturação do código.
+Há várias ferramentas que calculam métricas para um sistema ou aplicação. Para
+projetos desenvolvidos em PHP vamos usar a ferramenta mais simples que existe: o phploc" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/dicas/phploc/" />
+<meta property="article:published_time" content="2022-07-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-21T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Avaliando a qualidade do código PHP com Phploc">
+<meta itemprop="description" content="Em muitas situações é necessário entrar em contato com código desconhecido, desenvolvido por outra pessoa.
+Como etapa preliminar, pode ser útil obter estatísticas que informem algo sobre o código ,
+seja como medida de qualidade ou como informação da estruturação do código.
+Há várias ferramentas que calculam métricas para um sistema ou aplicação. Para
+projetos desenvolvidos em PHP vamos usar a ferramenta mais simples que existe: o phploc">
+<meta itemprop="datePublished" content="2022-07-21T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-07-21T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="3394">
+
+
+
+<meta itemprop="keywords" content="linux,php," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Avaliando a qualidade do código PHP com Phploc"/>
+<meta name="twitter:description" content="Em muitas situações é necessário entrar em contato com código desconhecido, desenvolvido por outra pessoa.
+Como etapa preliminar, pode ser útil obter estatísticas que informem algo sobre o código ,
+seja como medida de qualidade ou como informação da estruturação do código.
+Há várias ferramentas que calculam métricas para um sistema ou aplicação. Para
+projetos desenvolvidos em PHP vamos usar a ferramenta mais simples que existe: o phploc"/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/artigos/">
+					
+					<span class="menu__text">Artigos</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/dicas/">
+					
+					<span class="menu__text">Dicas</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Avaliando a qualidade do código PHP com Phploc</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-07-21T00:00:00Z">21.07.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>Em muitas situações é necessário entrar em contato com código desconhecido, desenvolvido por outra pessoa.</p>
+<p>Como etapa preliminar, pode ser útil obter estatísticas que informem algo sobre o código ,
+seja como medida de qualidade ou como informação da estruturação do código.</p>
+<p>Há várias ferramentas que calculam métricas para um sistema ou aplicação. Para
+projetos desenvolvidos em PHP vamos usar a ferramenta mais simples que existe: o phploc</p>
+<p>Antes de analisarmos um relatório da ferramenta, é bom termos em mente que os valores
+são estatísticas, ou seja, são tiradas de um conjunto, representam um conjunto. Isso significa que
+pode ser que haja uma parte do sistema feita de uma forma e outra parte desenvolvida de outra forma(o
+que é comum em equipes com alta rotatividade de desenvolvedores).</p>
+<p>Por isso, sem o contexto do código você pode interpretar da forma como quiser. Isso significa que
+apenas os números não são suficientes para dizer a qualidade de um projeto, mas é uma boa dica!</p>
+<p>O Phploc fornece bons indicadores da qualidade geral do código, por isso consegue dar uma boa visão da
+qualidade estrutural de um projeto. De novo, um sistema pode ser desenvolvido por diversas equipes e
+um módulo estar melhor escrito que outro. Ainda assim nosso exemplo abaixo nos indicará alguns
+pontos a serem observados mesmo sem abrirmos o código fonte.</p>
+<p>O <strong>Phploc</strong> fornece métricas para código procedural(o PHP clássico) ou código orientado a objetos. Por isso
+algumas estatísticas podem ou não fazer sentido dependendo do paradigma utilizado (ou não utilizado!).</p>
+<p>Assim, por exemplo, muitas chamadas de métodos estáticos ou muitas classes abstratas podem indicar um problema
+de desenho(projeto). Ou até mesmo uso de poucas classes, que pode indicar um &ldquo;código mistureba&rdquo;, em que o desen-
+vedor utiliza o paradigma procedural mas de vez em quando usa uma classe para prover um recurso
+específico.</p>
+<p>Tendo em vista que a orientação a objetos foi sendo adicionada ao PHP de forma incremental, isso acontece bastante!</p>
+<h1 id="instalação">Instalação</h1>
+<p>Pode ser que o repositório de pacotes do sistema tenha o phploc disponível. Se tiver, poderíamos instalar executando no DEBIAN
+ou derivados:</p>
+<blockquote>
+<p>leandro@leandro:~$ sudo apt install phploc</p>
+</blockquote>
+<p>Contudo, eu prefiro instalar baixando o arquivo phploc.phar. Para mim deu menos problemas durante a execução:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ wget <a href="https://phar.phpunit.de/phploc.phar">https://phar.phpunit.de/phploc.phar</a><br>
+leandro@leandro:~/Downloads$ cp phploc.phar ~/.local/bin/phploc<br>
+leandro@leandro:~/Downloads$ chmod +x ~/.local/bin/phploc</p>
+</blockquote>
+<p>Devemos lembrar de editar a variável PATH para que ela encontre o binário. Para isso, adicione</p>
+<blockquote>
+<p>PATH=$PATH:~/.local/bin/</p>
+</blockquote>
+<p>no final do arquivo <strong>~/.bashrc</strong> e fazemos logoff e login novamente para termos o acesso configurado em
+nosso ambiente, ou também podemos rodar:</p>
+<blockquote>
+<p>source ~/.bashrc</p>
+</blockquote>
+<p>como vimos em minha <a href="/dicas/recarregar-bashrc/">dica sobre como recarregar  arquivo .bashrc</a>. E assim
+testar a chamada:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ phploc<br>
+phploc 7.0.2 by Sebastian Bergmann.</p>
+<p>No directory specified</p>
+</blockquote>
+<h1 id="uso-básico">Uso básico</h1>
+<p>Para aprendermos a usar o <strong>phploc</strong> vamos baixar um projeto do github para servir de exemplo.</p>
+<p>Eu vou usar como exemplo um sistema para controle de igrejas que pode ser baixado <a href="https://github.com/hiltonbruce/Igreja">aqui</a>, ou via git:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ git clone <a href="https://github.com/hiltonbruce/Igreja.git">https://github.com/hiltonbruce/Igreja.git</a></p>
+</blockquote>
+<p>Nós podemos passar como argumento para o phploc um diretório ou um arquivo. Se passarmos um diretório,
+o relatório será sobre todos os arquivos dentro dele enquanto um arquivo como argumento somente vai
+gerar relatório sobre ele.</p>
+<p>Isso é útil, por exemplo, quando temos um script alvo para refatoração.</p>
+<p>Então, examinando nosso projeto de exemplo, o que obteríamos?</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ <strong>phploc Igreja/</strong><br>
+phploc 7.0.2 by Sebastian Bergmann.</p>
+<p>Directories                                         40<br>
+Files                                              487</p>
+<p><strong>Size</strong><br>
+Lines of Code (LOC)                            48803<br>
+Comment Lines of Code (CLOC)                    4118 (8.44%)<br>
+Non-Comment Lines of Code (NCLOC)              44685 (91.56%)<br>
+Logical Lines of Code (LLOC)                   16374 (33.55%)<br>
+Classes                                       2916 (17.81%)<br>
+Average Class Length                          33<br>
+Minimum Class Length                         1<br>
+Maximum Class Length                       337<br>
+Average Method Length                         10<br>
+Minimum Method Length                        0<br>
+Maximum Method Length                      110<br>
+Average Methods Per Class                      3<br>
+Minimum Methods Per Class                    1<br>
+Maximum Methods Per Class                   17<br>
+Functions                                     1513 (9.24%)<br>
+Average Function Length                       12<br>
+Not in classes or functions                  11945 (72.95%)</p>
+<p><strong>Cyclomatic Complexity</strong><br>
+Average Complexity per LLOC                     0.28<br>
+Average Complexity per Class                   11.60<br>
+Minimum Class Complexity                      1.00<br>
+Maximum Class Complexity                     90.00<br>
+Average Complexity per Method                   4.22<br>
+Minimum Method Complexity                     1.00<br>
+Maximum Method Complexity                    49.00</p>
+<p><strong>Dependencies</strong><br>
+Global Accesses                                 2798<br>
+Global Constants                                49 (1.75%)<br>
+Global Variables                                30 (1.07%)<br>
+Super-Global Variables                        2719 (97.18%)<br>
+Attribute Accesses                              1298<br>
+Non-Static                                    1298 (100.00%)<br>
+Static                                           0 (0.00%)<br>
+Method Calls                                    2405<br>
+Non-Static                                    2391 (99.42%)<br>
+Static                                          14 (0.58%)</p>
+<p><strong>Structure</strong><br>
+Namespaces                                         0<br>
+Interfaces                                         0<br>
+Traits                                             0<br>
+Classes                                           86<br>
+Abstract Classes                                 0 (0.00%)<br>
+Concrete Classes                                86 (100.00%)<br>
+Final Classes                                  0 (0.00%)<br>
+Non-Final Classes                             86 (100.00%)<br>
+Methods                                          283<br>
+Scope<br>
+Non-Static Methods                           283 (100.00%)<br>
+Static Methods                                 0 (0.00%)<br>
+Visibility<br>
+Public Methods                               283 (100.00%)<br>
+Protected Methods                              0 (0.00%)<br>
+Private Methods                                0 (0.00%)<br>
+Functions                                        117<br>
+Named Functions                                117 (100.00%)<br>
+Anonymous Functions                              0 (0.00%)<br>
+Constants                                         24<br>
+Global Constants                                24 (100.00%)<br>
+Class Constants                                  0 (0.00%)<br>
+Public Constants                               0 (0.00%)<br>
+Non-Public Constants                           0 (0.00%)</p>
+</blockquote>
+<p>O relatório é dividido em quatro seções, além de um pequeno resumo da quantidade de arquivos e diretórios:</p>
+<blockquote>
+<p>Directories                                         40<br>
+Files                                              487</p>
+</blockquote>
+<p>O <strong>phploc</strong> conta apenas arquivos com extensão <strong>php</strong>. As seções do relatório final são:</p>
+<ul>
+<li>
+<p><strong>Size</strong>: Calcula várias métricas relacionadas à quantidade de linhas de código. Embora não seja
+comum aplicar no dia a dia, existem vários estudos que usam a quantidade de linhas de código para
+estimar tempo de desenvolvimento, custo de projeto e quantidade de defeitos entre outros.</p>
+</li>
+<li>
+<p><strong>Cyclomatic Complexity</strong>: Calcula a complexidade do código, o número de pontos de decisão dentro
+de uma classe ou trecho de código e que está relacionada à testabilidade do código e à dificuldade
+de compreensão do funcionamento interno.</p>
+</li>
+<li>
+<p><strong>Dependencies</strong>:Calcula, vamos dizer, o acoplamento interno do código, ou seja, o quanto uma alteração em
+um trecho de código pode provocar problemas em outro. Isso acontece por meio de variáveis globais ou
+métodos estáticos.</p>
+</li>
+<li>
+<p><strong>Structure</strong>:Calcula métricas relacionadas ao paradigma de desenvolvimento: orientado a objetos ou
+procedual.</p>
+</li>
+</ul>
+<p>Vamos analisar em detalhe cada seção:</p>
+<h2 id="size">Size</h2>
+<p>Como mencionado anteriormente, calcula estatísticas relacionadas à quantidade de linhas de código:</p>
+<blockquote>
+<p><strong>Size</strong><br>
+  <strong>Lines of Code (LOC)</strong>                           48803<br>
+  <strong>Comment Lines of Code (CLOC)</strong>                    4118 (8.44%)<br>
+  <strong>Non-Comment Lines of Code (NCLOC)</strong>              44685 (91.56%)<br>
+  <strong>Logical Lines of Code (LLOC)</strong>                   16374 (33.55%)</p>
+</blockquote>
+<p>Temos 48,803 linhas de código, dos quais 16,374 são linhas lógicas de código, ou seja, contém
+código fonte(não é linha em branco nem comentário). É importante mencionar que há diversos modos de calcular linhas de código.</p>
+<p>Neste <a href="https://www.aivosto.com/project/help/pm-loc.html">link</a> você pode ler algumas definições.</p>
+<p>Podemos ver que a taxa de comentários é de 8,44% o que é uma boa taxa analisando apenas o valor numérico.
+É claro que precisamos entrar nos meandros do código para avaliar a qualidade real, mas é um início
+confortador.</p>
+<p>A seguir temos algumas estatísticas de linhas de código relacionadas ao desenvolvimento orientado a
+objetos. Como regra temos a contagem da média, do menor e do maior. É sempre bom ficar de olho na relação
+entre esses três valores. Um valor mínimo ou máximo muito distante da média pode representar um problema.
+Valor mínimo igual a zero é um problema e deve ser investigado.</p>
+<blockquote>
+<p><strong>Classes</strong>                                       2916 (17.81%)<br>
+  <strong>Average Class Length</strong>                          33<br>
+   <strong>Minimum Class Length</strong>                         1<br>
+   <strong>Maximum Class Length</strong>                       337</p>
+</blockquote>
+<p>Existem 2916 linhas de código dentro de classes no sistema, cerca de 17,81%, o que parece baixo.</p>
+<p>Isso pode significar que o sistema tem uma parte desenvolvida com orientação a objetos e outra parte desenvolvida no paradigma procedural.</p>
+<p>O tamanho médio das classes é de 33 linhas de código, sendo que existe uma classe que tem apenas uma linha! Será necessário
+investigar por que isso está acontecendo!</p>
+<p>Podemos listar os arquivos do projeto com <strong>find</strong>(as listagens serão cortadas-são trechos da listagem total):</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ <strong>find Igreja  -name &lsquo;*.php&rsquo;</strong><br>
+Igreja/painel_direito.php<br>
+Igreja/bk_nv_convertido/nv_convetid.php<br>
+Igreja/content.php<br>
+Igreja/top_igreja.php<br>
+Igreja/tesouraria/prestacao.php<br>
+&hellip;</p>
+</blockquote>
+<p>Para vermos os arquivos junto com a quantidade de linhas de cada arquivo .php podemos rodar:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ <strong>find Igreja  -name &lsquo;*.php&rsquo; -exec wc -l {} ;|sort -n</strong><br>
+0 Igreja/help/vazio.php<br>
+0 Igreja/tab_auxiliar/ramais.php<br>
+1 Igreja/tesouraria/compras.php<br>
+1 Igreja/tesouraria/contratos.php<br>
+1 Igreja/tesouraria/fornecedores.php<br>
+1 Igreja/tesouraria/index.php<br>
+1 Igreja/tesouraria/no_index.php<br>
+3 Igreja/adm/igreja.php<br>
+...<br>
+456 Igreja/relatorio/bkp_ficha.php<br>
+595 Igreja/models/agenda.class.php<br>
+642 Igreja/views/login.php<br>
+1140 Igreja/relatorio/formcadastro.php<br>
+1169 Igreja/relatorio/formcadastroBKP.php<br>
+1213 Igreja/func_class/classes.php<br>
+1364 Igreja/func_class/funcoes.php</p>
+</blockquote>
+<p>Podemos ver que temos arquivos sem nada dentro e arquivos com apenas uma linha de código. Além disso
+parece que o autor seguiu uma convenção de adicionar a string <strong>class</strong> ao nome dos arquivos que definem classes.</p>
+<p>Neste caso para obtermos apenas os arquivos que contenham classes e sua respectiva quantidade de linhas podemos fazer</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ <strong>find Igreja  -name &lsquo;*.php&rsquo; -exec wc -l {} ;|sort -n | grep class</strong><br>
+14 Igreja/models/selfonte.class.php<br>
+14 Igreja/models/setor.class.php<br>
+17 Igreja/models/formbairro.class.php<br>
+17 Igreja/models/incluir.class.php<br>
+18 Igreja/models/setores.class.php<br>
+...</p>
+</blockquote>
+<p>Ainda dentro das estatísticas de código orientado a objetos. Temos o comprimento de métodos.</p>
+<blockquote>
+<p><strong>Average Method Length</strong>                         10<br>
+<strong>Minimum Method Length</strong>                        0<br>
+<strong>Maximum Method Length</strong>                      110</p>
+</blockquote>
+<p>Veja que temos um método sem código dentro e pelo menos um método com comprimento dez vezes maior que
+a média. Isso deve ser investigado (mas não necessariamente representa um problema)</p>
+<blockquote>
+<p><strong>Average Methods Per Class</strong>                      3<br>
+<strong>Minimum Methods Per Class</strong>                    1<br>
+<strong>Maximum Methods Per Class</strong>                   17</p>
+</blockquote>
+<p>Além disso temos a métrica de quantidade de métodos por classe. Em média as classes têm três métodos,
+mas existe pelo menos uma classe com 17 métodos mas isso não parece muito problemático.</p>
+<p>Por fim temos métricas relacionandas a funções, que são o cerne do desenvolvimento procedural.</p>
+<blockquote>
+<p><strong>Functions</strong>                                     1513 (9.24%)<br>
+<strong>Average Function Length</strong>                       12</p>
+</blockquote>
+<p>Temos 1513 linha de código dentro de funções, cerca de 9,24%. Temos, por fim, a quantidade de código que não
+está dentro de classes nem de funções - é código de escopo global:</p>
+<blockquote>
+<p><strong>Not in classes or functions</strong>                  11945 (72.95%)</p>
+</blockquote>
+<p>Esse valor parece elevado, então talvez o sistema não faça uso de um framework mvc nem use mecanismos de orientação a objetos
+para realizar o processamento das requisições que chegam(<strong>Rotas/Controller</strong>).</p>
+<p>Isso é uma hipótese apenas e será necessário entrar no código para saber mais.</p>
+<h2 id="cyclomatic-complexity">Cyclomatic Complexity</h2>
+<p>Basicamente a complexidade ciclomática mede a quantidade de caminhos independentes dentro de um programa.
+Isso indica o quão fácil é compreender o funcionamento de um módulo ou trecho de código e, portanto, o
+quão arriscado é alterar algo.</p>
+<p>Indica, também, a quantidade de testes que seriam necessários para verificar o seu funcionamento, no mínimo
+01 teste para cada caminho, embora possamos ter mais testes para verificar os valores limítrofes das
+condições.</p>
+<p>Essencialmente essa métrica é calculada a partir da quantidade de comandos de condição existentes no
+sistema (IF, THEN, ELSE, SWITCH/CASE) mas também pode levar em conta comandos de tratamento de exceções
+(TRY/CATCH).</p>
+<p>Por isso não existe um modo padrão de calcular e diferentes ferramentas podem apresentar
+valores diferentes para essa métrica e isso é absolutamente normal.</p>
+<p>Uma tabela relacionando complexidade ciclomática e risco pode ser vista <a href="https://support.scitools.com/support/solutions/articles/70000582297-understanding-mccabe-cyclomatic-complexity">aqui</a>.</p>
+<p>O primeiro valor desta seção representa a complexidade média por linha de código lógica.</p>
+<p>Há outros indicadores semelhantes, com fórmula de cálculo ligeiramente diferente.</p>
+<blockquote>
+<p> <strong>Average Complexity per LLOC</strong>                     0.28</p>
+</blockquote>
+<p>Para avaliarmos esse indicador, precisamos de outras aplicações de domínio semelhante, o que é bem difícil. Eu não encontrei
+uma tabela de referência para ajudar a compreender o que esse indicador pode informar.</p>
+<p>Esse valor é metade do que encontrei em outro projeto que estava analisando (que tinha muito menos linhas de código - isso diz mais sobre o outro projeto do que sobre este),
+é tudo que posso dizer!</p>
+<p>Temos o cálculo da métrica para desenvolvimento orientado a objetos. Temos uma complexidade média de
+11, porém um máximo de 90. Então temos pelo menos uma classe que pode ser mais difícil manter.</p>
+<p>Talvez tenha muita lógica, é necessário investigar. Pode ser um candidato para refatoração.</p>
+<blockquote>
+<p><strong>Average Complexity per Class</strong>                   11.60<br>
+ <strong>Minimum Class Complexity</strong>                     1.00<br>
+ <strong>Maximum Class Complexity</strong>                     90.00</p>
+</blockquote>
+<p>Em seguida temos a mesma estatística para métodos.</p>
+<blockquote>
+<p><strong>Average Complexity per Method</strong>                   4.22<br>
+ <strong>Minimum Method Complexity</strong>                     1.00<br>
+ <strong>Maximum Method Complexity</strong>                    49.00</p>
+</blockquote>
+<p>Podemos ver uma média de 4,22, porém um valor máximo de 49. Pode ser que haja um método sobrecarregado, que
+precise de refatoração. Talvez este método pertença à classe vista acima e seja o responsável pela
+sobrecarga de complexidade. É necessário investigar.</p>
+<p>Um problema do phploc é que ele não diz o valor da complexidade de cada classe! Sabemos que pode haver problemas, mas não
+sabemos por enquanto onde! A mesma coisa para métodos!</p>
+<p>Pode ser necessário usar outra ferramenta para ter esses valores ou então construirmos nossa própria, visto que o cômputo
+é simples.</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>Estas métricas fornecem o grau de acoplamento interno dentro do sistema.</p>
+<blockquote>
+<p><strong>Global Accesses</strong>                                 2798<br>
+ <strong>Global Constants</strong>                                49 (1.75%)<br>
+ <strong>Global Variables</strong>                                30 (1.07%)<br>
+ <strong>Super-Global Variables</strong>                        2719 (97.18%)</p>
+</blockquote>
+<p>Temos uma quantidade elevada de acessos globais (2798), sendo que quase todo esse acesso é feito
+através de variáveis super globais($_POST, $_GET, $_SESSION etc).</p>
+<p>Isso pode indicar que valores passados pelo cliente são atribuídas diretamente a variáveis dentro do sistema. Se isso acontece, pode representar
+problemas de segurança, mas, de novo, é necessário uma investigação para saber a razão deste número.</p>
+<p>Como estatística, a métrica sintetiza um conjunto. Parece que a lógica interna está muito dependente e
+outro aspecto que isso pode provocar é uma baixa automação de testes.</p>
+<p>Ou seja, após cada modificação o sistema deve ser inteiramente testado &ldquo;na mão&rdquo;.</p>
+<p>Podemos usar novamente a linha de comando do Linux para encontrar quais arquivos são mais problemáticos e
+candidatos a uma refatoração.</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ <strong>find Igreja  -name &lsquo;*.php&rsquo; -exec grep -Hc -i  -e &lsquo;$_POST&rsquo; -e &lsquo;S_GET&rsquo; {} ;</strong><br>
+Igreja/painel_direito.php:0<br>
+Igreja/bk_nv_convertido/nv_convetid.php:0<br>
+Igreja/content.php:1<br>
+Igreja/top_igreja.php:0<br>
+Igreja/tesouraria/prestacao.php:0<br>
+Igreja/tesouraria/pesq_recibo.php:0<br>
+Igreja/tesouraria/no_index.php:0<br>
+Igreja/tesouraria/envelope.php:0<br>
+Igreja/tesouraria/agenda.php:32<br>
+...</p>
+</blockquote>
+<p>O comando acima buscou apenas <strong>$_POST</strong> e <strong>$_GET</strong>, mas serve de base para posterior aperfeiçoamento.</p>
+<p>Na parte orientada à objetos do sistema, não há acesso de atributos estáticos diretamente, o que é um
+bom sinal.</p>
+<blockquote>
+<p> <strong>Attribute Accesses</strong>                              1298<br>
+  <strong>Non-Static</strong>                                    1298 (100.00%)<br>
+  <strong>Static</strong>                                           0 (0.00%)</p>
+</blockquote>
+<p>E há 14 chamadas de métodos estáticos, representando 0,58% do total. Parece um valor baixo, mas só
+podemos ter certeza se isso é ou não um problema examinando o código fonte.</p>
+<blockquote>
+<p> <strong>Method Calls</strong>                                    2405<br>
+  <strong>Non-Static</strong>                                    2391 (99.42%)<br>
+  <strong>Static</strong>                                          14 (0.58%)</p>
+</blockquote>
+<h2 id="structure">Structure</h2>
+<p>Esta seção computa métricas relacionadas ao projeto, como o sistema foi construído (paradigma utilizado).</p>
+<blockquote>
+<p><strong>Structure</strong><br>
+  <strong>Namespaces</strong>                                         0<br>
+  <strong>Interfaces</strong>                                         0<br>
+  <strong>Traits</strong>                                             0</p>
+</blockquote>
+<p>A ausência de interfaces indica baixa abstração. As classes estão muito acopladas, conectadas. A modificação
+em uma pode gerar problema em outra.</p>
+<p>A ausência de namespace indica que pode haver baixa
+organização, visto que todas as classes estão em um único escopo global. De novo, analisando o código
+descobriremos se isso é um problema ou não.</p>
+<blockquote>
+<p> <strong>Classes</strong>                                           86<br>
+  <strong>Abstract Classes</strong>                                 0 (0.00%)<br>
+  <strong>Concrete Classes</strong>                                86 (100.00%)<br>
+  <strong>Final Classes</strong>                                  0 (0.00%)<br>
+  <strong>Non-Final Classes</strong>                             86 (100.00%)</p>
+</blockquote>
+<p>Ainda nas métricas relacionadas ao desenvolvimento orientado a objetos, temos as estatísticas
+relacionadas aos métodos dentro das classes.</p>
+<p>Há 86 classes no sistema, todas concretas. Não existe classe abstrata o que, de novo, pode indicar
+baixa abstração e alto acoplamento.</p>
+<p>Pode indicar falta de experiência com os conceitos do desenvolvimento
+orientado a objetos,mas, de novo, só um indicador e, mesmo que haja, pode não representar um problema.</p>
+<p>Além disso, temos 63 arquivos de definição de classe. Então há arquivos que definem mais de uma
+classe ou então arquivos que definem classes mas que não tem a string <strong>class</strong> no nome (isso poderia
+significar uma quebra no padrão de nomenclatura):</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$  find Igreja/  -name &lsquo;*class.php'| wc -l<br>
+63</p>
+</blockquote>
+<blockquote>
+<p><strong>Methods</strong>                                          283<br>
+     <strong>Scope</strong><br>
+  <strong>Non-Static Methods</strong>                           283 (100.00%)<br>
+  <strong>Static Methods</strong>                                 0 (0.00%)<br>
+ <strong>Visibility</strong><br>
+  <strong>Public Methods</strong>                               283 (100.00%)<br>
+  <strong>Protected Methods</strong>                              0 (0.00%)<br>
+  <strong>Private Methods</strong>                                0 (0.00%)</p>
+</blockquote>
+<p>Todos os métodos são não estáticos e todos os métodos são públicos.</p>
+<p>O <strong>phploc</strong> não calcula, mas a ausência de métodos protegidos indica falta de herança.</p>
+<p>A falta de métodos estáticos pode indicar que variáveis do ambiente do sistema como dados de acesso
+são tratados por meio de constantes ou variáveis superglobais. Mas isso é só uma especulação.</p>
+<p>Depois das métricas OO, temos métricas para funções(paradigma procedural):</p>
+<blockquote>
+<p><strong>Functions</strong>                                        117<br>
+  <strong>Named Functions</strong>                                117 (100.00%)<br>
+  <strong>Anonymous Functions</strong>                              0 (0.00%)</p>
+</blockquote>
+<p><strong>Named Functions</strong> são as funções normais. Existem também funções sem nome(<strong>anonymous functions</strong>) e
+<strong>arrow functions</strong>, que são nomenclaturas ainda mais sintéticas para funções, usualmente para
+criação de funções que serão usadas apenas uma vez, por exemplo, para serem passadas como parâmetro
+para outras funções.</p>
+<p>Todas as funções são nomeadas. Isso pode indicar que não houve necessidade de criação de funções
+que fossem utilizadas apenas uma vez, mas também pode indicar falta de experiência com os recursos
+do PHP pela equipe de desenvolvimento.</p>
+<p>Por fim temos as informações sobre constantes:</p>
+<blockquote>
+<p><strong>Constants</strong>                                         24<br>
+  <strong>Global Constants</strong>                                24 (100.00%)<br>
+  <strong>Class Constants</strong>                                  0 (0.00%)<br>
+  <strong>Public Constants</strong>                               0 (0.00%)<br>
+  <strong>Non-Public Constants</strong>                           0 (0.00%)</p>
+</blockquote>
+<p>Temos 24 constantes, todas de escopo global.</p>
+<h2 id="para-mais-além">Para mais além</h2>
+<p>Além de permitir uma fotografia instantânea de um projeto em PHP, o <strong>phploc</strong> pode ser usado ao longo
+de um projeto em desenvolvimento para acompanhar sua evolução.</p>
+<p>Quando usado desta forma, A quantidade de linhas de código (ou outra métrica) pode ser usada como
+estimador de tempo e também como ferramenta de avaliação da qualidade e da necessidade de refatoração ao longo do tempo.</p>
+<p>Podemos salvar o conteúdo do relatório em formato <strong>csv</strong>, <strong>html</strong> ou <strong>xml</strong> com as respectivas opções <strong>&ndash;log-csv</strong>,
+<strong>&ndash;log-json</strong> ou <strong>&ndash;log-xml</strong>. Por exemplo:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ <strong>phploc &ndash;log-csv 21072022.csv   Igreja/</strong><br>
+phploc 7.0.2 by Sebastian Bergmann.</p>
+<p>Directories                                         40<br>
+Files                                              487<br>
+(&hellip;)</p>
+</blockquote>
+<p>Analisando o conteúdo do arquivo 21072022.csv:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ <strong>cat 21072022.csv</strong><br>
+Directories,Files,Lines of Code (LOC),Cyclomatic Complexity / Lines of Code,Comment Lines of Code (CLOC),Non-Comment Lines of Code (NCLOC),Logical Lines of Code (LLOC),LLOC outside functions or classes,Namespaces,Interfaces,Traits,Classes,Abstract Classes,Concrete Classes,Final Classes,Non-Final Classes,Classes Length (LLOC),Methods,Non-Static Methods,Static Methods,Public Methods,Non-Public Methods,Protected Methods,Private Methods,Cyclomatic Complexity / Number of Classes,Cyclomatic Complexity / Number of Methods,Functions,Named Functions,Anonymous Functions,Functions Length (LLOC),Average Function Length (LLOC),Average Class Length,Average Method Length,Average Methods per Class,Constants,Global Constants,Class Constants,Public Class Constants,Non-Public Class Constants,Attribute Accesses,Non-Static Attribute Accesses,Static Attribute Accesses,Method Calls,Non-Static Method Calls,Static Method Calls,Global Accesses,Global Variable Accesses,Super-Global Variable Accesses,Global Constant Accesses,Test Classes,Test Methods<br>
+&quot;40&rdquo;,&ldquo;487&rdquo;,&ldquo;48803&rdquo;,&ldquo;0.27574203004764&rdquo;,&ldquo;4118&rdquo;,&ldquo;44685&rdquo;,&ldquo;16374&rdquo;,&ldquo;11945&rdquo;,&ldquo;0&rdquo;,&ldquo;0&rdquo;,&ldquo;0&rdquo;,&ldquo;86&rdquo;,&ldquo;0&rdquo;,&ldquo;86&rdquo;,&ldquo;0&rdquo;,&ldquo;86&rdquo;,&ldquo;2916&rdquo;,&ldquo;283&rdquo;,&ldquo;283&rdquo;,&ldquo;0&rdquo;,&ldquo;283&rdquo;,&ldquo;0&rdquo;,&ldquo;0&rdquo;,&ldquo;0&rdquo;,&ldquo;11.604651162791&rdquo;,&ldquo;4.2226148409894&rdquo;,&ldquo;117&rdquo;,&ldquo;117&rdquo;,&ldquo;0&rdquo;,&ldquo;1513&rdquo;,&ldquo;12.931623931624&rdquo;,&ldquo;33.906976744186&rdquo;,&ldquo;10&rdquo;,&ldquo;3.2906976744186&rdquo;,&ldquo;24&rdquo;,&ldquo;24&rdquo;,&ldquo;0&rdquo;,&ldquo;0&rdquo;,&ldquo;0&rdquo;,&ldquo;1298&rdquo;,&ldquo;1298&rdquo;,&ldquo;0&rdquo;,&ldquo;2405&rdquo;,&ldquo;2391&rdquo;,&ldquo;14&rdquo;,&ldquo;2798&rdquo;,&ldquo;30&rdquo;,&ldquo;2719&rdquo;,&ldquo;49&rdquo;,&ldquo;0&rdquo;,&ldquo;0&rdquo;</p>
+</blockquote>
+<p>O resultado é exibido na tela e salvo em disco.</p>
+<p>Com base nisso, podemos criar um job no CRON e salvar um relatório toda semana. Por exemplo, vamos
+criar um script <strong>relatorio_phploc.sh</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># configurar o caminho até o executável do phploc, pois o cron roda com uma variável PATH diferente daquela do usuário.</span> 
+<span style="color:#75715e"># Necessário passar um caminho absoluto</span>
+PHPLOC<span style="color:#f92672">=</span>/home/leandro/.local/bin/phploc
+
+<span style="color:#75715e"># passar o caminho completo até a pasta do projeto</span>
+PASTA_PROJETO<span style="color:#f92672">=</span>/home/leandro/Downloads/Igreja
+
+<span style="color:#75715e"># passar o caminho completo até onde o arquivo de relatório será salvo.</span>
+<span style="color:#75715e"># O formato abaixo será &#34;dia&#34;&#34;mês&#34;&#34;ano&#34;&#34;hora&#34;&#34;minuto&#34;.csv,</span> 
+<span style="color:#75715e"># por exemplo: 210720221852.csv. Rode man date no terminal para ver mais opções</span>
+<span style="color:#75715e"># se desejar modificar</span>
+ARQUIVO_RELATORIO<span style="color:#f92672">=</span>/home/leandro/Downloads/<span style="color:#66d9ef">$(</span>date +%d%m%Y%H%M<span style="color:#66d9ef">)</span>.csv
+
+<span style="color:#75715e"># linha de comando. O phploc salva em arquivo e exibe o resultado na saída padrão.</span> 
+<span style="color:#75715e"># Como a saída padrão não nos interessa, descarte esse resultado em /dev/null</span>
+$PHPLOC  --log-csv<span style="color:#f92672">=</span>$ARQUIVO_RELATORIO   $PASTA_PROJETO  1&gt; /dev/null
+</code></pre></div><p>Na pasta onde salvarmos esse script devemos habilitá-lo para execução com:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ chmod +x relatorio_phploc.sh</p>
+</blockquote>
+<p>Podemos adicionar uma regra ao CRON rodando:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>crontab -e</strong></p>
+</blockquote>
+<p>Esse comando vai abrir um editor de texto, onde podemos adicionar o comando para executar nosso
+script relatorio_phploc.sh todo sábado ao meio dia(na pasta do usuário leandro rodando como usuário
+leandro):</p>
+<blockquote>
+<p>0 12 * * 6 leandro /home/leandro/Downloads/relatorio_phploc.sh</p>
+</blockquote>
+<p>essa linha deve ser adicionada no final do arquivo aberto pelo crontab -e. Se o editor for o <strong>NANO</strong>
+aperte control+x para salvar e sair.</p>
+<p>Os logs do <strong>CRON</strong> são salvos em <strong>/var/log/syslog</strong> (pelo menos nas variantes do DEBIAN). Toda vez que o
+script for executado vai aparecer uma linha de log como esta:</p>
+<blockquote>
+<p>Jul 21 19:05:01 leandro CRON[16001]: (leandro) CMD (~/Downloads/relatorio_phploc.sh</p>
+</blockquote>
+<p>Portanto, para saber quando o comando foi (ou não) executado, basta fazer:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ <strong>grep CMD  /var/log/syslog</strong></p>
+</blockquote>
+<h1 id="conclusão">Conclusão</h1>
+<p>O phploc é uma excelente ferramenta para dar uma visão inicial de um projeto.</p>
+<p>Ele fornece métricas de desenvolvimento orientado a objetos e de paradigma procedural.</p>
+<p>Contudo, por fornecer estatísticas, os números precisam ser avaliados junto com alguma pesquisa de
+forma a não fornecer dados incorretos. Por exemplo, o suporte a orientação a objetos foi sendo
+adicionado ao PHP desde a versão 5 de forma incremental.</p>
+<p>Por isso, em códigos mais antigos pode ser
+que não encontremos classes ou métodos, mas isso não significa um desenvolvimento pobre, significa
+que não era comum usar esse paradigma na época em que o sistema foi feito. Então o sistema não fez
+uso de orientação a objetos por um motivo que não conhecemos de antemão!</p>
+<p>A ferramenta tem um pequeno problema de não mostrar as métricas por arquivo, mas isso devido à sua proposta
+de ser simples de usar e de entender. Mas podemos contornar esse problema com recursos de scripting do shell linux
+ou mesmo usar outra ferramenta para isso.</p>
+<p>Além de uma visão inicial de um projeto de terceiros, ele também permite gerar relatório em formato
+csv, xml e json, o que nos permite criar um agendador para coletar métricas de tempos em tempos e
+assim acompanharmos a evolução de um projeto interno.</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/php/" rel="tag">php</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/dicas/recarregar-bashrc/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">Recarregar o arquivo .bashrc no Linux</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2217338589613653"
+     crossorigin="anonymous"></script>
+</body>
+</html>
