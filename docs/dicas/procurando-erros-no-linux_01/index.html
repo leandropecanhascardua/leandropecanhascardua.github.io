@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Encontrando erros e corrigindo problemas no Ubuntu Linux - Parte 01 - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="Encontrando erros e corrigindo problemas no Ubuntu Linux - Parte 01" />
+<meta property="og:description" content="Em muitas situações o sistema operacional pode apresentar erros ou se comportar de estranhamente.
+Quando isso acontece, é necessário saber onde e como encontrar pistas para diagnosticar o problema.
+Nesta dica rápida vamos conhecer alguns comandos e opções para encontrar mensagens de erro fornecidas
+pelo sistema em mal funcionamento." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/dicas/procurando-erros-no-linux_01/" />
+<meta property="article:published_time" content="2022-07-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-25T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Encontrando erros e corrigindo problemas no Ubuntu Linux - Parte 01">
+<meta itemprop="description" content="Em muitas situações o sistema operacional pode apresentar erros ou se comportar de estranhamente.
+Quando isso acontece, é necessário saber onde e como encontrar pistas para diagnosticar o problema.
+Nesta dica rápida vamos conhecer alguns comandos e opções para encontrar mensagens de erro fornecidas
+pelo sistema em mal funcionamento.">
+<meta itemprop="datePublished" content="2022-07-25T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-07-25T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="3268">
+
+
+
+<meta itemprop="keywords" content="ubuntu,linux," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Encontrando erros e corrigindo problemas no Ubuntu Linux - Parte 01"/>
+<meta name="twitter:description" content="Em muitas situações o sistema operacional pode apresentar erros ou se comportar de estranhamente.
+Quando isso acontece, é necessário saber onde e como encontrar pistas para diagnosticar o problema.
+Nesta dica rápida vamos conhecer alguns comandos e opções para encontrar mensagens de erro fornecidas
+pelo sistema em mal funcionamento."/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/artigos/">
+					
+					<span class="menu__text">Artigos</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/dicas/">
+					
+					<span class="menu__text">Dicas</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Encontrando erros e corrigindo problemas no Ubuntu Linux - Parte 01</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-07-25T00:00:00Z">25.07.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>Em muitas situações o sistema operacional pode apresentar erros ou se comportar de estranhamente.</p>
+<p>Quando isso acontece, é necessário saber onde e como encontrar pistas para diagnosticar o problema.</p>
+<p>Nesta dica rápida vamos conhecer alguns comandos e opções para encontrar mensagens de erro fornecidas
+pelo sistema em mal funcionamento.</p>
+<h2 id="dmesg">dmesg</h2>
+<p>O comando dmesg permite controlar o buffer de mensagens do kernel. Para nós interessa saber que exibe
+todas as mensagens do kernel desde o início do processo de boot.</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>dmesg</strong><br>
+[    0.000000] microcode: microcode updated early to revision 0x2f, date = 2019-02-17<br>
+[    0.000000] Linux version 5.15.0-41-generic (buildd@lcy02-amd64-105) (gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #44~20.04.1-Ubuntu SMP Fri Jun 24 13:27:29 UTC 2022 (Ubuntu 5.15.0-41.44~20.04.1-generic 5.15.39)<br>
+(&hellip;)</p>
+</blockquote>
+<p>Executado no terminal sem argumentos, todas as mensagens são exibidas de forma contínua. Se você quiser
+examinar as mensagens paginando a saída, use o parâmetro(&ndash;human)</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>dmesg &ndash;human</strong><br>
+[jul24 21:34] microcode: microcode updated early to revision 0x2f, date = 2019-02-17<br>
+[  +0,000000] Linux version 5.15.0-41-generic (buildd@lcy02-amd64-105) (gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #44~20.04.1-Ubuntu SMP Fr&gt;<br>
+[  +0,000000] Command line: BOOT_IMAGE=/boot/vmlinuz-5.15.0-41-generic root=UUID=0d8fd723-9e58-4ec5-9345-3abe7557af80 ro quiet splash vt.handoff=7<br>
+[  +0,000000] KERNEL supported cpus:<br>
+[  +0,000000]   Intel GenuineIntel<br>
+(&hellip;)</p>
+</blockquote>
+<p>Todas as mensagens originadas no kernel são exibidas, mas para nosso propósito importa apenas aquelas
+relacionadas a erros ou problemas.</p>
+<p>Para isso, vamos usar a opção(<strong>-l</strong> ou <strong>&ndash;level</strong>) seguida por uma lista de opções relacionadas ao nível de
+prioridade das mensagens.</p>
+<p>Os níveis estão ordenados por odem de importância e são:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>emerg</strong></td>
+<td>sistema está inutilizável</td>
+</tr>
+<tr>
+<td><strong>alert</strong></td>
+<td>ação deve ser tomada imediatamente</td>
+</tr>
+<tr>
+<td><strong>crit</strong></td>
+<td>condições críticas</td>
+</tr>
+<tr>
+<td><strong>err</strong></td>
+<td>condições de erro</td>
+</tr>
+<tr>
+<td><strong>warn</strong></td>
+<td>condições de aviso</td>
+</tr>
+<tr>
+<td><strong>notice</strong></td>
+<td>condição normal, mas significativa</td>
+</tr>
+<tr>
+<td><strong>info</strong></td>
+<td>informativo</td>
+</tr>
+<tr>
+<td><strong>debug</strong></td>
+<td>mensagens de nível de depuração</td>
+</tr>
+</tbody>
+</table>
+<p>Para nosso propósito, as mensagens que importam são: <strong>emerg</strong>, <strong>alert</strong>, <strong>crit</strong>,<strong>err</strong></p>
+<p>Mensagens de um desses níveis indicam condições que devem ser resolvidas imediatamente (urgência na ordem em que são
+apresentadas na tabela). Para ver problemas emergenciais(prioridade mais alta):</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>dmesg &ndash;level=emerg</strong><br>
+leandro@leandro:~$</p>
+</blockquote>
+<blockquote>
+<p>leandro@leandro:~$ <strong>dmesg &ndash;level=alert</strong><br>
+leandro@leandro:~$</p>
+</blockquote>
+<blockquote>
+<p>leandro@leandro:~$ <strong>dmesg &ndash;level=crit</strong><br>
+leandro@leandro:~$</p>
+</blockquote>
+<blockquote>
+<p>leandro@leandro:~$ <strong>dmesg &ndash;level=err</strong><br>
+[    0.251635] ACPI BIOS Error (bug): Could not resolve symbol [_SB.PCI0.LPCB.EC0._REG.CPST], AE_NOT_FOUND (20210730/psargs-330)<br>
+[    0.251720] ACPI Error: Aborting method _SB.PCI0.LPCB.EC0._REG due to previous error (AE_NOT_FOUND) (20210730/psparse-529)<br>
+[    2.061178] ACPI BIOS Error (bug): Could not resolve symbol [_SB.PCI0.SAT0.SPT0._GTF.DSSP], AE_NOT_FOUND (20210730/psargs-330)<br>
+[    2.061406] ACPI Error: Aborting method _SB.PCI0.SAT0.SPT0._GTF due to previous error (AE_NOT_FOUND) (20210730/psparse-529)<br>
+[    2.110490] ACPI BIOS Error (bug): Could not resolve symbol [_SB.PCI0.SAT0.SPT0._GTF.DSSP], AE_NOT_FOUND (20210730/psargs-330)<br>
+[    2.110722] ACPI Error: Aborting method _SB.PCI0.SAT0.SPT0._GTF due to previous error (AE_NOT_FOUND) (20210730/psparse-529)<br>
+[  488.379893] usb 2-1.2: device descriptor read/64, error -71<br>
+[  660.819745] usb 2-1.2: device descriptor read/64, error -71</p>
+</blockquote>
+<p>Podemos ver que meu sistema não tem erros de prioridade <strong>emerg</strong>, <strong>alert</strong>, <strong>crit</strong>, mas tem erros
+de nível <strong>err</strong>, que é o mais baixo com o qual devemos nos preocupar.</p>
+<p>O ACPI é um padrão da indústria e, por isso, procura padronizar a configuração de energia no computador.</p>
+<p>Alguns fabricantes de BIOS, para fornecer algum recurso específico, projetam seu sistema tendo como pressuposto o sistema
+operacional Windows. Vem daí a origem da mensagem acima. Isso é um problema? Pode ser ou pode não ser. Alguma coisa não está
+implementada corretamente. Pode ser algo bobo como uma definição incorreta de uma variável ou pode ser uma funcionalidade
+implementada de forma não padronizada.</p>
+<p>Incrédulo? Que tal saber a chave de instalação do Windows que veio na sua máquina? (Esse comando só vai funcionar em máquinas
+vendidas com Windows pré-instalado):</p>
+<blockquote>
+<p>leandro@leandro:~$ sudo strings /sys/firmware/acpi/tables/MSDM | tail -n 1<br>
+<strong>D6N96-4F3W9-KV7TT-MK4GP-</strong>***</p>
+</blockquote>
+<p>Sua máquina foi vendida para ser usada com Windows(com algumas exceções)!!!Infelizmente as mensagens de ACPI são razoavelmente comuns em laptops como de baixo orçamento como o que eu estou
+rodando .</p>
+<p>Na listagem acima há também erros de usb que são devidos a má conexão pois estou usando um hub usb e, portanto, a conexão é instável.</p>
+<p>Pode ser interessante consultar todas as mensagens relevantes com um único comando. Podemos passar as
+prioridades que nos interessam como uma lista com os itens separados por vírgula:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>dmesg &ndash;level emerg,crit,alert,err</strong><br>
+[    0.251635] ACPI BIOS Error (bug): Could not resolve symbol [_SB.PCI0.LPCB.EC0._REG.CPST], AE_NOT_FOUND (20210730/psargs-330)<br>
+[    0.251720] ACPI Error: Aborting method _SB.PCI0.LPCB.EC0._REG due to previous error (AE_NOT_FOUND) (20210730/psparse-529)<br>
+[    2.061178] ACPI BIOS Error (bug): Could not resolve symbol [_SB.PCI0.SAT0.SPT0._GTF.DSSP], AE_NOT_FOUND (20210730/psargs-330)<br>
+[    2.061406] ACPI Error: Aborting method _SB.PCI0.SAT0.SPT0._GTF due to previous error (AE_NOT_FOUND) (20210730/psparse-529)<br>
+[    2.110490] ACPI BIOS Error (bug): Could not resolve symbol [_SB.PCI0.SAT0.SPT0._GTF.DSSP], AE_NOT_FOUND (20210730/psargs-330)<br>
+[    2.110722] ACPI Error: Aborting method _SB.PCI0.SAT0.SPT0._GTF due to previous error (AE_NOT_FOUND) (20210730/psparse-529)<br>
+[  488.379893] usb 2-1.2: device descriptor read/64, error -71<br>
+[  660.819745] usb 2-1.2: device descriptor read/64, error -71</p>
+</blockquote>
+<p>O primeiro campo da saída padrão do <strong>dmesg</strong> indica o timestamp desde o início do boot. Logo, quanto
+menor o valor mais próximo do momento em que o usuário ligou a máquina e quanto maior mais próximo do
+momento em que o usuário executou o dmesg.</p>
+<p>Além de erro o comando dmesg também pode ser usado para verificar ações como carregamento de drivers
+em dispositivos ou montagem de sistemas de arquivos. Portanto, junto com o comando <strong>grep</strong> pode ajudar
+bastante a vida dos usuários:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>dmesg |grep sda</strong><br>
+[    2.114043] sd 0:0:0:0: [sda] 976773168 512-byte logical blocks: (500 GB/466 GiB)<br>
+[    2.114053] sd 0:0:0:0: [sda] 4096-byte physical blocks<br>
+[    2.114086] sd 0:0:0:0: [sda] Write Protect is off<br>
+[    2.114097] sd 0:0:0:0: [sda] Mode Sense: 00 3a 00 00<br>
+[    2.114154] sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn&rsquo;t support DPO or FUA<br>
+[    2.244260]  sda: sda1 sda2 sda3 sda5 sda6<br>
+[    2.260468] sd 0:0:0:0: [sda] Attached SCSI disk<br>
+[    3.335976] EXT4-fs (sda6): mounted filesystem with ordered data mode. Opts: (null). Quota mode: none.<br>
+[    9.944243] EXT4-fs (sda6): re-mounted. Opts: errors=remount-ro. Quota mode: none.</p>
+</blockquote>
+<p>No comando acima eu selecionei as mensagens do kernel relacionadas ao meu disco rígido(sda) e recebi
+várias informações, como modo de escrita e as partições.</p>
+<h2 id="systemctl">systemctl</h2>
+<p>O SystemD é o programa <strong>init</strong> no Ubuntu e em várias distribuições Linux. É o programa que fica
+continuamente rodando recebendo requisições do usuário, processando e enviando de volta o resultado.</p>
+<p>Para confirmar se o sistema está usando SystemD,  podemos executar:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>ls -l /sbin/init</strong><br>
+lrwxrwxrwx 1 root root 20 abr 21 09:54 /sbin/init -&gt; /lib/systemd/systemd</p>
+</blockquote>
+<p>Vemos que /sbin/init é um link para /lib/systemd/systemd.</p>
+<p>Interessa-nos saber se há serviços falhando durante a inicialização. Para isso rodamos:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemctl &ndash;failed</strong><br>
+UNIT                  LOAD   ACTIVE SUB    DESCRIPTION                        <br>
+● <strong>fwupd-refresh.service</strong> loaded failed failed Refresh fwupd metadata and update motd</p>
+<p>LOAD   = Reflects whether the unit definition was properly loaded.<br>
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.<br>
+SUB    = The low-level unit activation state, values depend on unit type.</p>
+<p>1 loaded units listed.</p>
+</blockquote>
+<p>Um serviço que não carrega é um recurso sendo desperdiçado gastando tempo na inicialização da máquina,
+podendo deixar o tempo de boot absurdamente maior.</p>
+<p>Podemos ver no relatório acima que o serviço <strong>fwupd-refresh</strong> está falhando. podemos ver algumas
+informações sobre o serviço rodando:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemctl status fwupd-refresh.service</strong><br>
+● fwupd-refresh.service - <strong>Refresh fwupd metadata and update motd</strong><br>
+Loaded: loaded (/lib/systemd/system/fwupd-refresh.service; static; vendor preset: disabled)<br>
+Active: failed (Result: exit-code) since Sun 2022-07-24 23:09:55 -03; 14min ago<br>
+TriggeredBy: ● fwupd-refresh.timer<br>
+Docs: <strong>man:fwupdmgr(1)</strong><br>
+Process: 2786 ExecStart=/usr/bin/fwupdmgr refresh (code=exited, status=1/FAILURE)<br>
+Main PID: 2786 (code=exited, status=1/FAILURE)</p>
+<p>jul 24 23:09:54 leandro systemd[1]: Starting Refresh fwupd metadata and update motd&hellip;<br>
+jul 24 23:09:55 leandro systemd[1]: fwupd-refresh.service: Main process exited, code=exited, status=1/FAILURE<br>
+jul 24 23:09:55 leandro systemd[1]: fwupd-refresh.service: Failed with result &lsquo;exit-code&rsquo;.<br>
+jul 24 23:09:55 leandro systemd[1]: Failed to start Refresh fwupd metadata and update motd.</p>
+</blockquote>
+<p>Em negrito os pontos mais relevantes estão destacados. Esse serviço roda o comando <strong>/usr/bin/fwupdmgr</strong> que faz a atualização do
+banco de dados de firmwares disponíveis.</p>
+<p>No meu caso eu não quero esse serviço rodando, por isso vou buscar os serviços relacionados a este:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemctl list-units|grep fwupd</strong><br>
+● fwupd-refresh.service        loaded failed failed    Refresh fwupd metadata and update motd<br>
+fwupd-refresh.timer          loaded active waiting   Refresh fwupd metadata regularly</p>
+</blockquote>
+<p>Vou desabilitar o serviço e o timer. O serviço é o daemon e o timer é um job que é executado de tempos
+em tempos.</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>sudo systemctl disable fwupd-refresh.service</strong><br>
+[sudo] senha para leandro:<br>
+leandro@leandro:~$ <strong>sudo systemctl disable fwupd-refresh.timer</strong><br>
+Removed /etc/systemd/system/timers.target.wants/fwupd-refresh.timer.</p>
+</blockquote>
+<p>Os dois comandos desabilitam o serviço (não vão rodar no boot) mas ainda estão ativos. Se quiser
+desabilitar imediatamente pode fazer:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>sudo systemctl stop fwupd-refresh.timer</strong></p>
+</blockquote>
+<p>Se houver um <strong>socket</strong> associado ao serviço é importante desabilitar ele também, do contrário outro serviço pode ativá-lo
+de forma indesejada.</p>
+<p>Só para lembrar que no meu sistema toda e qualquer atualização ou instalação é feita manualmente. Portanto eu vou desabilitar
+toda atualização automática de qualquer coisa.</p>
+<h2 id="systemd-analyze">systemd-analyze</h2>
+<p>O comando <strong>systemd-analyze</strong> pode verificar a performance no tempo de boot do sistema. Ou seja, o tempo
+de carregamento.</p>
+<p>O systemd-analyze, pelo próprio nome, é um recurso do SystemD, portanto, só funcionará em sistemas onde
+este sistema de init estiver instalado.</p>
+<p>Seu uso mais simples(sem parâmetros) retorna:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemd-analyze</strong><br>
+Startup finished in 4.510s (firmware) + 12.121s (loader) + 5.068s (kernel) + 55.290s (userspace) = 1min 16.990s<br>
+graphical.target reached after 55.098s in userspace</p>
+</blockquote>
+<p>O boot é dividido em quatro seções: firmware, loader, kernel e userspace.</p>
+<p>Comparando o tempo em cada seção com o tempo total de boot podemos descobrir onde está o gargalo do sistema.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Momento</th>
+<th align="center">Tempo</th>
+<th align="center">%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">firmware</td>
+<td align="center">4.510s</td>
+<td align="center">5,9%</td>
+</tr>
+<tr>
+<td align="center">loader</td>
+<td align="center">12.121s</td>
+<td align="center">15,9%</td>
+</tr>
+<tr>
+<td align="center">kernel</td>
+<td align="center">5.068s</td>
+<td align="center">6,6%</td>
+</tr>
+<tr>
+<td align="center">userspace</td>
+<td align="center">55.290s</td>
+<td align="center">72,7%</td>
+</tr>
+</tbody>
+</table>
+<p>Passando o parâmetro <strong>blame</strong>, recebemos uma listagem ordenada do maior para o menor tempo de
+carregamento dos serviços. Isso pode indicar quais serviços desabilitar para diminuir o tempo de boot
+do sistema se estiver elevado.</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemd-analyze blame</strong><br>
+2min 57.386s apt-daily.service<br>
+26.027s dev-sda6.device<br>
+20.651s udisks2.service<br>
+15.397s networkd-dispatcher.service<br>
+14.800s systemd-journal-flush.service<br>
+13.618s containerd.service<br>
+10.522s NetworkManager-wait-online.service<br>
+10.408s accounts-daemon.service<br>
+7.077s NetworkManager.service<br>
+(&hellip;)</p>
+</blockquote>
+<p>No meu caso <strong>apt-daily.service</strong> está levando um tempo absurdo para carregar. Se eu rodar o mesmo
+comando do tópico sobre <strong>systemctl</strong> eu obteria:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemctl list-units| grep apt-daily</strong><br>
+apt-daily.timer         loaded active waiting   Daily apt download activities</p>
+</blockquote>
+<p>Serviços que iniciem com <strong>apt</strong> são relacionados à atualização do sistema. Desabilitar ou não depende
+de vários fatores, mas no meu caso eu prefiro desabilitar porque eu faço toda atualização de sistema
+manualmente.</p>
+<p>Olhando novamente a listagem anterior, o <strong>apt-daily.service</strong> não aparece ! Por isso é melhor aperfeiçoar a busca:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemctl list-unit-files| grep apt-daily</strong><br>
+apt-daily-upgrade.service   masked          enabled<br>
+apt-daily.service         static          enabled<br>
+apt-daily-upgrade.timer   enabled         enabled<br>
+apt-daily.timer            enabled         enabled</p>
+</blockquote>
+<p>O resultado acima mostra uma coisa peculiar: Embora <strong>apt-daily.service</strong> esteja desabilitado (static),
+o job <strong>apt-daily.timer</strong> não está! Então, mesmo que o serviço esteja desabilitado, ele ainda pode
+ser lançado no boot se houver um <strong>timer</strong> ou um <strong>socket</strong> ativo.</p>
+<p>Eu poderia configurar para os serviços relacionados ao apt carregarem durante o boot mas após a interface gráfica, por
+exemplo, ou algum tempo depois da conexão de rede, mas aqui eu vou fazer a coisa simples - no popular - Vou remover!</p>
+<p>Vamos desabilitar tudo então:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>sudo systemctl disable apt-daily-upgrade.timer</strong><br>
+[sudo] senha para leandro:<br>
+Removed /etc/systemd/system/timers.target.wants/apt-daily-upgrade.timer.<br>
+leandro@leandro:~$ sudo systemctl disable apt-daily.timer<br>
+Removed /etc/systemd/system/timers.target.wants/apt-daily.timer.</p>
+<p>leandro@leandro:~$ <strong>systemctl list-unit-files| grep apt-daily</strong><br>
+apt-daily-upgrade.service  masked          enabled<br>
+apt-daily.service         static          enabled<br>
+apt-daily-upgrade.timer                      disabled        enabled<br>
+apt-daily.timer               disabled        enabled</p>
+</blockquote>
+<p>Agora seria reiniciar a máquina e verificar o tempo de boot. Rodamos systemd-analyze de novo e verificamos
+se podemos melhorar o tempo de carregamento desabilitando serviços (nem sempre será possível).</p>
+<p>Outra opção do systemd-analyze é o parâmetro critical-chain, que nos fornece o caminho crítico,a
+sequência de serviço que mais pesa na inicialização. Assim, por exemplo:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemd-analyze critical-chain</strong><br>
+The time when unit became active or started is printed after the &ldquo;@&rdquo; character.<br>
+The time the unit took to start is printed after the &ldquo;+&rdquo; character.</p>
+<p>graphical.target @55.098s<br>
+ └─udisks2.service @34.446s +20.651s<br>
+  └─basic.target @33.723s<br>
+   └─sockets.target @33.723s<br>
+    └─snapd.socket @33.719s +3ms<br>
+     └─sysinit.target @33.628s<br>
+      └─snapd.apparmor.service @33.158s +468ms<br>
+       └─apparmor.service @31.182s +1.972s<br>
+        └─local-fs.target @31.179s<br>
+         └─boot-efi.mount @31.033s +145ms<br>
+          └─systemd-fsck@dev-disk-by\x2duuid-5C52\x2d66F4.service @30.607s +382ms<br>
+           └─dev-disk-by\x2duuid-5C52\x2d66F4.device @30.604s</p>
+</blockquote>
+<p>No relatório acima, o momento de inicialização segue após o sinal de arroba(@) e o tempo gasto no
+carregamento segue após o sinal mais(+). Assim, <strong>udisks2.service</strong> gastou 20.651s e iniciou 34.446s
+depois do boot. Isso quase dá o tempo do processo <strong>graphical.target</strong> (que é o ambiente gráfico).</p>
+<p>Pelo relatório acima, eu posso desabilitar o serviço <strong>snapd.socket</strong> que está relacionado ao
+gerenciamento de pacotes snap no sistema Ubuntu.</p>
+<p>Isso apenas no meu caso porque eu tenho a premissa de não instalar nada via pacotes snap (apesar de haver alguns na listagem abaixo).</p>
+<p>Eu sou conversavor e gosto de usar apenas pacotes <strong>.deb</strong>. Seu caso pode ser diferente de acordo com seu perfil!</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemctl list-unit-files |grep snapd</strong><br>
+snap-snapd-16010.mount                   enabled         enabled<br>
+snap-snapd-16292.mount                   enabled         enabled<br>
+snapd.apparmor.service                   enabled         enabled<br>
+snapd.autoimport.service                 enabled         enabled<br>
+snapd.core-fixup.service                 enabled         enabled<br>
+snapd.failure.service                    static          enabled<br>
+snapd.recovery-chooser-trigger.service      enabled         enabled<br>
+snapd.seeded.service                     disabled        enabled<br>
+snapd.service                            disabled        enabled<br>
+snapd.snap-repair.service                static          enabled<br>
+snapd.system-shutdown.service            enabled         enabled<br>
+snapd.socket                             enabled        enabled<br>
+snapd.snap-repair.timer                  enabled         enabled</p>
+</blockquote>
+<blockquote>
+<p>leandro@leandro:~$ <strong>sudo systemctl disable snapd.socket snap-snapd-16010.mount snap-snapd-16292.mount snapd.apparmor.service snapd.autoimport.service snapd.core-fixup.service  snapd.recovery-chooser-trigger.service snapd.system-shutdown.service snapd.socket snapd.snap-repair.timer</strong><br>
+Removed /etc/systemd/system/multi-user.target.wants/snapd.core-fixup.service.<br>
+Removed /etc/systemd/system/multi-user.target.wants/snapd.apparmor.service.<br>
+Removed /etc/systemd/system/multi-user.target.wants/snapd.recovery-chooser-trigger.service.<br>
+Removed /etc/systemd/system/multi-user.target.wants/snapd.autoimport.service.<br>
+Removed /etc/systemd/system/multi-user.target.wants/snap-snapd-16292.mount.<br>
+Removed /etc/systemd/system/multi-user.target.wants/snap-snapd-16010.mount.<br>
+Removed /etc/systemd/system/timers.target.wants/snapd.snap-repair.timer.<br>
+Removed /etc/systemd/system/final.target.wants/snapd.system-shutdown.service.<br>
+Removed /etc/systemd/system/sockets.target.wants/snapd.socket.</p>
+</blockquote>
+<p>Podemos ainda obter uma representação gráfica do boot rodando:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemd-analyze plot &gt; teste.png</strong></p>
+</blockquote>
+<p>Isso vai gerar um relatório em gráfico de barras e salvar o conteúdo no arquivo teste.png dentro da pasta atual.</p>
+<p>Temos também a opção de ver o caminho crítico do sistema, ou seja, a coligação de serviços dependentes responsável pelo
+maior tempo de carregamento no boot.</p>
+<p>Para obter esse relatório rodamos <strong>systemd-analyze critical-chain</strong>.</p>
+<p>Podemos perceber que o serviço udisks2 está levando mais de 20 segundos para subir. Podemos dar uma olhada nele:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemctl status udisks2</strong><br>
+● udisks2.service - Disk Manager<br>
+Loaded: loaded (/lib/systemd/system/udisks2.service; enabled; vendor preset: enabled)<br>
+Active: active (running) since Mon 2022-07-25 10:09:23 -03; 10min ago<br>
+Docs: man:udisks(8)<br>
+Main PID: 660 (udisksd)<br>
+Tasks: 5 (limit: 4488)<br>
+Memory: 7.2M<br>
+CGroup: /system.slice/udisks2.service<br>
+└─660 /usr/lib/udisks2/udisksd</p>
+<p>jul 25 10:08:50 leandro systemd[1]: Starting Disk Manager&hellip;<br>
+jul 25 10:08:52 leandro udisksd[660]: udisks daemon version 2.8.4 starting<br>
+jul 25 10:08:58 leandro udisksd[660]: <strong>failed to load module mdraid: libbd_mdraid.so.2: cannot open shared object file: No such file or directory</strong><br>
+jul 25 10:08:58 leandro udisksd[660]: <strong>Failed to load the &lsquo;mdraid&rsquo; libblockdev plugin</strong><br>
+jul 25 10:09:23 leandro systemd[1]: Started Disk Manager.<br>
+jul 25 10:09:23 leandro udisksd[660]: Acquired the name org.freedesktop.UDisks2 on the system message bus</p>
+</blockquote>
+<p>Há duas mensagens de erro na inicialização do serviço, as duas reclamando sobre um módulo mdraid. Vamos corrigir!</p>
+<p>Como o nome já indica, esse é um conjunto de utilitários e módulos para tratar de discos RAID.</p>
+<p>Antes de decidir se removo ou não, deixe-me ver se a biblioteca libbd_mdraid.so.2 existe no meu
+sistema:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>ldconfig -p| grep libbd_mdraid.so.2</strong><br>
+leandro@leandro:~$</p>
+</blockquote>
+<p>Aparentemente não. Então deixe-me ver de qual pacote essa biblioteca faz parte:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>apt-file search libbd_mdraid.so.2</strong><br>
+libblockdev-mdraid2: /usr/lib/x86_64-linux-gnu/libbd_mdraid.so.2<br>
+libblockdev-mdraid2: /usr/lib/x86_64-linux-gnu/libbd_mdraid.so.2.0.0</p>
+</blockquote>
+<p>Essa biblioteca faz parte do pacote <strong>libblockdev-mdraid2</strong>. Deixe-me ver se esse pacote está
+instalado em minha máquina:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>apt-cache policy libblockdev-mdraid2</strong><br>
+libblockdev-mdraid2:<br>
+<strong>Instalado: (nenhum)</strong><br>
+Candidato: 2.23-2ubuntu3<br>
+Tabela de versão:<br>
+2.23-2ubuntu3 500<br>
+500 <a href="http://br.archive.ubuntu.com/ubuntu">http://br.archive.ubuntu.com/ubuntu</a> focal/universe amd64 Packages</p>
+</blockquote>
+<p>Não está instalado. Instalaremos então:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>sudo apt install libblockev-crypto2 libblockdev-mdraid2</strong></p>
+</blockquote>
+<p>Reiniciando e verificando:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemd-analyze</strong><br>
+Startup finished in 3.443s (firmware) + 11.601s (loader) + 5.597s (kernel) + 40.539s (userspace) = 1min 1.181s<br>
+graphical.target reached after 39.760s in userspace</p>
+</blockquote>
+<p>Houve já uma redução de cerca de 20% no tempo de boot. Há ainda mais algumas considerações: Como eu desabilitei os serviços
+do snap (não uso) eu também vou desabilitar os dispositivos de loop que ele usa:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>df</strong><br>
+Sist. Arq.     Blocos de 1K    Usado Disponível Uso% Montado em<br>
+udev                        1914964        0    1914964   0% /dev<br>
+tmpfs                       390716     1520     389196   1% /run<br>
+/dev/sda6     87178268 44907620   37796232  55% /<br>
+tmpfs                      1953564        0    1953564   0% /dev/shm<br>
+tmpfs                          5120        4       5116   1% /run/lock<br>
+tmpfs                      1953564        0    1953564   0% /sys/fs/cgroup<br>
+/dev/loop0    56960    56960          0 100% /snap/core18/2344<br>
+/dev/loop4    63488    63488          0 100% /snap/core20/1518<br>
+/dev/loop1               128      128          0 100% /snap/bare/5<br>
+/dev/loop5             168832   168832          0 100% /snap/gnome-3-28-1804/161<br>
+/dev/loop2              87680    87680          0 100% /snap/compress-video/23<br>
+/dev/loop3              56960    56960          0 100% /snap/core18/2409<br>
+/dev/loop8            599040   599040          0 100% /snap/vlc/3008<br>
+/dev/loop7             93952    93952          0 100% /snap/gtk-common-themes/1535<br>
+/dev/loop6              83328    83328          0 100% /snap/gtk-common-themes/1534<br>
+/dev/sda1               497696     5356     492340   2% /boot/efi<br>
+tmpfs                        390712       16     390696   1% /run/user/1000</p>
+</blockquote>
+<p>Para isso vou remover o pacote snap (lembrando que eu não uso snap - apesar de ter instalado alguns programas para testar uma coisa ou outra):</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>sudo apt purge snapd</strong></p>
+</blockquote>
+<blockquote>
+<p>leandro@leandro:~$ <strong>df</strong><br>
+Sist. Arq.     Blocos de 1K    Usado Disponível Uso% Montado em<br>
+udev                1914964        0    1914964   0% /dev<br>
+tmpfs                390716     1520     389196   1% /run<br>
+/dev/sda6          87178268 43253432   39450420  53% /<br>
+tmpfs               1953564        0    1953564   0% /dev/shm<br>
+tmpfs                  5120        4       5116   1% /run/lock<br>
+tmpfs               1953564        0    1953564   0% /sys/fs/cgroup<br>
+/dev/sda1            497696     5356     492340   2% /boot/efi<br>
+tmpfs                390712       48     390664   1% /run/user/1000</p>
+</blockquote>
+<p>Verificando novamente o tempo de boot:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemd-analyze</strong><br>
+Startup finished in 3.104s (firmware) + 11.697s (loader) + 6.363s (kernel) + 35.386s (userspace) = 56.553s<br>
+graphical.target reached after 35.359s in userspace</p>
+</blockquote>
+<p>Meu tempo de boot agora diminuiu 25%! Por isso é importante verificar as mensagens de erro no sistema:
+elas podem significar diminuição no tempo de boot, principalmente quando o sistema tenta iniciar
+um serviço e não consegue porque todas as unidades estão encadeadas e a demora em um serviço pode
+se propagar mais para a frente com a demora em outro.</p>
+<p>Agora um último truque. Baseando em meu novo relatório de</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemd-analyze blame</strong><br>
+19.245s udisks2.service<br>
+14.045s networkd-dispatcher.service<br>
+12.662s containerd.service<br>
+(..)</p>
+</blockquote>
+<p>eu tenho 71 serviços ativos.</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemd-analyze blame &ndash;no-pager| wc -l</strong><br>
+<strong>71</strong></p>
+</blockquote>
+<p>E que tal se eu otimizasse meu tempo de busca e utilizasse o princípio de Paretto aqui e analisasse apenas os principais consumidores de tempo??</p>
+<p>Pelo princípio de Paretto aproximadamente 20% dos serviços consomem 80% do tempo de carregamento. Como eu tenho
+71 serviços eu devo me preocupar com mais ou menos 14 serviços. Como o systemd-analyze já me fornece
+a lista ordenada do maior para o menor, eu posso obter a lista rodando:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemd-analyze blame &ndash;no-pager| head -n 14</strong><br>
+19.245s udisks2.service<br>
+14.045s networkd-dispatcher.service<br>
+12.662s containerd.service<br>
+10.168s accounts-daemon.service<br>
+9.845s NetworkManager-wait-online.service<br>
+8.546s systemd-journal-flush.service<br>
+7.952s dev-sda6.device<br>
+6.431s NetworkManager.service<br>
+6.350s avahi-daemon.service<br>
+6.333s polkit.service<br>
+5.799s thermald.service<br>
+5.792s systemd-logind.service<br>
+5.791s wpa_supplicant.service<br>
+5.277s lightdm.service</p>
+</blockquote>
+<p>Nesta nova listagem, há três serviços que estão com problemas (usei systemctl status para verificar): networkd-dispatcher, thermald e wpa_supplicant.</p>
+<p>Quais desses serviços eu poderia desabilitar à primeira vista? Containerd e networkd-dispatcher.</p>
+<p>Containerd é o docker que está instalado na minha máquina. Como é uma máquina de desenvolvimento, não preciso dele carregando durante o boot.</p>
+<p>Portanto vou desabilitá-lo e carregar manualmente quando eu for usar:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>sudo systemctl disable containerd</strong><br>
+[sudo] senha para leandro:<br>
+Removed /etc/systemd/system/multi-user.target.wants/containerd.service.<br>
+leandro@leandro:~ $ sudo systemctl disable networkd-dispatcher<br>
+Removed /etc/systemd/system/multi-user.target.wants/networkd-dispatcher.service.</p>
+</blockquote>
+<p>O outro é o networkd_dispatcher que define configurações de rede, mas que usa systemd-networkd. No meu caso já tinha desabilitado
+o systemd-networkd, ou seja, o networkd_dispatcher nunca vai gerenciar nada!</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemctl status systemd-networkd</strong><br>
+● systemd-networkd.service - Network Service<br>
+Loaded: loaded (/lib/systemd/system/systemd-networkd.service; disabled; vendor preset: enabled)<br>
+Active: inactive (dead)<br>
+Docs: man:systemd-networkd.service(8)</p>
+</blockquote>
+<p>Thermald e wpa_supplicant eu pretendo analisar em uma eventual parte 02 desta dica (que já está ficando extensa).</p>
+<p>Reiniciando e verificando o tempo:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemd-analyze</strong><br>
+Startup finished in 3.098s (firmware) + 4.743s (loader) + 5.830s (kernel) + 35.412s (userspace) = 49.084s<br>
+graphical.target reached after 35.382s in userspace</p>
+</blockquote>
+<p>Chegamos assim a uma melhoria de cerca de 36%! Reduzimos o tempo de boot em 1/3!  Mas isso não é o fim. Bem, é por enquanto.</p>
+<h1 id="conclusão">Conclusão</h1>
+<p>O objetivo desta dica é mostrar como encontrar possíveis erros no sistema operacional Ubuntu Linux que possam
+vir a comprometer a performance ou a estabilidade do funcionamento.</p>
+<p>Vimos o comando <strong>dmesg</strong>, o <strong>systemd-analyze</strong> e o <strong>systemctl</strong> e analisamos diversas saídas destes comandos
+via terminal.</p>
+<p>No final acabamos nos concentrando em melhorar a performance de boot do sistema desabilitando serviços,
+instalando e desinstalando pacotes desnecessários.</p>
+<p>Infelizmente esta dica estava ficando muito grande (ficou maior do que eu havia planejado quando
+comecei) por isso dividi em partes. Ainda falta analisar as saídas do <strong>journalctl</strong> e os arquivos de
+log relacionandos ao sistema gráfico.</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/dicas/recarregar-bashrc/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">Recarregar o arquivo .bashrc no Linux</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2217338589613653"
+     crossorigin="anonymous"></script>
+</body>
+</html>

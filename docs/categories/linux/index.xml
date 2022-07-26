@@ -6,17 +6,29 @@
     <description>Recent content in Linux on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Thu, 21 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Encontrando erros e corrigindo problemas no Ubuntu Linux - Parte 01</title>
+      <link>https://leandropecanhascardua.github.io/dicas/procurando-erros-no-linux_01/</link>
+      <pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/procurando-erros-no-linux_01/</guid>
+      <description>&lt;p&gt;Em muitas situações o sistema operacional pode apresentar erros ou se comportar de estranhamente.&lt;/p&gt;
+&lt;p&gt;Quando isso acontece, é necessário saber onde e como encontrar pistas para diagnosticar o problema.&lt;/p&gt;
+&lt;p&gt;Nesta dica rápida vamos conhecer alguns comandos e opções para encontrar mensagens de erro fornecidas
+pelo sistema em mal funcionamento.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Avaliando a qualidade do código PHP com Phploc</title>
-      <link>https://leandropecanhascardua.github.io/dicas/phploc/</link>
+      <link>https://leandropecanhascardua.github.io/artigos/phploc/</link>
       <pubDate>Thu, 21 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://leandropecanhascardua.github.io/dicas/phploc/</guid>
+      <guid>https://leandropecanhascardua.github.io/artigos/phploc/</guid>
       <description>&lt;p&gt;Em muitas situações é necessário entrar em contato com código desconhecido, desenvolvido por outra pessoa.&lt;/p&gt;
 &lt;p&gt;Como etapa preliminar, pode ser útil obter estatísticas que informem algo sobre o código ,
 seja como medida de qualidade ou como informação da estruturação do código.&lt;/p&gt;

@@ -13,10 +13,10 @@
     
     <item>
       <title>Avaliando a qualidade do código PHP com Phploc</title>
-      <link>https://leandropecanhascardua.github.io/dicas/phploc/</link>
+      <link>https://leandropecanhascardua.github.io/artigos/phploc/</link>
       <pubDate>Thu, 21 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://leandropecanhascardua.github.io/dicas/phploc/</guid>
+      <guid>https://leandropecanhascardua.github.io/artigos/phploc/</guid>
       <description>&lt;p&gt;Em muitas situações é necessário entrar em contato com código desconhecido, desenvolvido por outra pessoa.&lt;/p&gt;
 &lt;p&gt;Como etapa preliminar, pode ser útil obter estatísticas que informem algo sobre o código ,
 seja como medida de qualidade ou como informação da estruturação do código.&lt;/p&gt;

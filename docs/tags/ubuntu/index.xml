@@ -6,10 +6,22 @@
     <description>Recent content in ubuntu on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sun, 17 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Encontrando erros e corrigindo problemas no Ubuntu Linux - Parte 01</title>
+      <link>https://leandropecanhascardua.github.io/dicas/procurando-erros-no-linux_01/</link>
+      <pubDate>Mon, 25 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/procurando-erros-no-linux_01/</guid>
+      <description>&lt;p&gt;Em muitas situações o sistema operacional pode apresentar erros ou se comportar de estranhamente.&lt;/p&gt;
+&lt;p&gt;Quando isso acontece, é necessário saber onde e como encontrar pistas para diagnosticar o problema.&lt;/p&gt;
+&lt;p&gt;Nesta dica rápida vamos conhecer alguns comandos e opções para encontrar mensagens de erro fornecidas
+pelo sistema em mal funcionamento.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>A saga do Tablet - parte 02</title>
