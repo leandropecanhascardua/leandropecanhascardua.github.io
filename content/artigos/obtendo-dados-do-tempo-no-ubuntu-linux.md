@@ -8,7 +8,6 @@ tags:
   - "inxi"
 categories:
   - "Linux"
-  - "Artigo"
 ---
 Uma das ferramentas mais versáteis do Linux é o inxi. Desenvolvida para fornecer detalhes sobre a configuração do sistema para fóruns de suporte, ela pode ir muito além
 e informar também dados meteorológicos como temperatura, umidade relativa do ar, pressão atmosférica entre outros, tudo pela linha de comando.

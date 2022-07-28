@@ -12,7 +12,7 @@
 <meta property="og:description" content="Página pessoal de Leandro Peçanha Scardua" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://leandropecanhascardua.github.io/categories/linux/" />
-<meta property="og:updated_time" content="2022-07-25T00:00:00+00:00" />
+<meta property="og:updated_time" content="2022-07-28T00:00:00+00:00" />
 
 		<meta itemprop="name" content="Linux">
 <meta itemprop="description" content="Página pessoal de Leandro Peçanha Scardua">
@@ -92,6 +92,30 @@
 	</header><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
+			<a href="/dicas/obtendo_versao_windows_acpi/" rel="bookmark">
+			Obtendo a versão do Windows na BIOS/EFI
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-07-28T00:00:00Z">28.07.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>Uma BIOS/EFI com suporte a ACPI pode requisitar informação sobre qual sistema operacional está
+executando e, se for o caso, bloquear tentativa de acesso a recursos.</p>
+<p>Isso pode ser conveniente quando o fabricante não implementa funcionalidades e deseja lançar o
+produto rapidamente no mercado.</p>
+<p>Neste caso, a BIOS espera que apenas algumas versões de algum sistema operacional(Windows?) esteja instalado.
+Isso é muito comum em notebooks e vamos ver como descobrir qual sistema operacional nossa BIOS(EFI) espera encontrar.</p>
+	</div>
+</article>
+<article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
 			<a href="/dicas/procurando-erros-no-linux_01/" rel="bookmark">
 			Encontrando erros e corrigindo problemas no Ubuntu Linux - Parte 01
 			</a>
@@ -145,7 +169,7 @@ projetos desenvolvidos em PHP vamos usar a ferramenta mais simples que existe: o
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-07-17T00:00:00Z">17.07.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>, <a class="meta__link" href="/categories/artigos/" rel="category">artigos</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-07-17T00:00:00Z">17.07.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>
 	</span>
 </div></div>
 	</header>
@@ -154,29 +178,6 @@ projetos desenvolvidos em PHP vamos usar a ferramenta mais simples que existe: o
 meu ambiente de modo a acessá-lo pelo terminal de comandos do Linux.</p>
 <p>Agora eu tentarei instalar um sistema dentro dele. Vou tentar fazer apenas usando ferramentas de
 linha de comando pelo terminal. Será que vai funcionar?</p>
-	</div>
-</article>
-<article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/dicas/recarregar-bashrc/" rel="bookmark">
-			Recarregar o arquivo .bashrc no Linux
-			</a>
-		</h2>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-07-12T00:00:00Z">12.07.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>, <a class="meta__link" href="/categories/dicas/" rel="category">Dicas</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>Essa é uma dica ligeira e muito útil.</p>
-<p>Por vezes é necessário modificar o script de personalização de ambiente de usuário .bashrc seja
-para modificar a variável PATH, seja para carregar alguma aplicação após o login do usuário.</p>
-<p>Após a modificação é necessário efetuar logoff e depois login para carregar novamente o arquivo, mas
-para tornar esse logoff desnecessário, podemos carregar este arquivo na sessão atual.</p>
 	</div>
 </article>
 
@@ -205,15 +206,6 @@ para tornar esse logoff desnecessário, podemos carregar este arquivo na sessão
 	<h4 class="widget__title">Categorias</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/artigo/">Artigo</a>
-			</li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/artigos/">artigos</a>
-			</li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/dicas/">Dicas</a>
-			</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/linux/">Linux</a>
 			</li>

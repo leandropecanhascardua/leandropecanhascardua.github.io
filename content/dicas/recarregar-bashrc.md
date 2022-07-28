@@ -7,7 +7,6 @@ tags:
   - "terminal"	
 categories:
   - "Linux"
-  - "Dicas"
 ---
 Essa é uma dica ligeira e muito útil.
 

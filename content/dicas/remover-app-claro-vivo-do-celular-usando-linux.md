@@ -9,7 +9,6 @@ tags:
   - "celular"
 categories:
   - "Linux"
-  - "Dicas"
 ---
 Todo chip de operadora de telefonia no Brasil instala junto consigo um App. Geralmente é apenas um aplicativo
 de relacionamento com cliente, para oferecer ofertas promocionais e descontos em pacotes.

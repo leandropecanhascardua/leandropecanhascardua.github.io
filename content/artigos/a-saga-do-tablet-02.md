@@ -10,7 +10,6 @@ tags:
   - adb
 categories:
   - "Linux"
-  - "artigos"
 ---
 No artigo anterior eu encontrei algumas informações sobre meu tablet Samsung GT-P1010 e configurei
 meu ambiente de modo a acessá-lo pelo terminal de comandos do Linux.

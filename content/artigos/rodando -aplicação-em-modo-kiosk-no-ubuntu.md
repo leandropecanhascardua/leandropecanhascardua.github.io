@@ -7,7 +7,6 @@ tags:
   - "kiosk"	
 categories:
   - "Linux"
-  - "Artigo"
 ---
 
 O modo kiosk (ou quiosque) é um modo de operação que disponibiliza para o usuário um único aplicativo ou aplicação em tela cheia e sem bordas ou barras de ferramentas. Seu principal uso é nos totens de auto atendimento, como os caixas automáticos e filas de atendimento.

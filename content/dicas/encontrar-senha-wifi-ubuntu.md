@@ -8,7 +8,6 @@ tags:
   - "wifi"	
 categories:
   - "Linux"
-  - "Dicas"
 ---
 Esta é uma dica rápida e fruto de uma necessidade comum: Configurar a senha da rede wifi em um novo dispositivo. 
 

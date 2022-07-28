@@ -7,7 +7,6 @@ tags:
   - "terminal"	
 categories:
   - "Linux"
-  - "Dicas"
 ---
 Recentemente eu estava fazendo testes no meu sistema de bolão para a Copa do Mundo e precisei alterar a data do sistema para 2018 de modo a averiguar as validações de data. 
 Foi então que percebi que não conseguia fazer isso com facilidade com date/hwclock como fazia antigamente. 

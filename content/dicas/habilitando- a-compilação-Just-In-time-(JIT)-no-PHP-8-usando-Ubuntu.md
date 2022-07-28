@@ -7,7 +7,6 @@ tags:
   - "php"	
 categories:
   - "PHP"
-  - "Dicas"
 ---
 O recurso Just In Time foi adicionado à versão 8 do PHP lançada em 2020 e promete ganhos interessantes de performance. 
 

@@ -13,7 +13,6 @@ tags:
   - "hacker"	
 categories:
   - "Linux"
-  - "Dicas"
 ---
 A técnica de sniffer é considerada uma das técnicas mais sutis e difíceis de identificar porque o atacante fica imóvel na rede, atuando passivamente enquanto vigia o tráfego de dados. 
 

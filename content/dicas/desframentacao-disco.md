@@ -7,7 +7,6 @@ tags:
   - "HD"
 categories:
   - "Linux"
-  - "Dicas"
 ---
 Há um mito de que sistemas Linux não precisam de desfragmentação. Será verdade?
 

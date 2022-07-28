@@ -7,7 +7,6 @@ tags:
   - "terminal"	
 categories:
   - "Linux"
-  - "Dicas"
 ---
 A necessidade desta dica veio de um problema: O ubuntu instala por padrão duas versões do Python: a versão 2.7 e a versão 3.8. 
 

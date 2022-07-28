@@ -6,10 +6,24 @@
     <description>Recent content in ubuntu on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Mon, 25 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 Jul 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Obtendo a versão do Windows na BIOS/EFI</title>
+      <link>https://leandropecanhascardua.github.io/dicas/obtendo_versao_windows_acpi/</link>
+      <pubDate>Thu, 28 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/obtendo_versao_windows_acpi/</guid>
+      <description>&lt;p&gt;Uma BIOS/EFI com suporte a ACPI pode requisitar informação sobre qual sistema operacional está
+executando e, se for o caso, bloquear tentativa de acesso a recursos.&lt;/p&gt;
+&lt;p&gt;Isso pode ser conveniente quando o fabricante não implementa funcionalidades e deseja lançar o
+produto rapidamente no mercado.&lt;/p&gt;
+&lt;p&gt;Neste caso, a BIOS espera que apenas algumas versões de algum sistema operacional(Windows?) esteja instalado.
+Isso é muito comum em notebooks e vamos ver como descobrir qual sistema operacional nossa BIOS(EFI) espera encontrar.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Encontrando erros e corrigindo problemas no Ubuntu Linux - Parte 01</title>
