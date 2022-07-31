@@ -6,10 +6,23 @@
     <description>Recent content on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Thu, 28 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 30 Jul 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Obter repositórios pela linha de comando no Ubuntu ou pelos derivados Debian</title>
+      <link>https://leandropecanhascardua.github.io/dicas/obter_repositorios_ubuntu/</link>
+      <pubDate>Sat, 30 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/obter_repositorios_ubuntu/</guid>
+      <description>&lt;p&gt;Distribuições Linux derivadas do Debian como Ubuntu, Linux Mint entre outras usam o gerenciador de pacotes APT para fornecerem
+um método cômodo e eficaz de instalar aplicativos sem a necessidade de o usuário se preocupar com dependência entre pacotes.&lt;/p&gt;
+&lt;p&gt;Contudo, o advento de novos releases e versões pode gerar um amontoado de repositórios que o iniciantes podem sentir-se tentados
+a misturar para instalar alguma aplicação específica. Principalmente devido a dicas de Internet antigas.&lt;/p&gt;
+&lt;p&gt;Quando é necessário obter ajuda, é necessário fornecer a lista completa dos repositórios de pacotes configurados na máquina.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Obtendo a versão do Windows na BIOS/EFI</title>
