@@ -6,10 +6,21 @@
     <description>Recent content in Linux on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sat, 30 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A saga do Tablet - parte 03</title>
+      <link>https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-03/</link>
+      <pubDate>Wed, 03 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-03/</guid>
+      <description>&lt;p&gt;Em meu último artigo eu mostrei as dificuldades iniciais com o comando adb e fastboot que não funcionaram conforme eu esperava.&lt;/p&gt;
+&lt;p&gt;As dificuldades foram úteis porque serviram de aprendizado e apontaram a necessidade de uma nova abordagem.&lt;/p&gt;
+&lt;p&gt;Agora eu vou abandonar os dois comandos e vou partir para o Heimdall.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Obter lista dos repositórios pela linha de comando no Ubuntu ou derivados Debian</title>
