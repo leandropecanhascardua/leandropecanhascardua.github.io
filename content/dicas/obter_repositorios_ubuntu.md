@@ -1,5 +1,5 @@
 ---
-title: Obter repositórios pela linha de comando no Ubuntu ou pelos derivados Debian
+title: Obter lista dos repositórios pela linha de comando no Ubuntu ou derivados Debian
 date: 2022-07-30
 tags:
   - "ubuntu"

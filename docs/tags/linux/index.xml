@@ -6,10 +6,21 @@
     <description>Recent content in linux on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Wed, 03 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Extrair o serial do Windows a partir da BIOS/EFI</title>
+      <link>https://leandropecanhascardua.github.io/dicas/extraindo_serial_windows/</link>
+      <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/extraindo_serial_windows/</guid>
+      <description>&lt;p&gt;Em outra &lt;a href=&#34;https://leandropecanhascardua.github.io/dicas/obtendo_versao_windows_acpi/&#34;&gt;dica&lt;/a&gt; eu mostrei como obter a versão do sistema operacional Windows que um notebook foi preparado para rodar.&lt;/p&gt;
+&lt;p&gt;Agora é hora de extrair a chave de validação do Windows(serial) que o fabricante colocou na BIOS/EFI. Sim, o serial está na
+BIOS/EFI e está acessível para você, comprador do equipamento!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>A saga do Tablet - parte 03</title>

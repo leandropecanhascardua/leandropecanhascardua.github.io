@@ -405,5 +405,5 @@ sistema operacional. Acho que eu tinha uma visão provinciana dos exploits...
 
 Dado a dificuldade encontrada, era hora de apelar para qualquer coisa que me fornecesse o resultado que eu precisava.
 
-(A saga do Tablet - parte 02)(/artigos/a-saga-do-tablet-02/)
+[A saga do Tablet - parte 02](/artigos/a-saga-do-tablet-02/)
 
