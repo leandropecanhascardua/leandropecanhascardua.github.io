@@ -1,5 +1,5 @@
 ---
-title: Procurando (e encontrando) bugs no código fonte sem rodar o aplicativo - Análise estática de código
+title: Procurando (e encontrando) bugs no código fonte sem rodar o aplicativo - Análise estática de código com graudit
 date: 2022-08-14
 tags: 
   - "linux"
