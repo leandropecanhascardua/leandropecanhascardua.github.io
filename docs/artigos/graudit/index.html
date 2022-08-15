@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Procurando (e encontrando) bugs no código fonte sem rodar o aplicativo - Análise estática de código - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="Procurando (e encontrando) bugs no código fonte sem rodar o aplicativo - Análise estática de código" />
+<meta property="og:description" content="Quer um jeito certo de encontrar bugs? Analise o código fonte!
+Bem, é isso que a análise estática de código pretende fazer procurando por padrões dentro código e avisando quando esses
+padrões são encontrados.
+Com o apoio de uma ferramenta como o graudit isso pode ser fácil demais da conta!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/artigos/graudit/" />
+<meta property="article:published_time" content="2022-08-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-14T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Procurando (e encontrando) bugs no código fonte sem rodar o aplicativo - Análise estática de código">
+<meta itemprop="description" content="Quer um jeito certo de encontrar bugs? Analise o código fonte!
+Bem, é isso que a análise estática de código pretende fazer procurando por padrões dentro código e avisando quando esses
+padrões são encontrados.
+Com o apoio de uma ferramenta como o graudit isso pode ser fácil demais da conta!">
+<meta itemprop="datePublished" content="2022-08-14T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-08-14T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1993">
+
+
+
+<meta itemprop="keywords" content="linux,php,graudit," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Procurando (e encontrando) bugs no código fonte sem rodar o aplicativo - Análise estática de código"/>
+<meta name="twitter:description" content="Quer um jeito certo de encontrar bugs? Analise o código fonte!
+Bem, é isso que a análise estática de código pretende fazer procurando por padrões dentro código e avisando quando esses
+padrões são encontrados.
+Com o apoio de uma ferramenta como o graudit isso pode ser fácil demais da conta!"/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/artigos/">
+					
+					<span class="menu__text">Artigos</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/dicas/">
+					
+					<span class="menu__text">Dicas</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Procurando (e encontrando) bugs no código fonte sem rodar o aplicativo - Análise estática de código</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-08-14T00:00:00Z">14.08.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/php/" rel="category">PHP</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>Quer um jeito certo de encontrar bugs? Analise o código fonte!</p>
+<p>Bem, é isso que a análise estática de código pretende fazer procurando por padrões dentro código e avisando quando esses
+padrões são encontrados.</p>
+<p>Com o apoio de uma ferramenta como o <strong>graudit</strong> isso pode ser fácil demais da conta!</p>
+<p>Programadores experientes podem encontrar problemas sem nem mesmo digitar o código fonte (e eu já vi um exemplo desses!).</p>
+<p>Mas o auxílio de uma ferramenta permite automatizar o processo e diminui o custo da análise estática de código, nome da técnica
+que consiste em vasculhar o código fonte em busca de padrões associados a problemas.</p>
+<p>Uma vez encontrado o padrão, é necessário uma análise pois não necessariamente há uma vulnerabilidade.</p>
+<p>Pode ser que haja verificações tendo em conta o risco e haja proteções adequadas. Ao mesmo tempo, só porque um trecho de código não foi
+exposto não significa que não haja ou não haverá problemas ali.</p>
+<p>Temos de levar em conta falsos positivos e falsos negativos, mas dentro do tempo que dispomos para nossos projetos temos de fazer o nos dê o melhor retorno em termo de tempo investido.</p>
+<p>O <strong>graudit</strong> é um programa desenvolvido em shell script que usa o utilitário <strong>GNU grep</strong> para vasculhar arquivos de código fonte em busca de padrões de código problemático.</p>
+<p>A página do projeto está disponível em (<a href="http://www.justanotherhacker.com/projects/graudit/">http://www.justanotherhacker.com/projects/graudit/</a>) junto com outras boas ferramentas
+do desenvolvedor.</p>
+<p>Por utilizar como base o Shell Script, as assinaturas são fáceis de entender e customizar, além de permitir a adição de assinaturas de código próprias para estender a funcionalidade da aplicação.</p>
+<h2 id="instalação">Instalação</h2>
+<p>O método mais recomendado de instalação é através do <a href="https://github.com/wireghoul/graudit">github do projeto</a>. Isso permite obter as assinaturas mais atualizadas.</p>
+<p>Vou mostrar a instalação apenas para o meu usuário local. Para isso vou usar o diretório <strong>~/.local/bin</strong> presente em uma configuração padrão do Ubuntu.</p>
+<blockquote>
+<p>leandro@leandro:~$  cd ~/.local/bin/</p>
+</blockquote>
+<blockquote>
+<p>leandro@leandro:~/.local/bin$  git clone <a href="https://github.com/wireghoul/graudit">https://github.com/wireghoul/graudit</a></p>
+</blockquote>
+<p>Vamos adicionar o caminho da instalação à variável <strong>$PATH</strong> do sistema, assim como a variável <strong>$GRDIR</strong> que contém o caminho para
+o banco de dados de assinaturas (e que será útil mais adiante).</p>
+<blockquote>
+<p>leandro@leandro:~$ nano ~/.bashrc</p>
+</blockquote>
+<blockquote>
+<p>PATH=$PATH:/home/leandro/.local/bin/graudit/<br>
+export GRDIR=/home/leandro/.local/bin/graudit/signatures/</p>
+</blockquote>
+<p>E atualizar a sessão atual seguindo a <a href="/dicas/recarregar-bashrc/">dica</a>:</p>
+<blockquote>
+<p>leandro@leandro:~$ source ~/.bashrc</p>
+</blockquote>
+<p>ou</p>
+<blockquote>
+<p>leandro@leandro:~$ . ~/.bashrc</p>
+</blockquote>
+<p>Depois disso já podemos testar a instalação.</p>
+<blockquote>
+<p>leandro@leandro:~$ graudit<br>
+===========================================================<br>
+                         .__ __  _<br>
+           ___________   _ _  __|_/|__|/  |_<br>
+           / __\_`_\__  \ |  |  \/ __| | \\  __\<br>
+         / /_/  &gt;  |\//__\|  |  / /_/| | || |<br>
+        \___  /|_|  (___/___/_____| |_||_|<br>
+       /___/        \/        <br>
+grep rough audit - static analysis tool<br>
+v3.4 written by @Wireghoul<br>
+=================================[justanotherhacker.com]===<br>
+Usage: graudit [opts] /path/to/scan</p>
+<p>OPTIONS<br>
+-d <!-- raw HTML omitted --> database to use or /path/to/file.db (uses default if not specified)<br>
+-A scan unwanted and difficult (ALL) files<br>
+-x exclude these files (comma separated list: -x <em>.js,</em>.sql)<br>
+-i case in-sensitive scan<br>
+-c <!-- raw HTML omitted --> number of lines of context to display, default is 2</p>
+<p>-B supress banner<br>
+-L vim friendly lines<br>
+-b colour blind friendly template<br>
+-z supress colors<br>
+-Z high contrast colors</p>
+<p>-l lists databases available<br>
+-v prints version number<br>
+-h prints this help screen</p>
+</blockquote>
+<p>Temos três conjuntos de argumentos para o comando :</p>
+<ul>
+<li>comportamento</li>
+<li>aparência</li>
+<li>informativos</li>
+</ul>
+<p>Com os argumentos de aparência, podemos modificar a apresentação do relatório de saída.</p>
+<p>Por exemplo, com a opção <strong>-B</strong> podemos suprimir o banner de apresentação. com a opção <strong>-z</strong> podemos suprimir as cores na
+saída, com <strong>-L</strong> podemos deixar a saída com o padrão de cores do vim (editor de texto de linha de
+comando evolução do vi).</p>
+<p>O conjunto de opções informativos fazem isso, mostram informações sobre o programa: <strong>-v</strong> imprime o número da versão,
+<strong>-h</strong> imprime a ajuda e a opção <strong>-l</strong> é a mais valiosa, fornece uma listagem do bancos da dados de assinaturas
+disponíveis.</p>
+<p>Com essa opção podemos ver quais plataformas de desenvolvimento ou linguagem de programação podemos analisar, ou mesmo que
+categoria de vulnerabilidade queremos encontrar:</p>
+<blockquote>
+<p>leandro@leandro:~/.local/bin$ <strong>graudit -B -l</strong><br>
+/home/leandro/.local/bin/graudit/signatures//actionscript.db<br>
+/home/leandro/.local/bin/graudit/signatures//android.db<br>
+/home/leandro/.local/bin/graudit/signatures//asp.db<br>
+/home/leandro/.local/bin/graudit/signatures//c.db<br>
+/home/leandro/.local/bin/graudit/signatures//cobol.db<br>
+/home/leandro/.local/bin/graudit/signatures//default.db<br>
+/home/leandro/.local/bin/graudit/signatures//dotnet.db<br>
+/home/leandro/.local/bin/graudit/signatures//exec.db<br>
+/home/leandro/.local/bin/graudit/signatures//fruit.db<br>
+/home/leandro/.local/bin/graudit/signatures//go.db<br>
+/home/leandro/.local/bin/graudit/signatures//ios.db<br>
+/home/leandro/.local/bin/graudit/signatures//java.db<br>
+/home/leandro/.local/bin/graudit/signatures//js.db<br>
+/home/leandro/.local/bin/graudit/signatures//nim.db<br>
+/home/leandro/.local/bin/graudit/signatures//perl.db<br>
+/home/leandro/.local/bin/graudit/signatures//php.db<br>
+/home/leandro/.local/bin/graudit/signatures//python.db<br>
+/home/leandro/.local/bin/graudit/signatures//ruby.db<br>
+/home/leandro/.local/bin/graudit/signatures//scala.db<br>
+/home/leandro/.local/bin/graudit/signatures//secrets-b64.db<br>
+/home/leandro/.local/bin/graudit/signatures//secrets.db<br>
+/home/leandro/.local/bin/graudit/signatures//spsqli.db<br>
+/home/leandro/.local/bin/graudit/signatures//sql.db<br>
+/home/leandro/.local/bin/graudit/signatures//strings.db<br>
+/home/leandro/.local/bin/graudit/signatures//xss.db<br>
+/home/leandro/.local/bin/graudit/signatures/actionscript.db<br>
+/home/leandro/.local/bin/graudit/signatures/android.db<br>
+/home/leandro/.local/bin/graudit/signatures/asp.db<br>
+/home/leandro/.local/bin/graudit/signatures/c.db<br>
+/home/leandro/.local/bin/graudit/signatures/cobol.db<br>
+/home/leandro/.local/bin/graudit/signatures/default.db<br>
+/home/leandro/.local/bin/graudit/signatures/dotnet.db<br>
+/home/leandro/.local/bin/graudit/signatures/exec.db<br>
+/home/leandro/.local/bin/graudit/signatures/fruit.db<br>
+/home/leandro/.local/bin/graudit/signatures/go.db<br>
+/home/leandro/.local/bin/graudit/signatures/ios.db<br>
+/home/leandro/.local/bin/graudit/signatures/java.db<br>
+/home/leandro/.local/bin/graudit/signatures/js.db<br>
+/home/leandro/.local/bin/graudit/signatures/nim.db<br>
+/home/leandro/.local/bin/graudit/signatures/perl.db<br>
+/home/leandro/.local/bin/graudit/signatures/php.db<br>
+/home/leandro/.local/bin/graudit/signatures/python.db<br>
+/home/leandro/.local/bin/graudit/signatures/ruby.db<br>
+/home/leandro/.local/bin/graudit/signatures/scala.db<br>
+/home/leandro/.local/bin/graudit/signatures/secrets-b64.db<br>
+/home/leandro/.local/bin/graudit/signatures/secrets.db<br>
+/home/leandro/.local/bin/graudit/signatures/spsqli.db<br>
+/home/leandro/.local/bin/graudit/signatures/sql.db<br>
+/home/leandro/.local/bin/graudit/signatures/strings.db<br>
+/home/leandro/.local/bin/graudit/signatures/xss.db<br>
+/home/leandro/.local/bin/graudit/misc/ampscript.db<br>
+/home/leandro/.local/bin/graudit/misc/flatline.db<br>
+/home/leandro/.local/bin/graudit/misc/qb64.db<br>
+/home/leandro/.local/bin/graudit/misc/rce.db<br>
+/home/leandro/.local/bin/graudit/misc/supression.db<br>
+/home/leandro/.local/bin/graudit/misc/wordpress.db</p>
+</blockquote>
+<p>Assim, podemos ver o cardápio do sistema: código fonte em C, Microsoft .NET, Go, Java, Javascript,
+PHP, Python, além de vulnerabilidades comuns para Wordpress, Cross-Site Scripting(XSS) e Sql entre outros!</p>
+<p>O último conjunto de parâmetros são os relacionados ao comportamento do programa em si. Com a opção <strong>-d</strong> podemos
+definir o caminho para um banco de dados, lembrando que podemos omitir o caminho completo se tivermos a variável de ambiente <strong>$GRDIR</strong> setada;com a opção <strong>-x</strong> podemos excluir algumas extensões de arquivo do processamento;com a opção -i podemos
+definir uma pesquisa sem fazer a diferenciação entre maiúsculas e minúsculas comum nos ambientes
+Linux e com a opção <strong>-c</strong> podemos sintetizar ou ampliar o relatório com a contagem do número de linhas a serem mostradas.</p>
+<p>Isso será melhor explicado no exemplo a seguir.</p>
+<p>Como exemplo vamos usar o aplicativo Igreja usando no artigo sobre <a href="/artigos/phploc/">phploc</a>.</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>cd Downloads/</strong><br>
+leandro@leandro:~/Downloads$ <strong>git clone <a href="https://github.com/hiltonbruce/Igreja.git">https://github.com/hiltonbruce/Igreja.git</a></strong></p>
+</blockquote>
+<p>Como devemos lembrar o sistema está construído em PHP. Se formos tentados a rodar:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ graudit -B -d php Igreja/<br>
+Igreja/painel_direito.php-40-			$recBuscas-&gt;buscarecibo();<br>
+Igreja/painel_direito.php:41:		}elseif (!empty($painelDireito) &amp;&amp; file_exists($painelDireito)) {<br>
+Igreja/painel_direito.php-42-			//Verifica se h� uma chamada a um painel espec�fico<br>
+##############################################<br>
+Igreja/painel_direito.php-46-		//In�cio da pend�ncia<br>
+Igreja/painel_direito.php:47:		$_urlLi_pen=&rdquo;?escolha={$_GET[&ldquo;escolha&rdquo;]}&amp;bsc_rol={$_GET[&ldquo;bsc_rol&rdquo;]}&quot;;//Montando o Link para ser passada a classe<br>
+Igreja/painel_direito.php-48-		$query_pen = &ldquo;SELECT rol,nome,obs FROM membro WHERE OBS&lt;&gt;&rsquo;&rsquo; &ldquo;;<br>
+##############################################<br>
+Igreja/painel_direito.php-52-		//Faz os calculos na pagina��o<br>
+Igreja/painel_direito.php:53:		$sql2_pen = mysql_query ($query_pen) or die (mysql_error());<br>
+Igreja/painel_direito.php-54-		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela<br>
+Igreja/painel_direito.php-55-		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas<br>
+Igreja/painel_direito.php:56:    $_GET[&ldquo;pagina1_pen&rdquo;] = (empty($_GET[&ldquo;pagina1_pen&rdquo;])) ? 0 : intval($_GET[&ldquo;pagina1_pen&rdquo;]);<br>
+Igreja/painel_direito.php:57:		if ($_GET[&ldquo;pagina1_pen&rdquo;]&lt;1) {<br>
+Igreja/painel_direito.php:58:			$_GET[&ldquo;pagina1_pen&rdquo;] = 1;<br>
+Igreja/painel_direito.php:59:		} elseif ($_GET[&ldquo;pagina1_pen&rdquo;]&gt;$paginas_pen) {<br>
+Igreja/painel_direito.php:60:			$_GET[&ldquo;pagina1_pen&rdquo;] = $paginas_pen;<br>
+Igreja/painel_direito.php-61-		}<br>
+Igreja/painel_direito.php:62:		$pagina_pen = $_GET[&ldquo;pagina1_pen&rdquo;]-1;<br>
+Igreja/painel_direito.php-63-		if ($pagina_pen&lt;0) {$pagina_pen=0;} //Especifica um valor p vari?vel p?gina caso ela esteja setada</p>
+</blockquote>
+<p>Receberemos um extenso relatório com um um total de 8068 linhas:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ graudit -B -d php Igreja/| wc -l<br>
+8058</p>
+</blockquote>
+<p>Sem conhecer o funcionamento interno da ferramenta, podemos ser levados a concluir que existem 8058 pontos de possíveis
+vulnerabilidades. Mas não é isso!</p>
+<p>Nosso relatório de saída mostrou o conteúdo de arquivos como Igreja/chat/js/jquery.js e Igreja/chat/js/jquery.js
+entre outros, ou seja, conteúdo em javascript.</p>
+<p>Isso poluiu muito o relatório de saída e não me interessa em um primeiro momento pois estou procurando apenas por problemas envolvendo o uso da linguagem <strong>PHP</strong>.</p>
+<p>Em um primeiro momento eu vou excluir arquivos de extensão js (vou-me concentrar primeiro no PHP) com a extensão <strong>-x</strong>.</p>
+<p>Outra coisa incômoda é que no relatório temos vários blocos separados por uma linha contendo exclusivamente
+tralhas(#). Entender o que significam essas tralhas ajudam a melhorar a construção de parâmetros executar uma busca eficiente.</p>
+<p>Cada bloco contém o nome do arquivo onde foi encontrado a assinatura do padrão(o problema) junto
+com o número da linha onde foi encontrado. Ao lado é exibido a linha com o padrão em realce.</p>
+<p>Além disso, o graudit retorna a linha encontrada junto com a linha anterior e a posterior. Isso permite uma avaliação mais rápida
+do potencial de exploração do padrão encontrado(mas adicionou mais 02 linhas ao resultado final!).</p>
+<p>Podemos mudar o número de linhas retornadas junto com o padrão usando o parâmetro <strong>-c</strong>. Podemos,
+assim, aumentar a quantidade (ou mesmo eliminar!) . O valor padrão para o parâmetro <strong>-c</strong> é 1.</p>
+<p>Assim, se quisermos retornar duas linhas além do padrão para analisar melhor o código poderíamos fazer:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ <strong>graudit -B -x *.js -c 2 -d php Igreja</strong><br>
+Igreja/painel_direito.php-39-			$recBuscas-&gt;mostra();<br>
+Igreja/painel_direito.php-40-			$recBuscas-&gt;buscarecibo();<br>
+Igreja/painel_direito.php:41:		<strong>}elseif (!empty($painelDireito) &amp;&amp; file_exists($painelDireito)) {</strong><br>
+Igreja/painel_direito.php-42-			//Verifica se h� uma chamada a um painel espec�fico<br>
+Igreja/painel_direito.php-43-			require_once $painelDireito;<br>
+##############################################<br>
+Igreja/painel_direito.php-45-		echo &ldquo;<!-- raw HTML omitted -->&rdquo;;<br>
+Igreja/painel_direito.php-46-		//In�cio da pend�ncia<br>
+Igreja/painel_direito.php:47:		<strong>$_urlLi_pen=&rdquo;?escolha={$_GET[&ldquo;escolha&rdquo;]}&amp;bsc_rol={$_GET[&ldquo;bsc_rol&rdquo;]}&quot;;//Montando o Link para ser passada a classe</strong><br>
+Igreja/painel_direito.php-48-		$query_pen = &ldquo;SELECT rol,nome,obs FROM membro WHERE OBS&lt;&gt;&rsquo;&rsquo; &ldquo;;<br>
+Igreja/painel_direito.php-49-		$nmpp_pen=&quot;40&rdquo;; //N?mero de mensagens por p?rginas<br>
+##############################################<br>
+Igreja/painel_direito.php-51-		$paginacao_pen[&lsquo;link&rsquo;] = &ldquo;?&quot;; //Pagina??o na mesma p?gina<br>
+Igreja/painel_direito.php-52-		//Faz os calculos na pagina��o<br>
+Igreja/painel_direito.php:53:		<strong>$sql2_pen = mysql_query ($query_pen) or die (mysql_error());</strong><br>
+Igreja/painel_direito.php-54-		$total_pen = mysql_num_rows($sql2_pen) ; //Retorna o total de linha na tabela<br>
+Igreja/painel_direito.php-55-		$paginas_pen = ceil ($total_pen/$nmpp_pen); //Retorna o total de p?ginas<br>
+Igreja/painel_direito.php:56:    <strong>$_GET[&ldquo;pagina1_pen&rdquo;] = (empty($_GET[&ldquo;pagina1_pen&rdquo;])) ? 0 : intval($_GET[&ldquo;pagina1_pen&rdquo;]);</strong><br>
+Igreja/painel_direito.php:57:		<strong>if ($_GET[&ldquo;pagina1_pen&rdquo;]&lt;1) {</strong><br>
+Igreja/painel_direito.php:58:			<strong>$_GET[&ldquo;pagina1_pen&rdquo;] = 1;</strong><br>
+(&hellip;)</p>
+</blockquote>
+<p>Se houver linhas próximas uma das outras no intervalo definido pelo parâmetro <strong>-c</strong>, as linhas são fundidas e mostradas num bloco só, como mostrado acima.</p>
+<p>Importante mencionar que o relatório do graudit não necessariamente aponta vulnerabilidades.</p>
+<p>Cada bloco do relatório corresponde a um padrão de problema comum. Para saber se é ou não problema,
+é necessário analisar o código.</p>
+<p>Pode ser, por exemplo, que o <strong>graudit</strong> aponte um problema de atribuição de variável $_GET mas os valores sejam exaustivamente tratados no código. Em todo caso, serve como um
+bom alerta.</p>
+<h2 id="um-exemplo-de-análise">um exemplo de análise</h2>
+<p>Como exercício vamos analisar nosso último relatório:</p>
+<p>O primeiro bloco aponta <strong>file_exists($painelDireito))</strong> como fonte de problema.</p>
+<p>Aparentemente trata-se apenas de uma chamada de função, então precisamos pesquisar por termos como <strong>&ldquo;file_exists php exploit&rdquo;</strong> no Google.</p>
+<p>Encontramos, por exemplo, a <a href="https://attackerkb.com/topics/VY0BeXIcp1/cve-2006-4481">https://attackerkb.com/topics/VY0BeXIcp1/cve-2006-4481</a> . Se explorar essa função parecer promissor, pesquisamos mais sobre ela e
+vulnerabilidades encontradas.</p>
+<p>Pode acontecer de esta função ser vulnerável apenas em determinadas versões do PHP, neste caso, se o código for nosso
+podemos atualizar a versão no servidor. Se não for nosso e pretendemos atacar, procuramos por instalações desse aplicativo que contenham essa versão.</p>
+<p>No segundo bloco de código temos o que parece ser a construção de uma url diretamente a partir da variável $_GET.
+Se o valor de <strong>$_urlLi_pen</strong> for impresso diretamente na saída html sem tratamento adequado, teremos cross site scripting. Veja que isso é
+especulação. Precisamos ver como essa variável será tratada ao longo do script e do programa como um todo.</p>
+<p>No terceiro bloco temos quatro linhas unificadas. A função <strong>mysql_query</strong> está depreciada, mas não encontrei
+vulnerabilidades relacionadas especificamente à função. Imagino que o alerta se refira apenas a
+atualizar para uma implementação mais moderna.</p>
+<p>As três últimas linhas são mais interessantes: Fazem um tratamento para um índice no array superglobal <strong>$_GET</strong>.  Parecem indicar que mais à frente esse índice será usado e, por isso,
+seu valor está sendo checado. Isso é uma prática não recomendada mas, como falei, não indica a priori
+uma vulnerabilidade. É, digamos, um ponto a ser melhorado.</p>
+<p>Isso sublinha um ponto interessante que eu gostaria de destacar: o <strong>graudit</strong> pode ser visto sob dois
+pontos de vista: o de uma equipe de desenvolvimento e o de um atacante ou analista de segurança!</p>
+<p>Sob o ponto de vista de equipe de desenvolvimento indica lugares onde o código pode ser aperfeiçoado
+e corrigido. Isso aumenta a qualidade!</p>
+<p>Sob o ponto de vista de uma equipe de segurança ou um atacante, significa um ponto onde o código
+está obscuro. Assim, seguindo a linha de execução, pode ser encontrada uma brecha ou algum erro que
+leve a uma exploração.</p>
+<h2 id="conclusão">Conclusão</h2>
+<p>O graudit é uma ferramenta de análise estática de código fonte muito versátil apesar da simplicidade
+da sua construção.</p>
+<p>É um script shell que possui um banco de dados de assinaturas para diversas linguagens
+de programação.</p>
+<p>Neste artigo eu cobri apenas a instalação e um uso bem básico, talvez eu faça outro artigo fazendo uma análise
+mais aprofundada.</p>
+<p>Ela pode ser usada tanto pela equipe de desenvolvimento como ferramenta de apoio à qualidade quanto
+pela equipe de segurança como meio de avaliar o risco de código.</p>
+<p>Pode ser também usado por caçadores de bugs ou atacantes que possuam acesso ao código fonte como ferramenta para encontrar vulnerabilidades
+potenciais ou reais. É bom destacar que pentesters em início de carreira podem se destacar encontrando bugs em projetos opensource
+e notificando os desenvolvedores ou sites especializados como (<a href="https://packetstormsecurity.com/">https://packetstormsecurity.com/</a>) e (<a href="https://www.exploit-db.com/">https://www.exploit-db.com/</a>) . Isso pode garantir um pouco de visibilidade.</p>
+<p>Eu devo cobrir posteriormente outras ferramentas para análise estática de código, mas eu considero o graudit uma das melhores
+devido à sua proposta!</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/php/" rel="tag">php</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/graudit/" rel="tag">graudit</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/artigos/a-saga-do-tablet-03/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">A saga do Tablet - parte 03</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2217338589613653"
+     crossorigin="anonymous"></script>
+</body>
+</html>
