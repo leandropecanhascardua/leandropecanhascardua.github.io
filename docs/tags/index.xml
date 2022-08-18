@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sun, 14 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>linux</title>
+      <link>https://leandropecanhascardua.github.io/tags/linux/</link>
+      <pubDate>Thu, 18 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ubuntu</title>
+      <link>https://leandropecanhascardua.github.io/tags/ubuntu/</link>
+      <pubDate>Thu, 18 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/tags/ubuntu/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>graudit</title>
@@ -21,29 +39,11 @@
     </item>
     
     <item>
-      <title>linux</title>
-      <link>https://leandropecanhascardua.github.io/tags/linux/</link>
-      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://leandropecanhascardua.github.io/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>PHP</title>
       <link>https://leandropecanhascardua.github.io/tags/php/</link>
       <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
       
       <guid>https://leandropecanhascardua.github.io/tags/php/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ubuntu</title>
-      <link>https://leandropecanhascardua.github.io/tags/ubuntu/</link>
-      <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://leandropecanhascardua.github.io/tags/ubuntu/</guid>
       <description></description>
     </item>
     

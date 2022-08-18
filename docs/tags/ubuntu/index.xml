@@ -6,10 +6,19 @@
     <description>Recent content in ubuntu on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sun, 07 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Removendo pacotes órfãos</title>
+      <link>https://leandropecanhascardua.github.io/dicas/deborphan/</link>
+      <pubDate>Thu, 18 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/deborphan/</guid>
+      <description>&lt;p&gt;Quando um pacote é instalado, junto com ele chegam suas dependências. Mas quando ele é desinstalado, suas dependências permanecem dentro do sistema.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Extrair o serial do Windows a partir da BIOS/EFI</title>
