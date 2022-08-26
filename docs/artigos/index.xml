@@ -6,10 +6,20 @@
     <description>Recent content in Artigos on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sun, 14 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/artigos/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A saga do Tablet - parte 04</title>
+      <link>https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-04/</link>
+      <pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-04/</guid>
+      <description>&lt;p&gt;Continuando a empreitada de exploração do tablet, vou partir para obtenção de acesso root no dispositivo.&lt;/p&gt;
+&lt;p&gt;Antes, porém, vou testar uma versão do software Odin para Linux, ou melhor, multiplataforma.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Procurando (e encontrando) bugs no código fonte sem rodar o aplicativo - Análise estática de código com graudit</title>

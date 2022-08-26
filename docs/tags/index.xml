@@ -6,26 +6,71 @@
     <description>Recent content in Tags on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Thu, 18 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>adb</title>
+      <link>https://leandropecanhascardua.github.io/tags/adb/</link>
+      <pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/tags/adb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Android</title>
+      <link>https://leandropecanhascardua.github.io/tags/android/</link>
+      <pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Heimdall</title>
+      <link>https://leandropecanhascardua.github.io/tags/heimdall/</link>
+      <pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/tags/heimdall/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>linux</title>
       <link>https://leandropecanhascardua.github.io/tags/linux/</link>
-      <pubDate>Thu, 18 Aug 2022 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate>
       
       <guid>https://leandropecanhascardua.github.io/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Tablet</title>
+      <link>https://leandropecanhascardua.github.io/tags/tablet/</link>
+      <pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/tags/tablet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>ubuntu</title>
       <link>https://leandropecanhascardua.github.io/tags/ubuntu/</link>
-      <pubDate>Thu, 18 Aug 2022 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate>
       
       <guid>https://leandropecanhascardua.github.io/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Usb</title>
+      <link>https://leandropecanhascardua.github.io/tags/usb/</link>
+      <pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/tags/usb/</guid>
       <description></description>
     </item>
     
@@ -44,51 +89,6 @@
       <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
       
       <guid>https://leandropecanhascardua.github.io/tags/php/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>adb</title>
-      <link>https://leandropecanhascardua.github.io/tags/adb/</link>
-      <pubDate>Wed, 03 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://leandropecanhascardua.github.io/tags/adb/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Android</title>
-      <link>https://leandropecanhascardua.github.io/tags/android/</link>
-      <pubDate>Wed, 03 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://leandropecanhascardua.github.io/tags/android/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Heimdall</title>
-      <link>https://leandropecanhascardua.github.io/tags/heimdall/</link>
-      <pubDate>Wed, 03 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://leandropecanhascardua.github.io/tags/heimdall/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tablet</title>
-      <link>https://leandropecanhascardua.github.io/tags/tablet/</link>
-      <pubDate>Wed, 03 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://leandropecanhascardua.github.io/tags/tablet/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Usb</title>
-      <link>https://leandropecanhascardua.github.io/tags/usb/</link>
-      <pubDate>Wed, 03 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://leandropecanhascardua.github.io/tags/usb/</guid>
       <description></description>
     </item>
     

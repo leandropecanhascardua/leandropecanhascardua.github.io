@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>A saga do Tablet - parte 04 - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="A saga do Tablet - parte 04" />
+<meta property="og:description" content="Continuando a empreitada de exploração do tablet, vou partir para obtenção de acesso root no dispositivo.
+Antes, porém, vou testar uma versão do software Odin para Linux, ou melhor, multiplataforma." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-04/" />
+<meta property="article:published_time" content="2022-08-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-25T00:00:00+00:00" />
+
+		<meta itemprop="name" content="A saga do Tablet - parte 04">
+<meta itemprop="description" content="Continuando a empreitada de exploração do tablet, vou partir para obtenção de acesso root no dispositivo.
+Antes, porém, vou testar uma versão do software Odin para Linux, ou melhor, multiplataforma.">
+<meta itemprop="datePublished" content="2022-08-25T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-08-25T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1832">
+
+
+
+<meta itemprop="keywords" content="ubuntu,linux,Android,Tablet,Usb,adb,Heimdall," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A saga do Tablet - parte 04"/>
+<meta name="twitter:description" content="Continuando a empreitada de exploração do tablet, vou partir para obtenção de acesso root no dispositivo.
+Antes, porém, vou testar uma versão do software Odin para Linux, ou melhor, multiplataforma."/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/artigos/">
+					
+					<span class="menu__text">Artigos</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/dicas/">
+					
+					<span class="menu__text">Dicas</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">A saga do Tablet - parte 04</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-08-25T00:00:00Z">25.08.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>, <a class="meta__link" href="/categories/artigos/" rel="category">Artigos</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>Continuando a empreitada de exploração do tablet, vou partir para obtenção de acesso root no dispositivo.</p>
+<p>Antes, porém, vou testar uma versão do software Odin para Linux, ou melhor, multiplataforma.</p>
+<p>Como eu mencionei no último artigo, eu ia partir para os exploits para obter acesso root. Pesquisando um pouco, eu encontrei referência para uma aplicação java que seria igual ao Odin. Resolvi testá-la.</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ <strong>git clone <a href="https://github.com/GameTheory-/jodin3.git">https://github.com/GameTheory-/jodin3.git</a></strong><br>
+leandro@leandro:~/Downloads/jodin3$ <strong>cd jodin3/</strong><br>
+leandro@leandro:~/Downloads/jodin3$ <strong>ls</strong><br>
+app  JOdin3CASUAL  README.md  runtime</p>
+</blockquote>
+<p>Para rodar a aplicação basta executar o arquivo JOdin3CASUAL</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/jodin3$ <strong>./JOdin3CASUAL</strong></p>
+</blockquote>
+<p>Isso vai abrir a seguinte interface, bem familiar àqueles que já experimentaram o Odin em ambiente Windows. É possível abrir o programa apenas clicando com o botão direito do mouse sobre
+o arquivo e depois em iniciar, mas iniciando pela linha de comando teremos algumas informações extra que serão de grande valia mais à frente.</p>
+<p><img src="/img/post/art03/jodin01_m.png" alt="Tela 01"></p>
+<p>Neste caso eu devo fornecer um arquivo PIT e o arquivo com a imagem de recovery deve estar no formato tar. Eu baixei uma imagem do TWRP neste formato:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ wget <a href="https://dl.twrp.me/espresso3g/twrp-3.1.0-0-espresso3g.img.tar">https://dl.twrp.me/espresso3g/twrp-3.1.0-0-espresso3g.img.tar</a></p>
+</blockquote>
+<p>Então eu vou baixar o arquivo a partir do meu tablet colocando-o em modo download pela linha de comando conforme dica minha publicada
+no site <a href="https://www.vivaolinux.com.br/dica/Colocar-dispositivo-movel-Samsung-em-modo-Download-pela-linha-de-comando/">Viva o Linux</a>:</p>
+<blockquote>
+<p>leandro@leandro:~/.config/pulse$ <strong>adb reboot download</strong></p>
+</blockquote>
+<p>E a seguir salvando o arquivo .PIT na minha máquina:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>heimdall download-pit &ndash;output tablet.pit</strong><br>
+Heimdall v1.4.2</p>
+<p>Copyright (c) 2010-2017 Benjamin Dobell, Glass Echidna<br>
+<a href="http://www.glassechidna.com.au/">http://www.glassechidna.com.au/</a></p>
+<p>This software is provided free of charge. Copying and redistribution is<br>
+encouraged.</p>
+<p>If you appreciate this software and you would like to support future<br>
+development please consider donating:<br>
+<a href="http://www.glassechidna.com.au/donate/">http://www.glassechidna.com.au/donate/</a></p>
+<p>Initialising connection&hellip;<br>
+Detecting device&hellip;<br>
+Claiming interface&hellip;<br>
+Attempt failed. Detaching driver&hellip;<br>
+Claiming interface again&hellip;<br>
+Setting up interface&hellip;</p>
+<p>Initialising protocol&hellip;<br>
+Protocol initialisation successful.</p>
+<p>Beginning session&hellip;</p>
+<p>Some devices may take up to 2 minutes to respond.<br>
+Please be patient!</p>
+<p>Session begun.</p>
+<p>Downloading device&rsquo;s PIT file&hellip;<br>
+PIT file download successful.</p>
+<p>Ending session&hellip;<br>
+Rebooting device&hellip;<br>
+Releasing device interface&hellip;<br>
+Re-attaching kernel driver&hellip;</p>
+</blockquote>
+<p>Clicando sobre os campos &ldquo;PIT&rdquo; e &ldquo;PDA&rdquo; e preenchendo-os adequadamente conforme a próxima tela. Temos:</p>
+<p><img src="/img/post/art03/jodin02_m.png" alt=""></p>
+<p>Clicando em &ldquo;Start&rdquo;, obtemos a seguinte tela, onde aparentemente tudo deu certo.</p>
+<p><img src="/img/post/art03/jodin03_m.png" alt=""></p>
+<p>Aparentemente&hellip; mas só que não!</p>
+<p>Na verdade não deu certo novamente e olhando o log do programa pelo terminal é possível saber o porquê:</p>
+<blockquote>
+<p>[VERBOSE]<strong>Heimdall Device detected!</strong><br>
+[VERBOSE]running command<br>
+[DEBUG]<strong>Run Heimdall from DeviceCommunicationProtocol:/usr/bin/heimdall flash &ndash;PIT /home/leandro/Downloads/tablet/tablet.pit &ndash;RECOVERY /tmp/CASUALleandro-2022-08-24-23.26.25/recovery.img</strong><br>
+,[DEBUG]###executing real-time command: /usr/bin/heimdall###<br>
+[DEBUG]Attempting state change to 0 devices connected</p>
+</blockquote>
+<p>O que ele fez foi apenas rodar o Heimdall!!!! Ou seja, esse JOdin é apenas um frontend alternativo para o Heimdall!!! Decepcionante!!!</p>
+<p>Eu gostaria de comentar algumas coisas que havia esquecido no artigo anterior.</p>
+<p>A primeira é que, durante minha pesquisa, várias fontes mencionaram a possibilidade de que o Heimdall não fosse capaz de gravar a imagem de recovery. Neste caso a recomendação era para
+desmontar o tablet, desconectar a bateria e ligar novamente.</p>
+<p>Eu quero evitar chegar a esse procedimento, mas não o descarto. Vou tentar todas as alternativas antes.</p>
+<p>Então comecei a estudar os exploits. O primeiro que testei não era exatamente para Samsung, mas os procedimentos me pareceram plausíveis então resolvi testar. Não
+é uma boa ideia sair testando dicas aleatórias, mas como estou registrando tudo o que fiz, vale a pena como aprendizado.</p>
+<p>Os passos estão descritos neste link <a href="https://www.dropbox.com/sh/jcpilpgoeta516e/AADr5I-wkB7doiTcIVKK9CW1a?preview=Rooting-the-tf300.txt">aqui</a></p>
+<p>Coloquei uma versão do comando <strong>debugfs</strong> e <strong>su</strong> dentro do tablet em um diretório com permissão global de escrita:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>adb push debugfs /data/local</strong><br>
+debugfs: 1 file pushed. 1.0 MB/s (1862336 bytes in 1.838s)<br>
+leandro@leandro:~/Downloads/tablet$ <strong>adb push su /data/local</strong><br>
+su: 1 file pushed. 1.2 MB/s (372006 bytes in 0.304s)</p>
+</blockquote>
+<p>Verificando se os arquivos estão lá:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>adb shell ls /data/local</strong><br>
+tmp<br>
+tspreq<br>
+tsprsp<br>
+debugfs<br>
+su</p>
+</blockquote>
+<p>O script tenta criar um link simbólico entre uma partição de sistema e o diretório /data/local que é de leitura/escrita para todos e espera que o Android se enrole com links simbólicos.</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>adb shell</strong><br>
+$ cd /data/local<br>
+$ mv tmp tmp.back<br>
+$ ln -s /dev/block/stl9 tmp<br>
+$ exit</p>
+</blockquote>
+<p>Resumi os procedimentos porque eles estão documentados no link acima. E testando&hellip;</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>adb shell</strong><br>
+$ /data/local/debugfs -w /dev/block/stl9<br>
+debugfs 1.42 (29-Nov-2011)<br>
+/dev/block/stl9: Permission denied while opening filesystem<br>
+debugfs:  q<br>
+$ /data/local/debugfs /dev/block/stl9<br>
+debugfs 1.42 (29-Nov-2011)<br>
+/dev/block/stl9: Permission denied while opening filesystem<br>
+debugfs:  q<br>
+$ exit</p>
+</blockquote>
+<p>Infelizmente não funcionou!</p>
+<p>Seria muita sorte se funcionasse considerando a natureza aleatória da dica!</p>
+<p>Mas na verdade essa minha primeira tentativa foi precipitada. Eu encontrei esse exploit pesquisando por outras coisas e além dele eu também encontrei uma referência um livro específico
+sobre Hacking em dispositivos Android.</p>
+<p>Trata-se do livro Xda developers&rsquo; Android Hacker&rsquo;s toolkit - the complete guide to rooting, ROMs and theming dos autores Jason Tyler e Will Verduzco
+que são editores do portal xda developers.O livro pode ser comprado <a href="https://www.amazon.com.br/XDA-Developers-Android-Hackers-Toolkit-ebook/dp/B0087GZ49Q">aqui</a> apesar de ser uma edição antiga (eu não sei se há edições recentes).</p>
+<p>Foi através da dica desse livro que consegui o acesso root na segunda tentativa.</p>
+<p>Eu tentei o script <strong>psneuter</strong>. Baixei a versão pré compilada, mas no github é possível ver o código fonte e entender seu funcionamento, ou mesmo compilar por si próprio se não
+confiar na versão binária disponibilizada.</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>wget <a href="https://github.com/tmzt/g2root-kmod/raw/master/scotty2/psneuter/psneuter">https://github.com/tmzt/g2root-kmod/raw/master/scotty2/psneuter/psneuter</a></strong></p>
+</blockquote>
+<p>Daí mandei para a pasta de permissão geral de leitura e escrita no tablet (a mesma usada na primeira tentativa):</p>
+<blockquote>
+<p>leandro@leandro:/tmp$ <strong>adb push psneuter /data/local</strong><br>
+psneuter: 1 file pushed. 0.8 MB/s (557962 bytes in 0.670s)</p>
+</blockquote>
+<p>E rodei o arquivo&hellip;</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ <strong>adb shell</strong><br>
+$ /data/local/psneuter<br>
+property service neutered.<br>
+killing adbd. (should restart in a second or two)</p>
+</blockquote>
+<p>Será que funcionou????</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads$ adb shell<br>
+# id<br>
+<strong>uid=0(root) gid=0(root)</strong></p>
+</blockquote>
+<p>Bingo! Root!</p>
+<p>É bom esclarecer que eu testei o script psneuter por algumas peculiaridades: No Github eu vi que era de 12 anos atrás, ou seja, era mais ou menos da época de lançamento do meu tablet.</p>
+<p>Se o script fosse muito posterior eu teria pouca confiança nele assim como se fosse anterior ao modelo de tablet.</p>
+<p>Outro ponto positivo foi a disponibilização de uma versão já compilada. Estou fazendo testes com binários compilados para arm e está difícil fazer funcionar. O problema é que o tablet é
+muito antigo e, quando eu compilo um programa para rodar nele, acontece um problema por causa da glibc ligada estaticamente ao executável. Há uma &ldquo;trava&rdquo; para bloquear a execução em
+versões mais antigas do sistema operacional e isso está me causando problemas.</p>
+<p>Isso não deve causar dor de cabeça em aparelhos e sistemas Android mais novos, mas no tablet está me causando muita irritação.</p>
+<p>Bem, acesso root adquirido, é hora de tentar fazer algo produtivo com ele, mas vou deixar para o próximo artigo. Quero ainda me aprofundar no funcionamento do sistema Android.</p>
+<p>Eu preciso entender o funcionamento especificamente no aparelho Samsung como o que eu tenho. É que a Internet está cheia de ruído e o excesso de dicas (e de dicas inúteis!!!) é um
+problema.</p>
+<p>Mas para não encerrar prematuramente, eis algumas informações que eu aproveitei para retirar:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>adb shell getprop</strong><br>
+[ro.secure]: [1]<br>
+[ro.allow.mock.location]: [0]<br>
+[ro.debuggable]: [0]<br>
+[persist.service.adb.enable]: [1]<br>
+[ro.factorytest]: [0]<br>
+[ro.serialno]: [c1609eb06dc432e]<br>
+[ro.bootmode]: [reboot_normal]<br>
+[ro.baseband]: [unknown]<br>
+[ro.carrier]: [unknown]<br>
+[ro.bootloader]: [unknown]<br>
+[ro.hardware]: [p1lite]<br>
+[ro.revision]: [4]<br>
+[dpm.allowcamera]: [1]<br>
+[ro.build.id]: [FROYO]<br>
+[ro.build.display.id]: [FROYO.UJKM5]<br>
+[ro.build.version.incremental]: [UJKM5]<br>
+[ro.build.version.sdk]: [8]<br>
+[ro.build.version.codename]: [REL]<br>
+[ro.build.version.release]: [2.2.2]<br>
+[ro.build.date]: [Mon Jun 13 08:39:01 BRT 2011]<br>
+[ro.build.date.utc]: [1307965141]<br>
+[ro.build.type]: [user]<br>
+[ro.build.user]: [sidclei]<br>
+[ro.build.host]: [bldhp-4]<br>
+[ro.build.tags]: [release-keys]<br>
+[ro.product.model]: [GT-P1010]<br>
+[ro.product.brand]: [samsung]<br>
+[ro.product.name]: [GT-P1010]<br>
+[ro.product.device]: [GT-P1010]<br>
+[ro.product.board]: [GT-P1010]<br>
+[ro.product.cpu.abi]: [armeabi-v7a]<br>
+[ro.product.cpu.abi2]: [armeabi]<br>
+[ro.product.manufacturer]: [samsung]<br>
+[ro.product.locale.language]: [en]<br>
+[ro.product.locale.region]: [GB]<br>
+[ro.wifi.channels]: []<br>
+[ro.board.platform]: [omap3]<br>
+[ro.build.product]: [GT-P1010]<br>
+[ro.build.description]: [GT-P1010-user 2.2.2 FROYO UJKM5 release-keys]<br>
+[ro.build.fingerprint]: [samsung/GT-P1010/GT-P1010/GT-P1010:2.2.2/FROYO/UJKM5:user/release-keys]<br>
+[ro.build.PDA]: [P1010UJKM5]<br>
+[ro.build.hidden_ver]: [P1010UJKM5]<br>
+[ro.build.changelist]: [1023452]<br>
+[ro.build.buildtag]: []<br>
+[ro.sf.lcd_density]: [240]<br>
+[ro.sf.hwrotation]: [90]<br>
+[rild.libpath]: [/system/lib/libsec-ril-apalone.so]<br>
+[rild.libargs]: [-d /dev/ttyS0]<br>
+[wifi.interface]: [tiwlan0]<br>
+[jpeg.libskiahw.decoder.enable]: [0]<br>
+[jpeg.libskiahw.decoder.thresh]: [100000]<br>
+[ro.opengles.version]: [131072]<br>
+[dalvik.vm.heapsize]: [48m]<br>
+[keyinputqueue.use_finger_id]: [true]<br>
+[windowsmgr.max_events_per_sec]: [60]<br>
+[ro.url.legal]: [http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html]<br>
+[ro.url.legal.android_privacy]: [http://www.google.com/intl/%s/mobile/android/basic/privacy.html]<br>
+[ro.com.google.locationfeatures]: [1]<br>
+[ro.setupwizard.mode]: [DISABLED]<br>
+[ro.com.google.gmsversion]: [2.2_r10]<br>
+[media.stagefright.enable-player]: [false]<br>
+[media.stagefright.enable-meta]: [false]<br>
+[media.stagefright.enable-scan]: [false]<br>
+[media.stagefright.enable-http]: [false]<br>
+[media.stagefright.enable-record]: [false]<br>
+[keyguard.no_require_sim]: [true]<br>
+[ro.config.ringtone]: [Minimal_tone.ogg]<br>
+[ro.config.notification_sound]: [01_Sherbet.ogg]<br>
+[ro.config.alarm_alert]: [Good_Morning.ogg]<br>
+[ro.config.media_sound]: [Media_preview_Touch_the_light.ogg]<br>
+[net.bt.name]: [Android]<br>
+[net.change]: [net.wifi.http-proxy]<br>
+[dalvik.vm.stack-trace-file]: [/data/anr/traces.txt]<br>
+[ro.com.google.clientidbase]: [android-samsung]<br>
+[persist.sys.country]: [BR]<br>
+[persist.sys.localevar]: []<br>
+[persist.sys.language]: [pt]<br>
+[ro.FOREGROUND_APP_ADJ]: [0]<br>
+[ro.VISIBLE_APP_ADJ]: [1]<br>
+[ro.SECONDARY_SERVER_ADJ]: [2]<br>
+[ro.BACKUP_APP_ADJ]: [2]<br>
+[ro.HOME_APP_ADJ]: [4]<br>
+[ro.HIDDEN_APP_MIN_ADJ]: [7]<br>
+[ro.CONTENT_PROVIDER_ADJ]: [14]<br>
+[ro.EMPTY_APP_ADJ]: [15]<br>
+[ro.FOREGROUND_APP_MEM]: [1536]<br>
+[ro.VISIBLE_APP_MEM]: [2048]<br>
+[ro.SECONDARY_SERVER_MEM]: [4096]<br>
+[ro.BACKUP_APP_MEM]: [4096]<br>
+[ro.HOME_APP_MEM]: [4096]<br>
+[ro.HIDDEN_APP_MEM]: [5120]<br>
+[ro.CONTENT_PROVIDER_MEM]: [5632]<br>
+[ro.EMPTY_APP_MEM]: [6144]<br>
+[net.tcp.buffersize.default]: [4096,87380,110208,4096,16384,110208]<br>
+[net.tcp.buffersize.wifi]: [4095,87380,110208,4096,16384,110208]<br>
+[net.tcp.buffersize.umts]: [4094,87380,110208,4096,16384,110208]<br>
+[net.tcp.buffersize.edge]: [4093,26280,35040,4096,16384,35040]<br>
+[net.tcp.buffersize.gprs]: [4092,8760,11680,4096,8760,11680]<br>
+[init.svc.immvibed]: [stopped]<br>
+[init.svc.pvrsrvinit]: [stopped]<br>
+[init.svc.baseimage]: [stopped]<br>
+[init.svc.console]: [running]<br>
+[init.svc.servicemanager]: [running]<br>
+[init.svc.vold]: [running]<br>
+[init.svc.notified_event]: [running]<br>
+[init.svc.netd]: [running]<br>
+[init.svc.debuggerd]: [running]<br>
+[init.svc.ril-daemon]: [running]<br>
+[init.svc.DR-deamon]: [running]<br>
+[init.svc.mobex-daemon]: [running]<br>
+[init.svc.zygote]: [running]<br>
+[init.svc.media]: [running]<br>
+[init.svc.playlogo]: [stopped]<br>
+[init.svc.dbus]: [running]<br>
+[init.svc.installd]: [running]<br>
+[init.svc.keystore]: [running]<br>
+[init.svc.orientationd]: [running]<br>
+[init.svc.geomagneticd]: [running]<br>
+[init.svc.glgps]: [running]<br>
+[init.svc.adbd]: [running]<br>
+[ril.bt_macaddr]: [9463D1F01235]<br>
+[ril.wifi_macaddr]: [94:63:D1:F0:12:36]<br>
+[ril.serialnumber]: [RZ1B602331D]<br>
+[ro.csc.country_code]: [Brazil]<br>
+[ro.csc.sales_code]: [ZTO]<br>
+[init.svc.playsound]: [stopped]<br>
+[debug.sf.nobootanimation]: [0]<br>
+[ril.RildInit]: [1]<br>
+[init.svc.samsungloop]: [stopped]<br>
+[hw.keyboards.65537.devname]: [ear_key_driver]<br>
+[hw.keyboards.65538.devname]: [p1_keyboard]<br>
+[hw.keyboards.65539.devname]: [power_key_driver]<br>
+[hw.keyboards.65540.devname]: [touchscreen]<br>
+[sys.settings_system_version]: [12]<br>
+[net.hostname]: [android_a511c9ff800e1b49]<br>
+[EXTERNAL_STORAGE_STATE]: [mounted]<br>
+[EXTERNAL_STORAGE_STATE_SD]: [unmounted]<br>
+[init.svc.wlan_loader]: [stopped]<br>
+[dev.bootcomplete]: [1]<br>
+[sys.binder_expand_vma]: [0]<br>
+[wlan.driver.status]: [ok]<br>
+[init.svc.wpa_supplicant]: [running]<br>
+[net.dnschange]: [2]<br>
+[gsm.version.ril-impl]: [Samsung RIL(IPC) v2.0]<br>
+[dhcp.tiwlan0.result]: [ok]<br>
+[init.svc.dhcpcd]: [running]<br>
+[dhcp.tiwlan0.pid]: [1510]<br>
+[gsm.sim.operator.numeric]: []<br>
+[dhcp.tiwlan0.reason]: [BOUND]<br>
+[gsm.sim.operator.alpha]: []<br>
+[gsm.sim.operator.iso-country]: [BR]<br>
+[gsm.sim.state]: [UNKNOWN]<br>
+[gsm.current.phone-type]: [0]<br>
+[gsm.operator.alpha]: []<br>
+[gsm.operator.numeric]: []<br>
+[gsm.operator.iso-country]: []<br>
+[gsm.operator.isroaming]: [false]<br>
+[ril.ecclist0]: [911]<br>
+[dhcp.tiwlan0.dns1]: [192.168.15.1]<br>
+[dhcp.tiwlan0.dns2]: []<br>
+[dhcp.tiwlan0.dns3]: []<br>
+[dhcp.tiwlan0.dns4]: []<br>
+[dhcp.tiwlan0.ipaddress]: [192.168.15.4]<br>
+[dhcp.tiwlan0.gateway]: [192.168.15.1]<br>
+[dhcp.tiwlan0.mask]: [255.255.255.0]<br>
+[dhcp.tiwlan0.leasetime]: [43200]<br>
+[dhcp.tiwlan0.server]: [192.168.15.1]<br>
+[net.dns1]: [192.168.15.1]<br>
+[ro.runtime.firstboot]: [947247612298]<br>
+[ril.approved_codever]: [none]<br>
+[ril.approved_cscver]: [none]<br>
+[ril.official_cscver]: [P1010ZTOKF3]<br>
+[ril.encrypt_cscver]: [691A21C89C1278DB58A1AC020CF3C60B]<br>
+[net.wifi.http-proxy]: []<br>
+[sys.settings_secure_version]: [11]<br>
+[gsm.defaultpdpcontext.active]: [false]</p>
+</blockquote>
+<p>Como podemos ver, são informações completas sobre o sistema, inclusive do usuário que fez a compilação!!!</p>
+<p>É possível obter uma listagem mais resumida apenas do que tem de hardware no tablet:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>adb shell pm list features</strong><br>
+feature:reqGlEsVersion=0x20000<br>
+feature:android.hardware.bluetooth<br>
+feature:android.hardware.camera<br>
+feature:android.hardware.camera.autofocus<br>
+feature:android.hardware.camera.flash<br>
+feature:android.hardware.location<br>
+feature:android.hardware.location.gps<br>
+feature:android.hardware.location.network<br>
+feature:android.hardware.microphone<br>
+feature:android.hardware.sensor.accelerometer<br>
+feature:android.hardware.sensor.compass<br>
+feature:android.hardware.sensor.light<br>
+feature:android.hardware.touchscreen<br>
+feature:android.hardware.touchscreen.multitouch<br>
+feature:android.hardware.wifi<br>
+feature:android.software.live_wallpaper<br>
+feature:android.software.status_bar.quick_panel.brightness_settings<br>
+feature:android.software.status_bar.quick_panel.mini_controllers<br>
+feature:android.software.status_bar.quick_panel.quick_settings</p>
+</blockquote>
+<p>Eu quero pesquisar mais um pouco porque vou ver a possibilidade de modificar as opções de montagem dos sistemas de arquivos no fstab. Será que se eu modificar <strong>ro</strong> para <strong>rw</strong> eu
+obtenho permissão de leitura/escrita? Será tão simples assim? E as partições extraídas no arquivo .PIT, onde se encaixam? Onde está o
+bootloader e como eu o acesso?</p>
+<p>É claro que meu objetivo ainda é instalar um sistema Linux nele. Algumas coisas ainda não estão claras para mim. Entre elas se o esquema de particionamento é obrigatório ou não.</p>
+<p>Eu vi que pelo menos inicialmente eu vou precisar aproveitar o particionamento para dar início ao instalador da distro. Não sei se consigo fazer um <strong>dd</strong> no tablet (conseguir eu
+consigo com root, mas não sei se vai funcionar).</p>
+<p>Ou seja, ainda há bastante coisa para entender antes de mudar radicalmente o sistema e que eu espero aprender.</p>
+<h2 id="conclusão">Conclusão</h2>
+<p>Ainda não foi dessa vez que comecei propriamente a reinstalação do sistema, mas consegui alguns avanços interessantes.</p>
+<p>Testei uma suposta versão do Odin multiplataforma, que se mostrou um engodo completo e dois exploits. Um aleatório e outro específico.</p>
+<p>O exploit específico eu vi no livro dos fundadores do portal xda developers e foi de grande ajuda. O livro também é muito bom!</p>
+<p>Com acesso root, é hora de modificar o sistema. Apesar de que eu não esteja esperando facilidade.</p>
+<p>Isso porque o procedimento do Heimdall deveria ter sido efetivo e não foi. Eu já estou considerando a necessidade de desmontar o tablet
+e desconectar a bateria.</p>
+<p>Em todo caso ainda tenho coisas a explorar.</p>
+<p><a href="/artigos/a-saga-do-tablet-03/">Parte 03</a></p>
+<p><a href="/artigos/a-saga-do-tablet-02/">Parte 02</a></p>
+<p><a href="/artigos/a-saga-do-tablet-01/">Parte 01</a></p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/android/" rel="tag">Android</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/tablet/" rel="tag">Tablet</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/usb/" rel="tag">Usb</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/adb/" rel="tag">adb</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/heimdall/" rel="tag">Heimdall</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/artigos/graudit/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">Procurando (e encontrando) bugs no código fonte sem rodar o aplicativo - Análise estática de código com graudit</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2217338589613653"
+     crossorigin="anonymous"></script>
+</body>
+</html>
