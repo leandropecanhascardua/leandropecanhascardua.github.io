@@ -1,6 +1,6 @@
 ---
 title: Diversão para as crianças pequititinhas no Linux
-date: 2022-08-28
+date: 2022-08-29
 tags:
   - "ubuntu"
   - "linux"
