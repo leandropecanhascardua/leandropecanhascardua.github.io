@@ -6,10 +6,21 @@
     <description>Recent content in Linux on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Thu, 25 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 28 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Diversão para as crianças pequititinhas no Linux</title>
+      <link>https://leandropecanhascardua.github.io/dicas/oneko/</link>
+      <pubDate>Sun, 28 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/oneko/</guid>
+      <description>&lt;p&gt;O Linux é um poderoso sistema operacional. É completo em todos os sentidos e atende aos mais rígidos padrões de segurança e estabilidade.&lt;/p&gt;
+&lt;p&gt;Porém, de vez em quando, é necessário relaxar um pouco. Para quem tem crianças na faixa entre três e cinco anos de idade, algumas distribuições
+fornecem um aplicativo divertido chamado oneko que pode deixar os pequenos absolutamente fascinados.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>A saga do Tablet - parte 04</title>
