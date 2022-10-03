@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Segurança em camadas com SystemD - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="Segurança em camadas com SystemD" />
+<meta property="og:description" content="Existe um aspecto muito pouco conhecido do SystemD que é a capacidade de obter dados estruturados para diagnosticar problemas.
+A ferramenta systemd-analyze é muito pouco conhecida e, de sua potencialidade total, muito pouco é efetivamente usado.
+Além de permitir diagnosticar problemas relacionados à inicialização do sistema, o SystemD fornece mecanismos para avaliar e corrigir
+a (in)segurança dos serviços(daemons) executando sob ele, criando uma camada de proteção." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/artigos/systemd-security/" />
+<meta property="article:published_time" content="2022-10-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-02T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Segurança em camadas com SystemD">
+<meta itemprop="description" content="Existe um aspecto muito pouco conhecido do SystemD que é a capacidade de obter dados estruturados para diagnosticar problemas.
+A ferramenta systemd-analyze é muito pouco conhecida e, de sua potencialidade total, muito pouco é efetivamente usado.
+Além de permitir diagnosticar problemas relacionados à inicialização do sistema, o SystemD fornece mecanismos para avaliar e corrigir
+a (in)segurança dos serviços(daemons) executando sob ele, criando uma camada de proteção.">
+<meta itemprop="datePublished" content="2022-10-02T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-10-02T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="3446">
+
+
+
+<meta itemprop="keywords" content="ubuntu,linux,systemD," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Segurança em camadas com SystemD"/>
+<meta name="twitter:description" content="Existe um aspecto muito pouco conhecido do SystemD que é a capacidade de obter dados estruturados para diagnosticar problemas.
+A ferramenta systemd-analyze é muito pouco conhecida e, de sua potencialidade total, muito pouco é efetivamente usado.
+Além de permitir diagnosticar problemas relacionados à inicialização do sistema, o SystemD fornece mecanismos para avaliar e corrigir
+a (in)segurança dos serviços(daemons) executando sob ele, criando uma camada de proteção."/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/artigos/">
+					
+					<span class="menu__text">Artigos</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/dicas/">
+					
+					<span class="menu__text">Dicas</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Segurança em camadas com SystemD</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-10-02T00:00:00Z">02.10.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>, <a class="meta__link" href="/categories/artigos/" rel="category">Artigos</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>Existe um aspecto muito pouco conhecido do SystemD que é a capacidade de obter dados estruturados para diagnosticar problemas.</p>
+<p>A ferramenta systemd-analyze é muito pouco conhecida e, de sua potencialidade total, muito pouco é efetivamente usado.</p>
+<p>Além de permitir diagnosticar problemas relacionados à inicialização do sistema, o SystemD fornece mecanismos para avaliar e corrigir
+a (in)segurança dos serviços(daemons) executando sob ele, criando uma camada de proteção.</p>
+<p>A primeira camada de proteção é feita pelo próprio serviço ou aplicação. Sua configuração e codificação.</p>
+<p>Se um atacante explorar uma falha, é importante que possamos limitar ao máximo o estrago que ele possa fazer restringindo os recursos
+disponíveis.</p>
+<p>Eu já analizei o systemd-analyze em outro artigo sobre <a href="/dicas/procurando-erros-no-linux_01/">como descobrir erros no Linux</a>.</p>
+<p>É uma excelente ferramenta, mas além da capacidade de diagnosticar problemas relacionados aos serviços durante a inicialização,
+esse comando também permite avaliar a segurança de acordo com um checklist de itens!</p>
+<p>Rodando <strong>systemd-analyze security</strong> podemos fazer uma auditoria de todos os serviços.</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemd-analyze security</strong><br>
+UNIT                                  EXPOSURE PREDICATE HAPPY<br>
+ ModemManager.service        5.8 MEDIUM    😐 <br>
+ NetworkManager.service      7.8 EXPOSED   🙁 <br>
+ accounts-daemon.service     9.6 UNSAFE    😨 <br>
+ acpid.service               9.6 UNSAFE    😨 <br>
+ alsa-state.service          9.6 UNSAFE    😨 <br>
+ anacron.service              9.6 UNSAFE    😨 <br>
+ apport.service              9.6 UNSAFE    😨 <br>
+ avahi-daemon.service         9.6 UNSAFE    😨 <br>
+ cron.service                 9.6 UNSAFE    😨 <br>
+ cups-browsed.service         9.6 UNSAFE    😨 <br>
+ cups.service                 9.6 UNSAFE    😨 <br>
+ dbus.service                 9.6 UNSAFE    😨 <br>
+ dmesg.service               9.6 UNSAFE    😨 <br>
+ emergency.service             9.5 UNSAFE    😨 <br>
+ getty@tty1.service          9.6 UNSAFE    😨 <br>
+ getty@tty7.service          9.6 UNSAFE    😨 <br>
+ hddtemp.service              9.6 UNSAFE    😨 <br>
+ irqbalance.service          6.1 MEDIUM    😐 <br>
+ kerneloops.service          9.2 UNSAFE    😨 <br>
+ lightdm.service              9.6 UNSAFE    😨 <br>
+ ondemand.service            9.6 UNSAFE    😨 <br>
+ plymouth-start.service       9.5 UNSAFE    😨 <br>
+ polkit.service              9.6 UNSAFE    😨 <br>
+ rc-local.service            9.6 UNSAFE    😨 <br>
+ rescue.service              9.5 UNSAFE    😨 <br>
+ rsync.service                9.6 UNSAFE    😨 <br>
+ rsyslog.service             9.6 UNSAFE    😨 <br>
+ rtkit-daemon.service         7.1 MEDIUM    😐 <br>
+ smartmontools.service       9.6 UNSAFE    😨 <br>
+ systemd-ask-password-console.service       9.3 UNSAFE    😨 <br>
+ systemd-ask-password-plymouth.service      9.5 UNSAFE    😨 <br>
+ systemd-ask-password-wall.service          9.4 UNSAFE    😨 <br>
+ systemd-fsckd.service       9.5 UNSAFE    😨 <br>
+ systemd-initctl.service     9.3 UNSAFE    😨 <br>
+ systemd-journald.service    4.4 OK        🙂 <br>
+ systemd-logind.service      2.8 OK        🙂 <br>
+ systemd-networkd.service    3.1 OK        🙂 <br>
+ systemd-resolved.service     2.2 OK        🙂 <br>
+ systemd-rfkill.service       9.3 UNSAFE    😨 <br>
+ systemd-timesyncd.service   2.1 OK        🙂 <br>
+ systemd-udevd.service       8.4 EXPOSED   🙁 <br>
+ thermald.service            9.6 UNSAFE    😨 <br>
+ udisks2.service              9.6 UNSAFE    😨 <br>
+ unattended-upgrades.service 9.6 UNSAFE    😨 <br>
+ upower.service               2.3 OK        🙂 <br>
+ user@1000.service            9.4 UNSAFE    😨 <br>
+ uuidd.service                4.5 OK        🙂 <br>
+ whoopsie.service             9.6 UNSAFE    😨 <br>
+ wpa_supplicant.service      9.6 UNSAFE    😨</p>
+</blockquote>
+<p>Obtemos um relatório como acima, dividido em 04 colunas, todas fornecendo a mesma informação, mas em um formato diferente.</p>
+<p>Na primeira coluna temos o nome da <strong>Unit</strong>; na segunda coluna temos o grau de exposição, que é uma métrica calculada verificando
+se as configurações do serviço estão de acordo com um checklist de segurança; a terceira coluna traduz o valor do grau de
+exposição em forma verbal, onde podemos ter avaliações como <strong>UNSAFE</strong>, <strong>OK</strong>, <strong>EXPOSED</strong>, <strong>MEDIUM</strong>; o último campo facilita ainda
+mais a compreensão ao traduzir o grau de exposição em forma pictórica, isto é, em um emoji, onde podemos ter uma carinha feliz quando
+o serviço está protegido e uma carinha triste quando o serviço está exposto.</p>
+<p>É importante mencionar que o grau de exposição varia entre 0 e 10, sendo 0(zero) considerado o mais seguro possível
+e 10(dez) o mais inseguro possível considerando os itens da checklist de verificações que o systemd-analyze vai analisar.</p>
+<p>Ou seja, o Systemd pretende fazer a segurança do sistema mensurável e demonstrável!!!! Esse paradigma é herdado da filosofia da ciência,
+onde só pode ser melhorado aquilo que pode ser medido!</p>
+<p>Nosso relatório acima mostra que alguns serviços estão com nível aceitável de segurança, como o <strong>systemd-logind</strong>. Outros, como
+o <strong>cups-browsed</strong> estão com um nível preocupante.</p>
+<p>Além disso, o systemd-analyze pode mostrar como ele chegou a essa avaliação, isto é, quais critérios ele usou para chegar a este valor
+e como calculou a avaliação final. Para isso, basta rodar o comando novamente passando o nome da <strong>Unit</strong> como segundo argumento e poderemos
+ver os itens de checklist de segurança para este serviço(daemon):</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>systemd-analyze security cups &ndash;no-pager</strong><br>
+ <strong>NAME</strong>                                                        <strong>DESCRIPTION</strong>                                                            <strong>EXPOSURE</strong><br>
+✗ PrivateNetwork=                              Service has access to the host&rsquo;s network                                     0.5<br>
+✗ User=/DynamicUser=                           Service runs as root user                                                    0.4<br>
+✗ CapabilityBoundingSet=~CAP_SET(UID|GID|PCAP) Service may change UID/GID identities/capabilities                           0.3<br>
+✗ CapabilityBoundingSet=~CAP_SYS_ADMIN         Service has administrator privileges                                         0.3<br>
+✗ CapabilityBoundingSet=~CAP_SYS_PTRACE        Service has ptrace() debugging abilities                                     0.3<br>
+✗ RestrictAddressFamilies=~AF_(INET|INET6)     Service may allocate Internet sockets                                        0.3<br>
+✗ RestrictNamespaces=~CLONE_NEWUSER            Service may create user namespaces                                           0.3<br>
+✗ RestrictAddressFamilies=~…                   Service may allocate exotic sockets                                          0.3<br>
+✗ CapabilityBoundingSet=~CAP_(CHOWN|FSETID|SETFCAP)       Service may change file ownership/access mode/capabilities unrestricted      0.2<br>
+✗ CapabilityBoundingSet=~CAP_(DAC_*|FOWNER|IPC_OWNER)     Service may override UNIX file/IPC permission checks                         0.2<br>
+✗ CapabilityBoundingSet=~CAP_NET_ADMIN         Service has network configuration privileges                                 0.2<br>
+✗ CapabilityBoundingSet=~CAP_RAWIO             Service has raw I/O access                                                   0.2<br>
+✗ CapabilityBoundingSet=~CAP_SYS_MODULE        Service may load kernel modules                                              0.2<br>
+✗ CapabilityBoundingSet=~CAP_SYS_TIME          Service processes may change the system clock                                0.2<br>
+✗ DeviceAllow=                                 Service has no device ACL                                                    0.2<br>
+✗ IPAddressDeny=                               Service does not define an IP address whitelist                              0.2<br>
+✓ KeyringMode=                                 Service doesn&rsquo;t share key material with other services                       <br>
+✗ NoNewPrivileges=                             Service processes may acquire new privileges                                 0.2<br>
+✓ NotifyAccess=                                Service child processes cannot alter service state                           <br>
+✗ PrivateDevices=                              Service potentially has access to hardware devices                           0.2<br>
+✗ PrivateMounts=                               Service may install system mounts                                            0.2<br>
+✗ PrivateTmp=                                  Service has access to other software&rsquo;s temporary files                       0.2<br>
+✗ PrivateUsers=                                Service has access to other users                                            0.2<br>
+✗ ProtectClock=                                Service may write to the hardware clock or system clock                      0.2<br>
+✗ ProtectControlGroups=                        Service may modify the control group file system                             0.2<br>
+✗ ProtectHome=                                 Service has full access to home directories                                  0.2<br>
+✗ ProtectKernelLogs=                           Service may read from or write to the kernel log ring buffer                 0.2<br>
+✗ ProtectKernelModules=                        Service may load or read kernel modules                                      0.2<br>
+✗ ProtectKernelTunables=                       Service may alter kernel tunables                                            0.2<br>
+✗ ProtectSystem=                               Service has full access to the OS file hierarchy                             0.2<br>
+✗ RestrictAddressFamilies=~AF_PACKET           Service may allocate packet sockets                                          0.2<br>
+✗ RestrictSUIDSGID=                            Service may create SUID/SGID files                                           0.2<br>
+✗ SystemCallArchitectures=                     Service may execute system calls with all ABIs                               0.2<br>
+✗ SystemCallFilter=~@clock                     Service does not filter system calls                                         0.2<br>
+✗ SystemCallFilter=~@debug                     Service does not filter system calls                                         0.2<br>
+✗ SystemCallFilter=~@module                    Service does not filter system calls                                         0.2<br>
+✗ SystemCallFilter=~@mount                     Service does not filter system calls                                         0.2<br>
+✗ SystemCallFilter=~@raw-io                    Service does not filter system calls                                         0.2<br>
+✗ SystemCallFilter=~@reboot                    Service does not filter system calls                                         0.2<br>
+✗ SystemCallFilter=~@swap                      Service does not filter system calls                                         0.2<br>
+✗ SystemCallFilter=~@privileged                Service does not filter system calls                                         0.2<br>
+✗ SystemCallFilter=~@resources                 Service does not filter system calls                                         0.2<br>
+✓ AmbientCapabilities=                         Service process does not receive ambient capabilities                         <br>
+✗ CapabilityBoundingSet=~CAP_AUDIT_*           Service has audit subsystem access                                           0.1<br>
+✗ CapabilityBoundingSet=~CAP_KILL              Service may send UNIX signals to arbitrary processes                         0.1<br>
+✗ CapabilityBoundingSet=~CAP_MKNOD             Service may create device nodes                                              0.1<br>
+✗ CapabilityBoundingSet=~CAP_NET_(BIND_SERVICE|BROADCAST|RAW)       Service has elevated networking privileges                                   0.1<br>
+✗ CapabilityBoundingSet=~CAP_SYSLOG            Service has access to kernel logging                                         0.1<br>
+✗ CapabilityBoundingSet=~CAP_SYS_(NICE|RESOURCE)        Service has privileges to change resource use parameters                     0.1<br>
+✗ RestrictNamespaces=~CLONE_NEWCGROUP          Service may create cgroup namespaces                                         0.1<br>
+✗ RestrictNamespaces=~CLONE_NEWIPC             Service may create IPC namespaces                                            0.1<br>
+✗ RestrictNamespaces=~CLONE_NEWNET             Service may create network namespaces                                        0.1<br>
+✗ RestrictNamespaces=~CLONE_NEWNS              Service may create file system namespaces                                    0.1<br>
+✗ RestrictNamespaces=~CLONE_NEWPID             Service may create process namespaces                                        0.1<br>
+✗ RestrictRealtime=                            Service may acquire realtime scheduling                                      0.1<br>
+✗ SystemCallFilter=~@cpu-emulation             Service does not filter system calls                                         0.1<br>
+✗ SystemCallFilter=~@obsolete                  Service does not filter system calls                                         0.1<br>
+✗ RestrictAddressFamilies=~AF_NETLINK          Service may allocate netlink sockets                                         0.1<br>
+✗ RootDirectory=/RootImage=                    Service runs within the host&rsquo;s root directory                                0.1<br>
+SupplementaryGroups=                           Service runs as root, option does not matter                                   <br>
+✗ CapabilityBoundingSet=~CAP_MAC_*             Service may adjust SMACK MAC                                                 0.1<br>
+✗ CapabilityBoundingSet=~CAP_SYS_BOOT          Service may issue reboot()                                                   0.1<br>
+✓ Delegate=                                    Service does not maintain its own delegated control group subtree              <br>
+✗ LockPersonality=                             Service may change ABI personality                                           0.1<br>
+✗ MemoryDenyWriteExecute=                      Service may create writable executable memory mappings                       0.1<br>
+RemoveIPC=                                     Service runs as root, option does not apply                                   <br>
+✗ RestrictNamespaces=~CLONE_NEWUTS             Service may create hostname namespaces                                       0.1<br>
+✗ UMask=                                       Files created by service are world-readable by default                       0.1<br>
+✗ CapabilityBoundingSet=~CAP_LINUX_IMMUTABLE   Service may mark files immutable                                             0.1<br>
+✗ CapabilityBoundingSet=~CAP_IPC_LOCK          Service may lock memory into RAM                                             0.1<br>
+✗ CapabilityBoundingSet=~CAP_SYS_CHROOT        Service may issue chroot()                                                   0.1<br>
+✗ ProtectHostname=                             Service may change system host/domainname                                    0.1<br>
+✗ CapabilityBoundingSet=~CAP_BLOCK_SUSPEND     Service may establish wake locks                                             0.1<br>
+✗ CapabilityBoundingSet=~CAP_LEASE             Service may create file leases                                               0.1<br>
+✗ CapabilityBoundingSet=~CAP_SYS_PACCT         Service may use acct()                                                       0.1<br>
+✗ CapabilityBoundingSet=~CAP_SYS_TTY_CONFIG    Service may issue vhangup()                                                  0.1<br>
+✗ CapabilityBoundingSet=~CAP_WAKE_ALARM        Service may program timers that wake up the system                           0.1<br>
+✗ RestrictAddressFamilies=~AF_UNIX             Service may allocate local sockets                                           0.1</p>
+<p>→ <strong>Overall exposure level for cups.service: 9.6 UNSAFE 😨</strong></p>
+</blockquote>
+<p>Podemos ver que se trata de um checklist onde temos quatro colunas: A primeira coluna (quase invisível), mostra se o item está
+presente ou ausente, ou seja, se passou ou não. A segunda coluna corresponde ao nome da diretiva de configuração, mais detalhes a seguir. A terceira
+coluna dá uma descrição sucinta da configuração que deveria ser evitada. A quarta coluna dá grau de exposição correspondente à ausência
+deste item de configuração. O valor corresponde a um peso ajustado de acordo com o grau de comprometimento de segurança que pode provocar.
+A interpretação do cálculo é de que o sistema inicia com o valor de 10(dez) e cada item configurado corretamente tem o seu peso associado
+decrementado e um ícone de seta na primeira coluna apontando esse item como OK.</p>
+<p>Como mencionado, cada item desse relatório corresponde a uma diretiva específica no arquivo de configuração da Unit.</p>
+<p>No primeiro relatório, vários serviços são marcados como inseguros (UNSAFE). Isso acontece por que nem todas as aplicações usam
+as funcionalidades fornecidas pelo SystemD.</p>
+<p>A quantidade de serviços marcados como inseguros certamente vai assustar quem o vir pela primeira vez, por isso é necessário
+entender que a métrica é calculada indistintamente para todos os serviços, ou seja, tanto um servidor web quanto o plymouth, que mostra
+a logomarca da distribuição no início do boot, por exemplo, são avaliados.</p>
+<p>Portanto pode ser custoso conduzir todos os serviços chegarem à avaliação OK. É necessário, então, algum método que permita
+alcançar a máxima segurança com o mínimo de esforço.</p>
+<p>Então, deveríamos começar analizando os serviços que estejam expostos à Internet ou processem dados não confiáveis que possam
+ser fornecidos pelo usuário, como servidores Web, servidores de bancos de dados, servidores de VPN entre outros.</p>
+<p>Sem mencionar, é claro, os serviços que nem deveriam estar habilitados num servidor, como wpa_supplicant e lightdm entre outros.
+Cada um uma possível porta de entrada para um invador.</p>
+<h2 id="protegendo">Protegendo</h2>
+<p>Agora, dado que obtivemos uma avaliação da segurança do nosso sistema sob o ponto de vista do SystemD, como podemos melhorar?</p>
+<p>Systemd permite que os serviços(Unit) rodem dentro de um ambiente protegido (uma &ldquo;sandbox&rdquo;) fornecidos pelo kernel Linux. Quem pensou
+num contâiner quase acertou.</p>
+<p>Assim como um contâiner, o kernel Linux pode filtrar e limitar acesso a sistemas de arquivos, redes e dispositivos entre outras
+coisas. Ou seja, permite isolar um serviço do restante do sistema usando namespaces dentro do espaço do kernel.</p>
+<p>Para ajustar a segurança de um serviço devemos adotar uma estratégia incremental. Ativar um item de configuração, recarregar o serviço, ver se tudo continua
+funcionando conforme o esperado e seguir para o próximo item até alcançar uma nível de segurança considerado aceitável.</p>
+<p>Como exemplo, vamos considerar o serviço do cups do último relatório e configurar algumas coisas para aumentar sua proteção.</p>
+<p>Para o artigo não ficar muito longo vou configurar somente algumas diretivas.</p>
+<p>São as que eu considero essenciais, mas não entenda como um ajuste exaustivo. Para mais detalhes siga as referências no final.</p>
+<h3 id="1---evitar-que-um-atacante-escale-privilégios">1 - Evitar que um atacante escale privilégios</h3>
+<p>Se um atacante explorar alguma vulnerabilidade, eu não quero que ele se torne root, pois uma vez alcançado o acesso root é fim de jogo.</p>
+<p>Para começar vamos recordar nosso grau de exposição:</p>
+<blockquote>
+<p>leandro@leandro:/usr/lib/systemd/system$ <strong>systemd-analyze security cups &ndash;no-pager| grep exposure</strong><br>
+→ Overall exposure level for cups.service: <strong>9.6 UNSAFE</strong> 😨</p>
+</blockquote>
+<p>A Unit do cups está em /usr/lib/systemd/system/cups.service. O conteúdo atual é o seguinte:</p>
+<pre><code>[Unit]
+Description=CUPS Scheduler
+Documentation=man:cupsd(8)
+After=sssd.service
+Requires=cups.socket
+
+[Service]
+ExecStart=/usr/sbin/cupsd -l
+Type=simple
+Restart=on-failure
+
+[Install]
+Also=cups.socket cups.path
+WantedBy=printer.target
+</code></pre><p>Vamos adicionar a diretiva <strong>NoNewPrivileges=true</strong> dentro da seção <strong>[Service]</strong>. Vai ficar assim:</p>
+<pre><code>[Unit]
+Description=CUPS Scheduler
+Documentation=man:cupsd(8)
+After=sssd.service
+Requires=cups.socket
+
+[Service]
+ExecStart=/usr/sbin/cupsd -l
+Type=simple
+Restart=on-failure
+NoNewPrivileges=true
+
+[Install]
+Also=cups.socket cups.path
+WantedBy=printer.target
+</code></pre><p>Recarregamos todos os serviços:</p>
+<blockquote>
+<p>leandro@leandro:/usr/lib/systemd/system$ <strong>sudo systemctl daemon-reload</strong></p>
+</blockquote>
+<p>E verificamos o grau de exposição:</p>
+<blockquote>
+<p>leandro@leandro:/usr/lib/systemd/system$ <strong>systemd-analyze security cups &ndash;no-pager| grep exposure</strong><br>
+→ Overall exposure level for cups.service: <strong>9.4 UNSAFE</strong> 😨</p>
+</blockquote>
+<p>Veja que uma grande proteção diminuiu muito pouco, mas já é um começo. Uma outra estratégia poderia ser verificar quais fatores possuem
+os maiores graus de exposição e começar por eles.</p>
+<h3 id="2--evite-gente-xeretando-o-tmp">2- Evite gente xeretando o /tmp</h3>
+<p>Uma vez tendo explorada uma vulnerabilidade eu não quero que um atacante possa ver acesso a dados de outros processos. Vários aplicativos
+criam arquivos temporários durante seu tempo de existência e o lugar padrão para eles é o diretório /tmp do sistema.</p>
+<p>Voltamos ao arquivo <strong>/usr/lib/systemd/system/cups.service</strong>  e vamos adicionar a diretiva <strong>PrivateTmp=yes</strong>. Vai ficar assim:</p>
+<pre><code>[Unit]
+Description=CUPS Scheduler
+Documentation=man:cupsd(8)
+After=sssd.service
+Requires=cups.socket
+
+[Service]
+ExecStart=/usr/sbin/cupsd -l
+Type=simple
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=yes
+
+[Install]
+Also=cups.socket cups.path
+WantedBy=printer.target
+</code></pre><blockquote>
+<p>leandro@leandro:/usr/lib/systemd/system$ <strong>sudo systemctl daemon-reload</strong><br>
+leandro@leandro:/usr/lib/systemd/system$ <strong>systemd-analyze security cups &ndash;no-pager| grep exposure</strong><br>
+→ Overall exposure level for cups.service: <strong>9.0 UNSAFE</strong> 😨</p>
+</blockquote>
+<p>Veja que eliminamos dois problemas, mas o systemD não ligou a mínima! Ainda estamos com um nível insatisfatório de segurança.</p>
+<h3 id="3---torne-variáveis-do-kernel-somente-leitura">3 - Torne variáveis do kernel somente leitura</h3>
+<p>Agora seguiremos para configurações mais sutis.</p>
+<p>Uma vez que um atacante alcança o sistema, a primeira coisa que ele fará será tentar garantir que vai continuar acessando o sistema.</p>
+<p>Ele pode conseguir isso de diversas maneiras e uma delas é modificar o sistema. Em particular, um atacante não deve ser capaz
+de carregar módulos de kernel, os chamados rootkits, nem modificar parâmetros de configuração, principalmente subsistemas como acpi entre outros.</p>
+<p>Por isso vamos adicionar as diretivas <strong>ProtectKernelTunables=yes</strong>, <strong>ProtectKernelModules=yes</strong>, <strong>ProtectControlGroups=yes</strong>, como abaixo:</p>
+<pre><code>[Unit]
+Description=CUPS Scheduler
+Documentation=man:cupsd(8)
+After=sssd.service
+Requires=cups.socket
+
+[Service]
+ExecStart=/usr/sbin/cupsd -l
+Type=simple
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+
+[Install]
+Also=cups.socket cups.path
+WantedBy=printer.target
+</code></pre><p>E verificar o impacto:</p>
+<blockquote>
+<p>leandro@leandro:/usr/lib/systemd/system$ <strong>systemd-analyze security cups &ndash;no-pager| grep exposure</strong><br>
+→ Overall exposure level for cups.service: <strong>8.3 EXPOSED</strong> 🙁</p>
+</blockquote>
+<p>Estamos abaixo de 9 pela primeira vez, e protegemos o sistema de três problemas, mesmo assim nossa avaliação ainda não é boa!</p>
+<h3 id="4---montar-diretório-usr-boot-bootefi-e-etc-como-somente-leitura">4 - Montar diretório /usr, /boot, /boot/efi e /etc como somente leitura</h3>
+<p>Novamente a lógica é de que um atacante não pode modificar o sistema em caso de sucesso. Queremos impedir que ele modifique o binário
+de algum aplicativo inserindo uma versão maliciosa e que ele possa inserir um aplicativo efi de boot (como um grub malicioso, por exemplo). Além
+disso, devemos proteger o diretório /etc de modificações visto que ele contém as configurações do sistema.</p>
+<p>Vamos adicionar a diretiva <strong>ProtectSystem=full</strong>.</p>
+<pre><code>[Unit]
+Description=CUPS Scheduler
+Documentation=man:cupsd(8)
+After=sssd.service
+Requires=cups.socket
+
+[Service]
+ExecStart=/usr/sbin/cupsd -l
+Type=simple
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectSystem=full
+
+[Install]
+Also=cups.socket cups.path
+WantedBy=printer.target
+</code></pre><p>E vericar o resultado:</p>
+<blockquote>
+<p>leandro@leandro:/usr/lib/systemd/system$ <strong>sudo systemctl daemon-reload</strong><br>
+leandro@leandro:/lib/systemd/system$ <strong>systemd-analyze security cups &ndash;no-pager| grep exposure</strong><br>
+→ Overall exposure level for cups.service: <strong>8.2 EXPOSED</strong> 🙁</p>
+</blockquote>
+<p>Uma coisa a ser mencionada é que essa configuração é para a Unit, ou seja, apenas a Unit enxerga esses diretórios como somente leitura e
+é importante destacar essa informação.</p>
+<p>Como eu falei, essa defesa funciona em camadas, mas o systemD não é infalível e devemos configurar nossa máquina de modo a proteger
+esses diretórios independente do init utilizado(adicionar mais uma camada).</p>
+<h3 id="5---excluir-namespaces-que-o-serviço-não-esteja-utilizando">5 - Excluir namespaces que o serviço não esteja utilizando</h3>
+<p>Eu me concentro nos problemas anteriores, a partir daqui o SystemD nos ajuda a nos proteger de problemas que nem sequer sabíamos
+que estávamos expostos(pelo menos é o meu caso).</p>
+<p>Agora vamos restringir nosso serviço de modo que ele acesse apenas o que precise para funcionar em termos de recursos de sistema como
+interfaces de rede, comunicação inter processos entre outros. Eu vou configurar a diretiva <strong>RestrictNamespaces</strong> e dizer que meu serviço
+cups só vai poder usar a interface de rede, mais nada. Por isso a lista de itens <strong>uts</strong>, <strong>ipc</strong>, <strong>pid</strong>, <strong>user</strong>, <strong>cgroup</strong></p>
+<pre><code>[Unit]
+Description=CUPS Scheduler
+Documentation=man:cupsd(8)
+After=sssd.service
+Requires=cups.socket
+
+[Service]
+ExecStart=/usr/sbin/cupsd -l
+Type=simple
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectSystem=full
+RestrictNamespaces=uts ipc pid user cgroup
+
+[Install]
+Also=cups.socket cups.path
+WantedBy=printer.target
+</code></pre><p>E novamente verificar o impacto:</p>
+<blockquote>
+<p>leandro@leandro:/lib/systemd/system$ <strong>sudo systemctl daemon-reload</strong><br>
+leandro@leandro:/lib/systemd/system$ <strong>systemd-analyze security cups &ndash;no-pager| grep exposure</strong><br>
+→ Overall exposure level for cups.service: <strong>8.0 EXPOSED</strong> 🙁</p>
+</blockquote>
+<h3 id="6---limitar-as-capacidades">6 - Limitar as capacidades</h3>
+<p>Capacidade aqui significa o que um processo com nível não privilegiado pode fazer. Não é possível explicar em pormenores cada configuração,
+mas para mais detalhes acesse a manpage - <strong>man capabilities</strong> na linha de comando.</p>
+<pre><code>[Unit]
+Description=CUPS Scheduler
+Documentation=man:cupsd(8)
+After=sssd.service
+Requires=cups.socket
+
+[Service]
+ExecStart=/usr/sbin/cupsd -l
+Type=simple
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectSystem=full
+RestrictNamespaces=uts ipc pid user cgroup
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE CAP_DAC_READ_SEARCH
+
+[Install]
+Also=cups.socket cups.path
+WantedBy=printer.target
+</code></pre><p>Acima permitimos que o serviço rode em uma porta privilegiada.</p>
+<blockquote>
+<p>leandro@leandro:/lib/systemd/system$ sudo systemctl daemon-reload<br>
+leandro@leandro:/lib/systemd/system$ systemd-analyze security cups &ndash;no-pager| grep exposure<br>
+→ Overall exposure level for cups.service: <strong>5.9 MEDIUM</strong> 😐</p>
+</blockquote>
+<p>Finalmente conseguimos uma carinha indiferente, o que já é uma vitória.</p>
+<h3 id="7---criar-um-dispositivo-de-rede-para-a-unit">7 - Criar um dispositivo de rede para a Unit</h3>
+<p>Aqui a ideia é a mesma de um contâiner e isolar o serviço do restante do sistema. Para isso vamos setar <strong>PrivateNetwork=true</strong></p>
+<pre><code>[Unit]
+Description=CUPS Scheduler
+Documentation=man:cupsd(8)
+After=sssd.service
+Requires=cups.socket
+
+[Service]
+ExecStart=/usr/sbin/cupsd -l
+Type=simple
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectSystem=full
+RestrictNamespaces=uts ipc pid user cgroup
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE CAP_DAC_READ_SEARCH
+PrivateNetwork=true
+
+[Install]
+Also=cups.socket cups.path
+WantedBy=printer.target
+</code></pre><p>E verificar o impacto:</p>
+<blockquote>
+<p>leandro@leandro:/lib/systemd/system$ sudo systemctl daemon-reload<br>
+leandro@leandro:/lib/systemd/system$ systemd-analyze security cups &ndash;no-pager| grep exposure<br>
+→ Overall exposure level for cups.service: 5.5 MEDIUM 😐</p>
+</blockquote>
+<p>Tivemos algum trabalho, mais ainda temos uma carinha indiferente e uma avaliação de 5.5! Mas para mim chega, já estou satisfeito
+com as configurações que eu fiz. É claro que um serviço exposto à Internet requereria mais algum esforço, mas para este artigo já está
+bom.</p>
+<h3 id="um-alerta">Um alerta</h3>
+<p>Algumas configurações podem provocar erro, por isso é necessário adotar uma estratégia passo a passo.</p>
+<p>Por exemplo, adicionando a diretiva <strong>DynamicUser=true</strong> poderíamos permitir que o sistema criasse um &ldquo;usuário efêmerero&rdquo; para o serviço.</p>
+<p>Um usuário efêmero é um usuário exclusivo para rodar serviços e que não vai ter login nem acesso a shell, como o usuário <strong>nobody</strong> em muitos sistemas.</p>
+<p>Abaixo a configuração:</p>
+<pre><code>[Unit]
+Description=CUPS Scheduler
+Documentation=man:cupsd(8)
+After=sssd.service
+Requires=cups.socket
+
+[Service]
+ExecStart=/usr/sbin/cupsd -l
+Type=simple
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectSystem=full
+RestrictNamespaces=uts ipc pid user cgroup
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE CAP_DAC_READ_SEARCH
+PrivateNetwork=true
+DynamicUser=true
+
+[Install]
+Also=cups.socket cups.path
+WantedBy=printer.target
+</code></pre><p>Porém, se recarregarmos o serviço:</p>
+<blockquote>
+<p>leandro@leandro:/lib/systemd/system$ sudo systemctl daemon-reload</p>
+</blockquote>
+<p>E checarmos o status, veremos que temos problema:</p>
+<blockquote>
+<p>leandro@leandro:/lib/systemd/system$ systemctl status cups.service<br>
+● cups.service - CUPS Scheduler<br>
+       Loaded: loaded (/lib/systemd/system/cups.service; enabled; vendor preset: enabled)<br>
+       Active: active (running) since Tue 2022-09-13 23:27:05 -03; 2min 28s ago<br>
+TriggeredBy: ● cups.path<br>
+               ● cups.socket<br>
+         Docs: man:cupsd(8)<br>
+    Main PID: 8329 (cupsd)<br>
+        Tasks: 1 (limit: 4488)<br>
+       Memory: 1.7M<br>
+       CGroup: /system.slice/cups.service<br>
+               └─8329 /usr/sbin/cupsd -l</p>
+<p>set 13 23:27:05 leandro cupsd[8329]: <strong>Unable to change permissions of &ldquo;/var/log/cups&rdquo; - Read-only file system</strong><br>
+set 13 23:27:05 leandro cupsd[8329]: <strong>Unable to open log file &ldquo;/var/log/cups/error_log&rdquo; - Permission denied</strong><br>
+set 13 23:27:05 leandro cupsd[8329]: <strong>Unable to change permissions of &ldquo;/var/log/cups&rdquo; - Read-only file system</strong><br>
+set 13 23:27:05 leandro cupsd[8329]: <strong>Unable to open log file &ldquo;/var/log/cups/error_log&rdquo; - Permission denied</strong><br>
+set 13 23:27:05 leandro cupsd[8329]: <strong>Unable to change permissions of &ldquo;/var/log/cups&rdquo; - Read-only file system</strong><br>
+set 13 23:27:05 leandro cupsd[8329]: <strong>Unable to open log file &ldquo;/var/log/cups/access_log&rdquo; - Permission denied</strong><br>
+set 13 23:27:05 leandro cupsd[8329]: <strong>Unable to change permissions of &ldquo;/var/log/cups&rdquo; - Read-only file system</strong><br>
+set 13 23:27:05 leandro cupsd[8329]: <strong>Unable to open log file &ldquo;/var/log/cups/access_log&rdquo; - Permission denied</strong><br>
+set 13 23:27:37 leandro cupsd[8329]: <strong>Unable to change permissions of &ldquo;/var/log/cups&rdquo; - Read-only file system</strong><br>
+set 13 23:27:37 leandro cupsd[8329]: <strong>Unable to open log file &ldquo;/var/log/cups/error_log&rdquo; - Permission denied</strong></p>
+</blockquote>
+<p>Nossa alteração provocou problemas no permissionamento. Por isso precisamos desfazer o que fizemos.</p>
+<p>É bom lembrar que nós não precisamos chegar a um valor de zero para todo serviço. O que é importante é implementarmos as proteções que nos deixem
+tranquilos quanto à segurança do serviço e do sistema como um todo.</p>
+<p>Por isso vou parar por aqui. Conseguimos passar nosso grau de exposição de 9.6 para 5.5 - quase metade!</p>
+<h2 id="conclusão">Conclusão</h2>
+<p>O tão mal falado quanto incompreendido SystemD fornece uma série de ferramentas que auxiliam o administrador de sistemas Linux.</p>
+<p>Uma delas é o systemd-analyze, que além de fornecer dados sobre o carregamento do sistema, fornece também subsídios para auditar a
+segurança dos serviços executados.</p>
+<p>O sub comando security vem com uma métrica para calcular a segurança, permitindo saber se um serviço está seguro em
+termo de configuração da Unit e vem também com um checklist com itens para melhorar a proteção usando uma estratégia passo a passo, encapsulando cada serviço ao máximo
+como um verdadeiro contâiner sem <strong>Docker</strong>.</p>
+<p>E o melhor de tudo é que a cada passo é possível explicar o que está sendo feito e como está sendo feito!</p>
+<p>Isso permite que, se um atacante for capaz de burlar a configuração de um serviço ou explorar uma falha de codificação, não seja
+capaz de ir além dos limites que lhe impusermos, da mesma forma que, para proteger uma casa, adicionamos um muro, depois colocamos cães
+de guarda, em seguida colocamos grades nas janelas e cadeados nas portas.</p>
+<p>Um nível impedindo um agressor de prosseguir para o seguinte!</p>
+<h3 id="fontes">Fontes:</h3>
+<p><a href="https://lincolnloop.com/blog/sandboxing-services-systemd/">https://lincolnloop.com/blog/sandboxing-services-systemd/</a></p>
+<p><a href="https://www.freedesktop.org/software/systemd/man/systemd.exec.html">https://www.freedesktop.org/software/systemd/man/systemd.exec.html</a></p>
+<p><a href="https://www.ctrl.blog/entry/systemd-service-hardening.html">https://www.ctrl.blog/entry/systemd-service-hardening.html</a></p>
+<p><a href="https://www.admin-magazine.com/Archive/2022/67/Harden-services-with-systemd">https://www.admin-magazine.com/Archive/2022/67/Harden-services-with-systemd</a></p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/systemd/" rel="tag">systemD</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/artigos/a-saga-do-tablet-04/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">A saga do Tablet - parte 04</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2022 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2217338589613653"
+     crossorigin="anonymous"></script>
+</body>
+</html>
