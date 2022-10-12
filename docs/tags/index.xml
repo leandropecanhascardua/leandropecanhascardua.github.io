@@ -6,17 +6,35 @@
     <description>Recent content in Tags on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sun, 02 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Oct 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Android</title>
+      <link>https://leandropecanhascardua.github.io/tags/android/</link>
+      <pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>linux</title>
       <link>https://leandropecanhascardua.github.io/tags/linux/</link>
-      <pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://leandropecanhascardua.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ubuntu</title>
+      <link>https://leandropecanhascardua.github.io/tags/ubuntu/</link>
+      <pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/tags/ubuntu/</guid>
       <description></description>
     </item>
     
@@ -30,29 +48,11 @@
     </item>
     
     <item>
-      <title>ubuntu</title>
-      <link>https://leandropecanhascardua.github.io/tags/ubuntu/</link>
-      <pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://leandropecanhascardua.github.io/tags/ubuntu/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>adb</title>
       <link>https://leandropecanhascardua.github.io/tags/adb/</link>
       <pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate>
       
       <guid>https://leandropecanhascardua.github.io/tags/adb/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Android</title>
-      <link>https://leandropecanhascardua.github.io/tags/android/</link>
-      <pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://leandropecanhascardua.github.io/tags/android/</guid>
       <description></description>
     </item>
     

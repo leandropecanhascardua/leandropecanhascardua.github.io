@@ -6,10 +6,23 @@
     <description>Recent content in Dicas on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Mon, 29 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Oct 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/dicas/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Benchmarking de performance de navegador</title>
+      <link>https://leandropecanhascardua.github.io/dicas/web-basemark/</link>
+      <pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/web-basemark/</guid>
+      <description>&lt;p&gt;Eu tenho um computador com uma configuração modesta e, se isso não fosse suficiente, com sérios problemas no disco rígido.&lt;/p&gt;
+&lt;p&gt;Por isso eu preciso aproveitar cada byte da memória RAM. Sendo assim, eu gasto um bom tempo pesquisando sugestões para melhorar a performance do meu equipamento.&lt;/p&gt;
+&lt;p&gt;Porém, sempre surge um problema: Como ter certeza de que uma configuração é efetiva? Como saber se realmente houve alguma melhoria (e não uma piora)
+no desempenho? Para não confiar no subjetivismo da opinião pessoal, precisamos traduzir a performance em um valor e de uma ferramenta
+para fazer a medição.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Diversão para as crianças pequititinhas no Linux</title>

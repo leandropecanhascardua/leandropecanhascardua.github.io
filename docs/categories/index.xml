@@ -6,10 +6,28 @@
     <description>Recent content in Categories on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Sun, 02 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Oct 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dicas</title>
+      <link>https://leandropecanhascardua.github.io/categories/dicas/</link>
+      <pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/categories/dicas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://leandropecanhascardua.github.io/categories/linux/</link>
+      <pubDate>Wed, 12 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/categories/linux/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Artigos</title>
@@ -17,24 +35,6 @@
       <pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>https://leandropecanhascardua.github.io/categories/artigos/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>https://leandropecanhascardua.github.io/categories/linux/</link>
-      <pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://leandropecanhascardua.github.io/categories/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dicas</title>
-      <link>https://leandropecanhascardua.github.io/categories/dicas/</link>
-      <pubDate>Mon, 29 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://leandropecanhascardua.github.io/categories/dicas/</guid>
       <description></description>
     </item>
     
