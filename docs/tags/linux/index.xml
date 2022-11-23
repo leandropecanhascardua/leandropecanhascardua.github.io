@@ -6,10 +6,22 @@
     <description>Recent content in linux on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Wed, 12 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 23 Nov 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Melhorando o desempenho da navegação Web do usuário movendo dados para a memória RAM</title>
+      <link>https://leandropecanhascardua.github.io/dicas/firefox-na-ram/</link>
+      <pubDate>Wed, 23 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/firefox-na-ram/</guid>
+      <description>&lt;p&gt;Os atuais navegadores de Internet como Firefox e Chrome são verdadeiros monstros que devoram todos os recursos disponíveis em uma máquina.&lt;/p&gt;
+&lt;p&gt;Além de memória RAM, os navegadores também fazem muita Entrada/Saída de dados em disco ao gravar e recuperar dados de perfis de usuários armazenados no HD para aumentar sua funcionalidade.&lt;/p&gt;
+&lt;p&gt;Isso é fantástico, mas o disco rígido é muito mais lento que a memória RAM e, em um HD com blocos defeituosos, como pode acontecer nas estações de trabalho caseiras, isso pode ser problemático.&lt;/p&gt;
+&lt;p&gt;Agora imagine se pudéssemo mover o gerenciamento desses perfis para a memória RAM e diminuíssemos a quantidade de acesso a disco. Será que melhoraríamos a performance?&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Benchmarking de performance de navegador</title>
