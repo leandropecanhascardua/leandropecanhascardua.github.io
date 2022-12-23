@@ -6,10 +6,22 @@
     <description>Recent content in ubuntu on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Wed, 23 Nov 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 23 Dec 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Compartilhamento (fácil) de arquivos na rede local (na moleza mesmo!)</title>
+      <link>https://leandropecanhascardua.github.io/dicas/warpinator/</link>
+      <pubDate>Fri, 23 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/warpinator/</guid>
+      <description>&lt;p&gt;Hoje em dia é comum a existência e o uso de vários dispositivos de informática simultaneamente e com eles a necessidade de trocar arquivos.&lt;/p&gt;
+&lt;p&gt;Seja em casa, seja em um escritório. Podemos estar em qualquer lugar e acessar a informação de qualquer dispositivo!&lt;/p&gt;
+&lt;p&gt;Por isso uma necessidade que surge é de um modo de transferir arquivos de um local para outro, de preferência a um custo baixo e
+sem a necessidade de conhecimentos técnicos para sua implantação.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Melhorando o desempenho da navegação Web do usuário movendo dados para a memória RAM</title>
