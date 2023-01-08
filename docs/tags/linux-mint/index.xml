@@ -6,10 +6,22 @@
     <description>Recent content in linux mint on Leandro Peçanha Scardua</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt</language>
-    <lastBuildDate>Fri, 23 Dec 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Jan 2023 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://leandropecanhascardua.github.io/tags/linux-mint/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Trasmitindo vídeos do computador e assistindo no celular dentro da Intranet usando VLC (e Linux!)</title>
+      <link>https://leandropecanhascardua.github.io/dicas/streaming-vlc/</link>
+      <pubDate>Sat, 07 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/dicas/streaming-vlc/</guid>
+      <description>&lt;p&gt;Hoje em dia estamos cercados de aparelhos eletrônicos. De celulares a smartvs, passando por laptops e computadores de mesa.&lt;/p&gt;
+&lt;p&gt;Nesse cenário, compartilhar informação e dados é uma necessidade diária. Inclusive filmes e séries!
+Às vezes precisamos assistir no celular ou tablet um filme que baixamos em um computador.&lt;/p&gt;
+&lt;p&gt;Pouca gente sabe, mas o VLC fornece uma solução simples e rápida para isso!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Compartilhamento (fácil) de arquivos na rede local (na moleza mesmo!)</title>
