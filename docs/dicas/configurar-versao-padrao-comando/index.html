@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Configurando uma versão padrão para comandos no Ubuntu Linux 20.04 - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="Configurando uma versão padrão para comandos no Ubuntu Linux 20.04" />
+<meta property="og:description" content="A necessidade desta dica veio de um problema: O ubuntu instala por padrão duas versões do Python: a versão 2.7 e a versão 3.8.
+À medida em que o python é a base de construção dos ambientes gráficos, pode tornar-se confuso
+gerenciar a versão padrão a ser usada quando chamamos o interpretador na linha de comando. Mas esse problema atinge outros utilitários do sistema." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/dicas/configurar-versao-padrao-comando/" />
+<meta property="article:published_time" content="2022-06-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-15T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Configurando uma versão padrão para comandos no Ubuntu Linux 20.04">
+<meta itemprop="description" content="A necessidade desta dica veio de um problema: O ubuntu instala por padrão duas versões do Python: a versão 2.7 e a versão 3.8.
+À medida em que o python é a base de construção dos ambientes gráficos, pode tornar-se confuso
+gerenciar a versão padrão a ser usada quando chamamos o interpretador na linha de comando. Mas esse problema atinge outros utilitários do sistema.">
+<meta itemprop="datePublished" content="2022-06-15T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-06-15T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="764">
+
+
+
+<meta itemprop="keywords" content="ubuntu,linux,terminal," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Configurando uma versão padrão para comandos no Ubuntu Linux 20.04"/>
+<meta name="twitter:description" content="A necessidade desta dica veio de um problema: O ubuntu instala por padrão duas versões do Python: a versão 2.7 e a versão 3.8.
+À medida em que o python é a base de construção dos ambientes gráficos, pode tornar-se confuso
+gerenciar a versão padrão a ser usada quando chamamos o interpretador na linha de comando. Mas esse problema atinge outros utilitários do sistema."/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/artigos/">
+					
+					<span class="menu__text">Artigos</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/dicas/">
+					
+					<span class="menu__text">Dicas</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Configurando uma versão padrão para comandos no Ubuntu Linux 20.04</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-06-15T00:00:00Z">15.06.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>A necessidade desta dica veio de um problema: O ubuntu instala por padrão duas versões do Python: a versão 2.7 e a versão 3.8.</p>
+<p>À medida em que o python é a base de construção dos ambientes gráficos, pode tornar-se confuso
+gerenciar a versão padrão a ser usada quando chamamos o interpretador na linha de comando. Mas esse problema atinge outros utilitários do sistema.</p>
+<p>Se buscarmos pelas versões do python na pasta /usr/bin, temos :</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>ls /usr/bin/python* -l</strong><br>
+lrwxrwxrwx 1 root root       9 mar 13  2020 /usr/bin/python2 -&gt; python2.7<br>
+-rwxr-xr-x 1 root root 3674216 mar  8  2021 /usr/bin/python2.7<br>
+lrwxrwxrwx 1 root root       9 mar  7 15:25 /usr/bin/python3 -&gt; python3.8<br>
+-rwxr-xr-x 1 root root 5490448 mar 15 09:22 /usr/bin/python3.8<br>
+lrwxrwxrwx 1 root root      33 mar 15 09:22 /usr/bin/python3.8-config -&gt; x86_64-linux-gnu-python3.8-config<br>
+lrwxrwxrwx 1 root root      16 mar 13  2020 /usr/bin/python3-config -&gt; python3.8-config</p>
+</blockquote>
+<p>Isso significa que para executar um script programa.py eu tenho que rodar</p>
+<blockquote>
+<p>python2.7 programa.py</p>
+</blockquote>
+<p>ou</p>
+<blockquote>
+<p>python3.8 programa.py</p>
+</blockquote>
+<p>Na verdade, como pudemos ver na primeira listagem, python2 é um link simbólico para python2.7 assim como python3 é um link simbólico para python3.8. Nenhum problema.</p>
+<p>Mas por vezes pegamos scripts que definem, por exemplo:</p>
+<p>#!/usr/bin/env python</p>
+<p>Não referenciando explicitamente a versão a ser usada(esperando uma versão padrão). Neste caso o programa não roda e precisamos alterar o código fonte e explicitar qual versão usaremos.</p>
+<p>Podemos resolver rapidamente criando um link simbólico. Assim como na primeira listagem python2 aponta para python2.7, podemos ter um
+link python apontando para python2.</p>
+<p>Podemos inclusive implementar essa ideia diretamente rodando:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>sudo ln /usr/bin/python2 /usr/bin/python</strong><br>
+[sudo] senha para leandro:<br>
+leandro@leandro:~$ <strong>python</strong><br>
+Python 2.7.18 (default, Mar  8 2021, 13:02:45)<br>
+[GCC 9.3.0] on linux2<br>
+Type &ldquo;help&rdquo;, &ldquo;copyright&rdquo;, &ldquo;credits&rdquo; or &ldquo;license&rdquo; for more information.<br>
+&gt;&gt;&gt;</p>
+</blockquote>
+<p>O problema dessa solução é que se tivermos muitas versões de um programa, pode se tornar complicado fazer esse gerenciamento, dado que envolve manipular diretamente os arquivos e torna a operação sujeita a erros.</p>
+<p>Por isso é melhor usar o <strong>update-alternatives</strong> para gerenciar as versões do programa que temos instalado na máquina.</p>
+<p>O que o update-alternatives faz é gerenciar as versões disponíveis de cada comando e fornecer uma interface mais simples para o gerenciamento. Com esse comando os links são guardados no diretório <strong>/etc/alternatives</strong> e estes
+apontam para os comandos reais.</p>
+<p>Isso permite manter não apenas versões de comandos, mas opções de configuração também. Um exemplo é o comando editor. Esse comando é apenas um item de configuração que aponta para um dos editores de linha de comando disponíveis
+no sistema. Para o meu sistema, as opções são estas:</p>
+<blockquote>
+<p>leandro@leandro:/etc/alternatives$ <strong>update-alternatives &ndash;list editor</strong><br>
+/bin/ed<br>
+/bin/nano<br>
+/usr/bin/vim.tiny</p>
+</blockquote>
+<p>Isso torna o sistema mais flexível ao separar um item do comando que o executa.</p>
+<p>Então, voltando ao nosso pequeno problema com o python, rejeitando a solução de criar um link simbólico manualmente, vamos adicionar uma chave de configuração para o python com a opção &ndash;install:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>sudo update-alternatives &ndash;install /usr/bin/python  python /usr/bin/python2.7 1</strong><br>
+update-alternatives: a usar /usr/bin/python2.7 para disponibilizar /usr/bin/python (python) em modo auto</p>
+</blockquote>
+<p>O comando &ndash;install recebe os argumentos <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --> <!-- raw HTML omitted --> que são, respectivamente: o nome padrão do comando como será chamado no terminal, o nome dele a ser gerenciado pelo update-alternatives, o caminho para o
+item real, ou a versão do item que queremos gerenciar e uma prioridade, que indicam uma preferência. Para cada versão a ser configurada esse comando com a opção <strong>&ndash;install</strong> deve ser executado.</p>
+<p>Agora checaremos nossa configuração:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>update-alternatives &ndash;list python</strong><br>
+/usr/bin/python2.7</p>
+</blockquote>
+<p>Adicionando a versão 3 do python para o controle:</p>
+<blockquote>
+<p>leandro@leandro:~$ sudo update-alternatives &ndash;install /usr/bin/python  python /usr/bin/python3.8 2<br>
+update-alternatives: a usar /usr/bin/python3.8 para disponibilizar /usr/bin/python (python) em modo auto</p>
+</blockquote>
+<p>Checando tudo:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>update-alternatives &ndash;list python</strong><br>
+/usr/bin/python2.7<br>
+/usr/bin/python3.8</p>
+</blockquote>
+<p>Agora podemos modificar a versão padrão do python que usaremos em nosso sistema executando:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>sudo update-alternatives &ndash;config python</strong><br>
+Existem 2 escolhas para a alternativa python (disponibiliza /usr/bin/python).</p>
+<p>Selecção   Caminho             Prioridade Estado<br>
+-&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;<br>
+* 0            /usr/bin/python3.8   2         modo automático<br>
+1            /usr/bin/python2.7   1         modo manual<br>
+2            /usr/bin/python3.8   2         modo manual</p>
+<p>Pressione <!-- raw HTML omitted --> para manter a escolha actual[*], ou digite o número da selecção:</p>
+</blockquote>
+<p>Podemos ver que a versão padrão selecionada é a primeira (índice 0). Se rodarmos o comando python na linha de comando agora temos:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>python</strong><br>
+Python 3.8.10 (default, Mar 15 2022, 12:22:08)<br>
+[GCC 9.4.0] on linux<br>
+Type &ldquo;help&rdquo;, &ldquo;copyright&rdquo;, &ldquo;credits&rdquo; or &ldquo;license&rdquo; for more information.<br>
+&gt;&gt;&gt;</p>
+</blockquote>
+<p>Para obtermos informações completas passando a opção <strong>&ndash;display</strong>:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>update-alternatives &ndash;display python</strong><br>
+python - modo automático<br>
+A melhor versão do link é /usr/bin/python3.8<br>
+o link actualmente aponta para /usr/bin/python3.8<br>
+link python é /usr/bin/python<br>
+/usr/bin/python2.7 - prioridade 1<br>
+/usr/bin/python3.8 - prioridade 2<br>
+leandro@leandro:~$</p>
+</blockquote>
+<p>Para informações completas consulte a man page</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>man update-alternatives</strong></p>
+</blockquote>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/terminal/" rel="tag">terminal</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/dicas/encontrar-senha-wifi-ubuntu/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">Encontrando a senha da rede wifi gravada no Ubuntu Linux</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/dicas/descobrindo-sniffer-na-rede/" rel="next">
+			<span class="pager__subtitle">Próximo&thinsp;»</span>
+			<p class="pager__title">Rastreando sniffer encondido na rede usando Linux</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2023 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2217338589613653"
+     crossorigin="anonymous"></script>
+</body>
+</html>

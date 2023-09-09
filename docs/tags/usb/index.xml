@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Usb on Leandro Peçanha Scardua</title>
+    <link>https://leandropecanhascardua.github.io/tags/usb/</link>
+    <description>Recent content in Usb on Leandro Peçanha Scardua</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt</language>
+    <lastBuildDate>Thu, 25 Aug 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://leandropecanhascardua.github.io/tags/usb/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A saga do Tablet - parte 04</title>
+      <link>https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-04/</link>
+      <pubDate>Thu, 25 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-04/</guid>
+      <description>&lt;p&gt;Continuando a empreitada de exploração do tablet, vou partir para obtenção de acesso root no dispositivo.&lt;/p&gt;
+&lt;p&gt;Antes, porém, vou testar uma versão do software Odin para Linux, ou melhor, multiplataforma.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>A saga do Tablet - parte 03</title>
+      <link>https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-03/</link>
+      <pubDate>Wed, 03 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-03/</guid>
+      <description>&lt;p&gt;Em meu último artigo eu mostrei as dificuldades iniciais com o comando adb e fastboot que não funcionaram conforme eu esperava.&lt;/p&gt;
+&lt;p&gt;As dificuldades foram úteis porque serviram de aprendizado e apontaram a necessidade de uma nova abordagem.&lt;/p&gt;
+&lt;p&gt;Agora eu vou abandonar os dois comandos e vou partir para o Heimdall.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>A saga do Tablet - parte 02</title>
+      <link>https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-02/</link>
+      <pubDate>Sun, 17 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-02/</guid>
+      <description>&lt;p&gt;No artigo anterior eu encontrei algumas informações sobre meu tablet Samsung GT-P1010 e configurei
+meu ambiente de modo a acessá-lo pelo terminal de comandos do Linux.&lt;/p&gt;
+&lt;p&gt;Agora eu tentarei instalar um sistema dentro dele. Vou tentar fazer apenas usando ferramentas de
+linha de comando pelo terminal. Será que vai funcionar?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>A saga do Tablet - parte 01</title>
+      <link>https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-01/</link>
+      <pubDate>Wed, 06 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-01/</guid>
+      <description>&lt;p&gt;Eu tenho um Galaxy Tab antigo, versão 7. Ele já não atualiza e a versão do Android e nem me
+permite instalar nada pois a maior parte dos aplicativos é construído para uma versão mais nova
+do sistema operacional.&lt;/p&gt;
+&lt;p&gt;Ele estava encostado aqui e, embora na teoria eu ainda possa utilizá-lo, na prática não posso!Nem mesmo a PlayStore
+eu consigo acessar!&lt;/p&gt;
+&lt;p&gt;Navegar é possível em apenas alguns poucos sites e mesmo assim sou importunado por mensagens de
+alerta por problemas de certificados e ainda por sites toscamente renderizados.&lt;/p&gt;
+&lt;p&gt;Enfim, não perco nada se o danificar em uma empreitada&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

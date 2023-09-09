@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kiosk on Leandro Peçanha Scardua</title>
+    <link>https://leandropecanhascardua.github.io/tags/kiosk/</link>
+    <description>Recent content in kiosk on Leandro Peçanha Scardua</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt</language>
+    <lastBuildDate>Mon, 30 May 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://leandropecanhascardua.github.io/tags/kiosk/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rodando um aplicativo em modo Kiosk no Ubuntu Linux 20.04</title>
+      <link>https://leandropecanhascardua.github.io/artigos/rodando-aplica%C3%A7%C3%A3o-em-modo-kiosk-no-ubuntu/</link>
+      <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/artigos/rodando-aplica%C3%A7%C3%A3o-em-modo-kiosk-no-ubuntu/</guid>
+      <description>&lt;p&gt;O modo kiosk (ou quiosque) é um modo de operação que disponibiliza para o usuário um único aplicativo ou aplicação em tela cheia e sem bordas ou barras de ferramentas. Seu principal uso é nos totens de auto atendimento, como os caixas automáticos e filas de atendimento.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

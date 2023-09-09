@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>A saga do Tablet - parte 02 - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="A saga do Tablet - parte 02" />
+<meta property="og:description" content="No artigo anterior eu encontrei algumas informações sobre meu tablet Samsung GT-P1010 e configurei
+meu ambiente de modo a acessá-lo pelo terminal de comandos do Linux.
+Agora eu tentarei instalar um sistema dentro dele. Vou tentar fazer apenas usando ferramentas de
+linha de comando pelo terminal. Será que vai funcionar?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/artigos/a-saga-do-tablet-02/" />
+<meta property="article:published_time" content="2022-07-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-17T00:00:00+00:00" />
+
+		<meta itemprop="name" content="A saga do Tablet - parte 02">
+<meta itemprop="description" content="No artigo anterior eu encontrei algumas informações sobre meu tablet Samsung GT-P1010 e configurei
+meu ambiente de modo a acessá-lo pelo terminal de comandos do Linux.
+Agora eu tentarei instalar um sistema dentro dele. Vou tentar fazer apenas usando ferramentas de
+linha de comando pelo terminal. Será que vai funcionar?">
+<meta itemprop="datePublished" content="2022-07-17T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-07-17T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1915">
+
+
+
+<meta itemprop="keywords" content="ubuntu,linux,Android,Tablet,Usb,adb," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A saga do Tablet - parte 02"/>
+<meta name="twitter:description" content="No artigo anterior eu encontrei algumas informações sobre meu tablet Samsung GT-P1010 e configurei
+meu ambiente de modo a acessá-lo pelo terminal de comandos do Linux.
+Agora eu tentarei instalar um sistema dentro dele. Vou tentar fazer apenas usando ferramentas de
+linha de comando pelo terminal. Será que vai funcionar?"/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/artigos/">
+					
+					<span class="menu__text">Artigos</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/dicas/">
+					
+					<span class="menu__text">Dicas</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">A saga do Tablet - parte 02</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-07-17T00:00:00Z">17.07.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>No artigo anterior eu encontrei algumas informações sobre meu tablet Samsung GT-P1010 e configurei
+meu ambiente de modo a acessá-lo pelo terminal de comandos do Linux.</p>
+<p>Agora eu tentarei instalar um sistema dentro dele. Vou tentar fazer apenas usando ferramentas de
+linha de comando pelo terminal. Será que vai funcionar?</p>
+<p>Apenas para recordar, eu não tenho experiência alguma em dispositivos móveis além daquela de nível
+usuário comum. Daí o título &ldquo;Saga&rdquo;.</p>
+<p>Fazer essa instalação apenas pela linha de comando parece inocência, mas pela pesquisa que eu fiz
+para iniciar essa empreitada eu vi que seria possível em dispositivos mais recentes. Por isso vou
+tentar estas técnicas primeiro. Se não funcionar será experiência adquirida.</p>
+<p>Então primeiro vou verificar se o dispositivo está conectado:</p>
+<p>leandro@leandro:~$ adb devices
+List of devices attached
+10106419c016	device</p>
+<p>Fica então a decisão de qual sistema tentar instalar. Eu fiz uma boa pesquisa e descobri que há
+muitas opções disponíveis. É bom lembrar que estou descartando a instalação por <strong>CHROOT</strong> ou qualquer
+tipo de acesso via <strong>VNC</strong>. Eu quero linux nativamente no tablet!</p>
+<p>Havia distribuições baseadas em Debian, Arch, Gentoo entre outras, que aparentemente permitiam a
+instalação (preenchiam os requisitos técnicos) além de outras distribuições derivadas criadas
+especificamente para a plataforma.</p>
+<p>Eu me decidi pelo <a href="https://postmarketos.org/">PostmarketOS</a> por alguns motivos muito evidentes: havia extensa documentação para o
+meu dispositivo e isso, para quem está começando, não pode ser negligenciado. Ela é baseada em Alpine
+Linux que é uma distribuição que nunca usei e que tem algumas diferenças importantes em relação ao
+Debian, mas que eu pretendia instalar para testar em uma máquina virtual.</p>
+<p>O requisito de economia de recursos contou bastante. Se a instalação for bem sucedida, depois eu posso
+experimentar outros sistemas para treinar meu conhecimento.</p>
+<p>Na página wiki do <a href="https://wiki.postmarketos.org/wiki/Devices">postmarketOS</a> esse tablet GT-P1010 que
+eu tenho está listado e já foi trabalhado por outras pessoas, assim posso esperar que praticamente tudo funcione (em teoria)!</p>
+<p>Seguindo para a <a href="https://wiki.postmarketos.org/wiki/Samsung_Galaxy_Tab_2_7.0%22_(samsung-espresso3g)">página relacionada ao dispositivo</a>
+eu tenho o procedimento a ser executado:</p>
+<ul>
+<li>baixar uma imagem pré-construída</li>
+<li>Instalar TWRP no tablet</li>
+<li>colocar o tablet em modo flash</li>
+</ul>
+<p>Eu baixei uma imagem do postmarketOS baseada em XFCE4 para meu celular neste <a href="https://images.postmarketos.org/bpo/v22.06/samsung-espresso3g/xfce4/">link</a>.
+Há dois arquivos para baixar (no momento em que estou escrevendo este artigo):</p>
+<ul>
+<li>20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g-boot.img.xz</li>
+<li>20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g.img.xz</li>
+</ul>
+<p>Eu vou realizar o download pelo wget pela linha de comando para documentar melhor as ações:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ wget <a href="https://images.postmarketos.org/bpo/v22.06/samsung-espresso3g/xfce4/20220713-0808/20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g-boot.img.xz">https://images.postmarketos.org/bpo/v22.06/samsung-espresso3g/xfce4/20220713-0808/20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g-boot.img.xz</a></p>
+<p>leandro@leandro:~/Downloads/tablet$ wget <a href="https://images.postmarketos.org/bpo/v22.06/samsung-espresso3g/xfce4/20220713-0808/20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g.img.xz">https://images.postmarketos.org/bpo/v22.06/samsung-espresso3g/xfce4/20220713-0808/20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g.img.xz</a></p>
+</blockquote>
+<p>Em seguida eu vou conferir a integridade dos arquivos. Afinal, não quero de forma alguma ser surpreendido
+por algum problema desconhecido que eu não possa rastrear a origem. Por isso eu vou baixar o hash dos
+arquivos para comparar com o download que fiz</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ wget <a href="https://images.postmarketos.org/bpo/v22.06/samsung-espresso3g/xfce4/20220713-0808/20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g-boot.img.xz.sha256">https://images.postmarketos.org/bpo/v22.06/samsung-espresso3g/xfce4/20220713-0808/20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g-boot.img.xz.sha256</a></p>
+<p>leandro@leandro:~/Downloads/tablet$ wget <a href="https://images.postmarketos.org/bpo/v22.06/samsung-espresso3g/xfce4/20220713-0808/20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g.img.xz.sha256">https://images.postmarketos.org/bpo/v22.06/samsung-espresso3g/xfce4/20220713-0808/20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g.img.xz.sha256</a></p>
+</blockquote>
+<p>Por fim eu vou checar a integridade dos dois arquivos de imagem usando o comando <strong>sha256sum</strong></p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ sha256sum -c 20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g-boot.img.xz.sha256<br>
+20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g-boot.img.xz: SUCESSO</p>
+<p>leandro@leandro:~/Downloads/tablet$ sha256sum -c 20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g.img.xz.sha256<br>
+20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g.img.xz: SUCESSO</p>
+</blockquote>
+<p>Os dois arquivos estão íntegros, então é possível continuar. Eu vou descompactar os arquivos e obter
+os arquivos img usando o comando <strong>unxz</strong>:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ unxz 20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g.img.xz</p>
+<p>leandro@leandro:~/Downloads/tablet$ unxz 20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g-boot.img.xz</p>
+</blockquote>
+<p>Assim teremos dois arquivos .img que irão para o tablet em minha pasta de trabalho.</p>
+<p>Eu não tenho root neste aparelho e pelo que sei ele está bloqueado, mesmo assim vou tentar rodar
+a imagem de boot nele pelo comando <strong>adb</strong>:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ adb reboot 20220713-0808-postmarketOS-v22.06-xfce4-0.5.1-samsung-espresso3g-boot.img</p>
+</blockquote>
+<p>O resultado foi um boot normal. Mas não custava nada tentar. Será necessário entrar no modo <strong>fastboot</strong></p>
+<p>O modo <strong>fastboot</strong> é uma protocolo usado para modificar o sistema de arquivos via conexão usb em um
+computador desktop. Ele é usado via uma ferramenta de linha de comando com o mesmo nome.</p>
+<p>Há uma variedade de tutoriais na internet e, por isso, alvo de muita confusão. Eu havia entendido que
+era um método universal, mas a princípio era contraditório se eu precisava ou não entrar em um modo
+especial do tablet para isso. Primeiro eu tentei pela linha de comando:</p>
+<blockquote>
+<p>leandro@leandro:~$ fastboot devices<br>
+leandro@leandro:~$</p>
+</blockquote>
+<p>Como não obtive saída, suspeitei de que seria necessário entrar em modo especial do celular.</p>
+<p>Há uma combinação de teclas para fazer isso, mas vou tentar pela linha de comando com o <strong>adb</strong> para
+ver se é possível. Tentei vários comandos:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ adb reboot-bootloader</p>
+<p>leandro@leandro:~/Downloads/tablet$ adb reboot bootloader</p>
+</blockquote>
+<p>Em todos o resultado foi o mesmo: Boot normal no tablet.
+Tentei então entrar no modo recovery via <strong>adb</strong>:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ adb reboot recovery</p>
+</blockquote>
+<p>Eu até consigo entrar em modo recuperação, mas</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ fastboot devices</p>
+</blockquote>
+<p>não me retorna nada.</p>
+<p>Tive de pesquisar pela Internet, novamente em fontes contraditórias tentando filtrar o que se aplicava
+e o que não se aplicava ao meu tablet.</p>
+<p>Na página sobre Android da <a href="https://wiki.archlinux.org/title/android#Fastboot">wiki do Arch Linux</a> eu
+obtive a informação de que dispositivos Samsung(como o meu!) não podiam ser gravados via Fastboot. Eu
+havia encontrado esse link logo no começo de minha pesquisa, mas deixei meio de lado porque não sabia
+se estava ou não atualizado. Pelo visto estava e a informação era confiável.</p>
+<p>Pela Internet, verifiquei que além do modo Recovery, meu tablet também tinha o <strong>modo Download</strong> que
+seria o método adequado para realizar o que eu queria. Mas será que esse modo Download não seria um
+outro nome para o <strong>Fastboot mode</strong>? Eu precisava testar!</p>
+<p>Entrei, então, em modo &ldquo;Download&rdquo; usando a combinação de teclas Power+Down+Home mas também nada feito!</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ fastboot devices</p>
+</blockquote>
+<p>Ao que parece é hora de reconhecer minha primeira derrota. Eu contava com a efetividade do comando
+fastboot para fazer todo o trabalho para mim.</p>
+<p>Apesar de o blog não possuir área para interação com o leitor, já posso escutar as risadas e também
+os conselhos. Mas o objetivo não é apenas instalar uma ROM em um equipamento. É também fazer da forma
+como eu quero e aprender alguma coisa no processo.</p>
+<p>Eu submestimei meu equipamento! Bem, minha primeira tentativa foi esta. Na próxima será hora de tentar
+o Heimdall, ainda insistindo na linha de comando!</p>
+<p>Então, para não deixar o artigo desinteressante, vamos obter algumas informações sobre o sistema.</p>
+<p>O comando <strong>adb</strong> permite executar comandos dentro do Android usando o comando <strong>shell</strong>:</p>
+<p>Qual versão do kernel Linux o Android está usando?</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>adb shell cat /proc/version</strong><br>
+Linux version 2.6.32.9 (sidclei@bldhp-4) (gcc version 4.4.0 (GCC) ) #1 PREEMPT Mon Jun 13 08:27:20 BRT 2011</p>
+</blockquote>
+<p>Qual o processador da máquina?</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>adb shell cat /proc/cpuinfo</strong><br>
+Processor	: ARMv7 Processor rev 2 (v7l)<br>
+BogoMIPS	: 299.11<br>
+Features	: swp half thumb fastmult vfp edsp neon vfpv3<br>
+CPU implementer	: 0x41<br>
+CPU architecture: 7<br>
+CPU variant	: 0x3<br>
+CPU part	: 0xc08<br>
+CPU revision	: 2</p>
+<p>Hardware	: P1Lite Samsung Board<br>
+Revision	: 0004<br>
+Serial		: 0000000000000000</p>
+</blockquote>
+<p>Qual o driver de áudio?</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>adb shell cat /proc/asound/version</strong><br>
+Advanced Linux Sound Architecture Driver Version 1.0.21.</p>
+</blockquote>
+<p>Qual a placa de som?</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ adb shell cat /proc/asound/cards<br>
+0 [SDP3430        ]: twl4030 - SDP3430<br>
+SDP3430 (twl4030)</p>
+</blockquote>
+<p>Quais as interfaces de rede?</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>adb shell ls /proc/sys/net/ipv4/conf</strong><br>
+all<br>
+default<br>
+lo<br>
+usb0<br>
+sit0<br>
+ip6tnl0<br>
+tiwlan0</p>
+</blockquote>
+<p>Agora informações mais importantes. Quais as partições?</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ adb shell cat /proc/partitions<br>
+major minor  #blocks  name</p>
+<p>179        0   15630336 mmcblk0<br>
+179        1   13359136 mmcblk0p1<br>
+179        2    1966080 mmcblk0p2<br>
+179        3     305088 mmcblk0p3<br>
+139        0     513024 tfsr0/c<br>
+139        1        256 tfsr1<br>
+139        2        256 tfsr2<br>
+139        3      10240 tfsr3<br>
+139        4       1280 tfsr4<br>
+139        5       1280 tfsr5<br>
+139        6       5120 tfsr6<br>
+139        7       7680 tfsr7<br>
+139        8       7680 tfsr8<br>
+139        9     366080 tfsr9<br>
+139       10      77312 tfsr10<br>
+139       11      35840 tfsr11<br>
+137        0     513024 bml0/c<br>
+137        1        256 bml1<br>
+137        2        256 bml2<br>
+137        3      10240 bml3<br>
+137        4       1280 bml4<br>
+137        5       1280 bml5<br>
+137        6       5120 bml6<br>
+137        7       7680 bml7<br>
+137        8       7680 bml8<br>
+137        9     366080 bml9<br>
+137       10      77312 bml10<br>
+137       11      35840 bml11<br>
+138        3       6400 stl3<br>
+138        6       1280 stl6<br>
+138        9     355840 stl9<br>
+138       10      72704 stl10<br>
+138       11      32000 stl11</p>
+</blockquote>
+<p>Podemos notar a existência de partições com nomes estranhos. Isso porque o Android é baseado no kernel
+Linux mas não segue o padrão de nomes dos diretórios (aliás ele cria os dele próprio!).</p>
+<p>E como elas estão montadas?</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>adb shell mount</strong><br>
+rootfs / rootfs ro,relatime 0 0<br>
+tmpfs /dev tmpfs rw,relatime,mode=755 0 0<br>
+devpts /dev/pts devpts rw,relatime,mode=600 0 0<br>
+proc /proc proc rw,relatime 0 0<br>
+sysfs /sys sysfs rw,relatime 0 0<br>
+none /acct cgroup rw,relatime,cpuacct 0 0<br>
+tmpfs /mnt/asec tmpfs rw,relatime,mode=755,gid=1000 0 0<br>
+tmpfs /app-cache tmpfs rw,relatime,size=12288k 0 0<br>
+none /dev/cpuctl cgroup rw,relatime,cpu 0 0<br>
+/dev/block/stl9 /system rfs ro,relatime,vfat,log_off,check=no,gid/uid/rwx,iocharset=utf8 0 0<br>
+/dev/block/mmcblk0p3 /mnt/apk vfat ro,nodev,noatime,nodiratime,fmask=0133,dmask=0022,codepage=cp437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro 0 0<br>
+/dev/block/mmcblk0p2 /data rfs rw,nosuid,nodev,relatime,vfat,llw,check=no,gid/uid/rwx,iocharset=utf8 0 0<br>
+/dev/block/stl10 /dbdata rfs rw,nosuid,nodev,relatime,vfat,llw,check=no,gid/uid/rwx,iocharset=utf8 0 0<br>
+/dev/block/stl11 /cache rfs rw,nosuid,nodev,relatime,vfat,llw,check=no,gid/uid/rwx,iocharset=utf8 0 0<br>
+/dev/block/stl3 /efs rfs rw,nosuid,nodev,relatime,vfat,llw,check=no,gid/uid/rwx,iocharset=cp437 0 0<br>
+/dev/block/stl6 /mnt/.lfs j4fs rw,relatime 0 0<br>
+debugfs /debug debugfs rw,relatime 0 0<br>
+/dev/block/vold/179:1 /mnt/sdcard vfat rw,dirsync,nosuid,nodev,noexec,noatime,nodiratime,uid=1000,gid=1015,fmask=0002,dmask=0002,allow_utime=0020,codepage=cp437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro 0 0</p>
+</blockquote>
+<p>Note as partições que são montadas como somente leitura(<strong>ro</strong>) e as que são montadas com permissão de escrita(<strong>rw</strong>).</p>
+<p>Além disso, como elas estão usando o espaço de armazenamento?</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>adb shell df</strong><br>
+/dev: 244676K total, 0K used, 244676K available (block size 4096)<br>
+/mnt/asec: 244676K total, 0K used, 244676K available (block size 4096)<br>
+/app-cache: 12288K total, 0K used, 12288K available (block size 4096)<br>
+/system: 353984K total, 342484K used, 11500K available (block size 4096)<br>
+/mnt/apk: 304848K total, 63168K used, 241680K available (block size 16384)<br>
+/data: 1963952K total, 141136K used, 1822816K available (block size 16384)<br>
+/dbdata: 71448K total, 1976K used, 69472K available (block size 4096)<br>
+/cache: 31336K total, 16K used, 31320K available (block size 2048)<br>
+/efs: 6064K total, 14K used, 6050K available (block size 1024)<br>
+/mnt/.lfs: Function not implemented<br>
+/mnt/sdcard: 13355840K total, 6223168K used, 7132672K available (block size 32768)</p>
+</blockquote>
+<p>Podemos notar a existência de um cartão de memória(<strong>mmcblk0</strong>) contendo três partições, mas somente
+duas (mmcblk0p2 e mmcblk0p3) têm sistemas de arquivos montados! Por que será? O que aconteceu com <strong>mmcblk0p1</strong> ?</p>
+<p>Agora vamos obter as variáveis de ambiente:</p>
+<blockquote>
+<p>leandro@leandro:~/Downloads/tablet$ <strong>adb shell printenv</strong><br>
+DEFAULT_BASEIMAGE=/system/lib/dsp/baseimage.dof<br>
+ANDROID_ROOT=/system<br>
+LD_LIBRARY_PATH=/system/lib<br>
+PATH=/sbin:/system/sbin:/system/bin:/system/xbin<br>
+DSP_PATH=/system/lib/dsp<br>
+ASEC_MOUNTPOINT=/mnt/asec<br>
+INTERNAL_STORAGE=/mnt/sdcard<br>
+OTG_STORAGE=/mnt/sdcard/otg_disk<br>
+BOOTCLASSPATH=/system/framework/core.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar<br>
+QOSDYN_FILE=/system/lib/dsp/qosdyn_3430.dll64P<br>
+ANDROID_BOOTLOGO=1<br>
+ANDROID_ASSETS=/system/app<br>
+EXTERNAL_STORAGE=/mnt/sdcard/external_sd<br>
+BT_FW_PATH=/system/lib/firmware<br>
+ANDROID_DATA=/data<br>
+PM_TBLFILE=/system/etc/policytable.tbl<br>
+TMPDIR=/data/local/tmp<br>
+ANDROID_PROPERTY_WORKSPACE=14,32768</p>
+</blockquote>
+<p>vários diretórios listados acima são conhecidos de quem mexe com gravação de ROM em Android.</p>
+<p>E finalmente os dados de um dos arquivos mais importante do sistema:</p>
+<blockquote>
+<p>leandro@leandro:~$ <strong>adb shell cat /system/build.prop</strong><br>
+# begin build properties<br>
+# autogenerated by buildinfo.sh<br>
+ro.build.id=FROYO<br>
+ro.build.display.id=FROYO.UJKM5<br>
+ro.build.version.incremental=UJKM5<br>
+ro.build.version.sdk=8<br>
+ro.build.version.codename=REL<br>
+ro.build.version.release=2.2.2<br>
+ro.build.date=Mon Jun 13 08:39:01 BRT 2011<br>
+ro.build.date.utc=1307965141<br>
+ro.build.type=user<br>
+ro.build.user=sidclei<br>
+ro.build.host=bldhp-4<br>
+ro.build.tags=release-keys<br>
+ro.product.model=GT-P1010<br>
+ro.product.brand=samsung<br>
+ro.product.name=GT-P1010<br>
+ro.product.device=GT-P1010<br>
+ro.product.board=GT-P1010<br>
+ro.product.cpu.abi=armeabi-v7a<br>
+ro.product.cpu.abi2=armeabi<br>
+ro.product.manufacturer=samsung<br>
+ro.product.locale.language=en<br>
+ro.product.locale.region=GB<br>
+ro.wifi.channels=<br>
+ro.board.platform=omap3<br>
+# ro.build.product is obsolete; use ro.product.device<br>
+ro.build.product=GT-P1010<br>
+# Do not try to parse ro.build.description or .fingerprint<br>
+ro.build.description=GT-P1010-user 2.2.2 FROYO UJKM5 release-keys<br>
+ro.build.fingerprint=samsung/GT-P1010/GT-P1010/GT-P1010:2.2.2/FROYO/UJKM5:user/release-keys<br>
+# Samsung Specific Properties<br>
+ro.build.PDA=P1010UJKM5<br>
+ro.build.hidden_ver=P1010UJKM5<br>
+ro.build.changelist=1023452<br>
+ro.build.buildtag=<br>
+# end build properties<br>
+# system.prop for Latona FF</p>
+<p>ro.sf.lcd_density=240<br>
+ro.sf.hwrotation=90</p>
+<p>rild.libpath=/system/lib/libsec-ril-apalone.so<br>
+rild.libargs=-d /dev/ttyS0<br>
+wifi.interface=tiwlan0<br>
+jpeg.libskiahw.decoder.enable=0<br>
+jpeg.libskiahw.decoder.thresh=100000</p>
+<p># The OpenGL ES API level that is natively supported by this device.<br>
+# This is a 16.16 fixed point number<br>
+ro.opengles.version=131072</p>
+<p># default heap size : default -&gt; 48m<br>
+dalvik.vm.heapsize=48m<br>
+#<br>
+# ADDITIONAL_BUILD_PROPERTIES<br>
+#<br>
+keyinputqueue.use_finger_id=true<br>
+windowsmgr.max_events_per_sec=60<br>
+keyinputqueue.use_finger_id=true<br>
+windowsmgr.max_events_per_sec=60<br>
+keyinputqueue.use_finger_id=true<br>
+windowsmgr.max_events_per_sec=60<br>
+ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html<br>
+ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html<br>
+ro.com.google.locationfeatures=1<br>
+ro.setupwizard.mode=DISABLED<br>
+ro.com.google.gmsversion=2.2_r10<br>
+media.stagefright.enable-player=false<br>
+media.stagefright.enable-meta=false<br>
+media.stagefright.enable-scan=false<br>
+media.stagefright.enable-http=false<br>
+media.stagefright.enable-record=false<br>
+keyguard.no_require_sim=true<br>
+ro.config.ringtone=Minimal_tone.ogg<br>
+ro.config.notification_sound=01_Sherbet.ogg<br>
+ro.config.alarm_alert=Good_Morning.ogg<br>
+ro.config.media_sound=Media_preview_Touch_the_light.ogg<br>
+ro.opengles.version=131072<br>
+net.bt.name=Android<br>
+dalvik.vm.stack-trace-file=/data/anr/traces.txt</p>
+</blockquote>
+<h2 id="conclusão">Conclusão</h2>
+<p>Fui derrotado em minha primeira investida, mas saí com algum conhecimento extra sobre meu equipamento
+e do funcionamento do Android como um todo!</p>
+<p>Eu já sabia que o Android possuía algumas diferenças em relação às distribuições Linux de Desktop,
+mas foi interessante vê-las ao vivo!</p>
+<p>O desafio de instalar um novo sistema no meu tablet antigo mostrou-se mais desafiador do que parecia
+a princípio, mas não desistirei tão cedo!</p>
+<p>Mais adiante vou tentar cobrir o processo de boot completo do Android e talvez o sistema de arquivos dele
+para ajudar quem quiser tentar fazer o mesmo que eu.</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/android/" rel="tag">Android</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/tablet/" rel="tag">Tablet</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/usb/" rel="tag">Usb</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/adb/" rel="tag">adb</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/artigos/a-saga-do-tablet-01/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">A saga do Tablet - parte 01</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/artigos/phploc/" rel="next">
+			<span class="pager__subtitle">Próximo&thinsp;»</span>
+			<p class="pager__title">Avaliando a qualidade do código PHP com Phploc</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2023 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2217338589613653"
+     crossorigin="anonymous"></script>
+</body>
+</html>

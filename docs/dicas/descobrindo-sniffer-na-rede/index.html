@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Rastreando sniffer encondido na rede usando Linux - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="Rastreando sniffer encondido na rede usando Linux" />
+<meta property="og:description" content="A técnica de sniffer é considerada uma das técnicas mais sutis e difíceis de identificar porque o atacante fica imóvel na rede, atuando passivamente enquanto vigia o tráfego de dados.
+Ela consiste em colocar a placa de rede em modo promíscuo e assim capturar todos os pacotes que passam na interface de comunicação, acessando, dessa forma, dados valiosos.
+Como veremos nesta dica, identificar um sniffer é difícil, mas não impossível." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/dicas/descobrindo-sniffer-na-rede/" />
+<meta property="article:published_time" content="2022-06-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-19T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Rastreando sniffer encondido na rede usando Linux">
+<meta itemprop="description" content="A técnica de sniffer é considerada uma das técnicas mais sutis e difíceis de identificar porque o atacante fica imóvel na rede, atuando passivamente enquanto vigia o tráfego de dados.
+Ela consiste em colocar a placa de rede em modo promíscuo e assim capturar todos os pacotes que passam na interface de comunicação, acessando, dessa forma, dados valiosos.
+Como veremos nesta dica, identificar um sniffer é difícil, mas não impossível.">
+<meta itemprop="datePublished" content="2022-06-19T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-06-19T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="846">
+
+
+
+<meta itemprop="keywords" content="Debian,Mint,linux,terminal,rede,segurança,nmap,sniffer,hacker," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Rastreando sniffer encondido na rede usando Linux"/>
+<meta name="twitter:description" content="A técnica de sniffer é considerada uma das técnicas mais sutis e difíceis de identificar porque o atacante fica imóvel na rede, atuando passivamente enquanto vigia o tráfego de dados.
+Ela consiste em colocar a placa de rede em modo promíscuo e assim capturar todos os pacotes que passam na interface de comunicação, acessando, dessa forma, dados valiosos.
+Como veremos nesta dica, identificar um sniffer é difícil, mas não impossível."/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/artigos/">
+					
+					<span class="menu__text">Artigos</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/dicas/">
+					
+					<span class="menu__text">Dicas</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Rastreando sniffer encondido na rede usando Linux</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-06-19T00:00:00Z">19.06.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>A técnica de sniffer é considerada uma das técnicas mais sutis e difíceis de identificar porque o atacante fica imóvel na rede, atuando passivamente enquanto vigia o tráfego de dados.</p>
+<p>Ela consiste em colocar a placa de rede em modo promíscuo e assim capturar todos os pacotes que passam na interface de comunicação, acessando, dessa forma, dados valiosos.</p>
+<p>Como veremos nesta dica, identificar um sniffer é difícil, mas não impossível.</p>
+<p>Para isso vamos usar o nmap e um recurso pouco conhecido dele, o <strong>Nmap Scripting Engine(NSE)</strong>. Ele permite que usuários escrevam scripts para automatizar tarefas de rede.</p>
+<p>Muitos desses scripts são disponibilizados para a comunidade e vêm, inclusive, junto com a ferramenta. No meu sistema, os scripts estão disponíveis em <strong>/usr/share/nmap/scripts</strong>,</p>
+<p>Então, primeiro vamos realizar algumas atividade preliminares e  analisar nosso ambiente:</p>
+<p>Talvez o nmap não esteja instalado. Para instalar basta fazer:</p>
+<blockquote>
+<p>leandro@casa:~$ sudo apt install nmap</p>
+</blockquote>
+<p>Vamos rodar preliminarmente o nmap para verificarmos quantas máquinas temos em nossa rede:</p>
+<blockquote>
+<p>leandro@casa:~$ <strong>sudo nmap -sP  192.168.15.2-10</strong><br>
+Starting Nmap 7.80 ( <a href="https://nmap.org">https://nmap.org</a> ) at 2022-06-19 21:27 -03<br>
+Nmap scan report for 192.168.15.2<br>
+Host is up (0.00021s latency).<br>
+MAC Address: 08:00:27:0A:77:54 (Oracle VirtualBox virtual NIC)<br>
+Nmap scan report for 192.168.15.9<br>
+Host is up.<br>
+Nmap done: 9 IP addresses (2 hosts up) scanned in 26.31 seconds</p>
+</blockquote>
+<p>Agora vamos rodar o sniffer-detect para ver o que encontramos:</p>
+<blockquote>
+<p>leandro@casa:~$ <strong>sudo nmap &ndash;script=sniffer-detect  192.168.15.2-10</strong><br>
+Starting Nmap 7.80 ( <a href="https://nmap.org">https://nmap.org</a> ) at 2022-06-19 21:28 -03<br>
+Nmap scan report for 192.168.15.2<br>
+Host is up (0.00085s latency).<br>
+All 1000 scanned ports on 192.168.15.2 are closed<br>
+MAC Address: 08:00:27:0A:77:54 (Oracle VirtualBox virtual NIC)</p>
+<p>Nmap scan report for 192.168.15.9<br>
+Host is up (0.000016s latency).<br>
+Not shown: 999 closed ports<br>
+PORT   STATE SERVICE<br>
+80/tcp open  http</p>
+</blockquote>
+<p>Nmap done: 9 IP addresses (2 hosts up) scanned in 30.14 seconds</p>
+<p>Podemos ver que há duas máquinas ativas e nada de anormal. O IP 192.168.15.9 é o anfitrião e roda Linux Mint enquanto o IP 192.168.15.2 é uma máquina virtual rodando Debian 11 no VirtualBox.</p>
+<p>Então este será o nosso atacante. Precisamos rodar um sniffer nele, vamos simplificar e rodar o <strong>Tcpdump</strong>. No Debian o comando para instalação como usuário root é o seguinte:</p>
+<blockquote>
+<p>root@debian01:~# apt install tcpdump</p>
+</blockquote>
+<p>No Ubuntu e no Linux Mint pode ser</p>
+<blockquote>
+<p>leandro@leandro:~# sudo apt install tcpdump</p>
+</blockquote>
+<p>Então rodamos nosso sniffer apenas digitando tcpdump na linha de comando e dando enter como usuário <strong>root</strong></p>
+<p><img src="/img/post/dica02/sniffer.png" alt="Sniffer"></p>
+<p>Agora agora nossa rede está insegura! Vamos ver se conseguimos encontrar o problema!</p>
+<p>O script NSE que nos interessa é o <strong>sniffer-detect</strong>. É bom lembrar que o script foi criado para uma rede cabeada Ethernet.</p>
+<p>Isso significa que escanear uma rede wifi vai trazer resultados estranhos (na minha casa apontou que a Smartv estava snifando a rede&hellip;). Enfim, dada a ressalva, podemos executá-lo assim:</p>
+<blockquote>
+<p>leandro@casa:~$ <strong>sudo nmap &ndash;script=sniffer-detect  192.168.15.2-10</strong><br>
+Starting Nmap 7.80 ( <a href="https://nmap.org">https://nmap.org</a> ) at 2022-06-19 21:30 -03<br>
+Nmap scan report for 192.168.15.2<br>
+Host is up (0.0011s latency).<br>
+All 1000 scanned ports on 192.168.15.2 are closed<br>
+MAC Address: 08:00:27:0A:77:54 (Oracle VirtualBox virtual NIC)</p>
+<p><strong>Host script results:</strong><br>
+<strong>|_sniffer-detect: Likely in promiscuous mode (tests: &ldquo;11111111&rdquo;)</strong></p>
+<p>Nmap scan report for 192.168.15.9<br>
+Host is up (0.000016s latency).<br>
+Not shown: 999 closed ports<br>
+PORT   STATE SERVICE<br>
+80/tcp open  http</p>
+<p>Nmap done: 9 IP addresses (2 hosts up) scanned in 28.09 seconds</p>
+</blockquote>
+<p>Como podemos ver, o <strong>nmap</strong> encontrou atividade suspeita após mostrar o primeiro host (192.168.15.2).</p>
+<p>Então a princípio temos um sniffer e nosso suspeito é o host 192.168.15.2. Então vamos rodar o script individualmente contra ele para ver:</p>
+<blockquote>
+<p>leandro@casa:~$ <strong>sudo nmap &ndash;script=sniffer-detect  192.168.15.2</strong><br>
+[sudo] senha para leandro:<br>
+Starting Nmap 7.80 ( <a href="https://nmap.org">https://nmap.org</a> ) at 2022-06-19 21:57 -03<br>
+Nmap scan report for 192.168.15.2<br>
+Host is up (0.00097s latency).<br>
+All 1000 scanned ports on 192.168.15.2 are closed<br>
+MAC Address: 08:00:27:0A:77:54 (Oracle VirtualBox virtual NIC)</p>
+<p><strong>Host script results:</strong><br>
+<strong>|_sniffer-detect: Likely in promiscuous mode (tests: &ldquo;11111111&rdquo;)</strong></p>
+<p>Nmap done: 1 IP address (1 host up) scanned in 14.79 seconds</p>
+</blockquote>
+<p>O resultado parece confirmar nossa suspeita. Podemos rodar contra o outro host(192.168.15.9) para conferir:</p>
+<blockquote>
+<p>leandro@casa:~$ <strong>sudo nmap &ndash;script=sniffer-detect  192.168.15.9</strong><br>
+Starting Nmap 7.80 ( <a href="https://nmap.org">https://nmap.org</a> ) at 2022-06-19 21:32 -03<br>
+Nmap scan report for 192.168.15.9<br>
+Host is up (0.000015s latency).<br>
+Not shown: 999 closed ports<br>
+PORT   STATE SERVICE<br>
+80/tcp open  http</p>
+<p>Nmap done: 1 IP address (1 host up) scanned in 13.77 seconds</p>
+</blockquote>
+<p>Se quiser analisar o código fonte do script - ou de qualquer outro - basta acessar a pasta <strong>/usr/share/nmap/scripts</strong></p>
+<blockquote>
+<p>leandro@casa:/usr/share/nmap/scripts$ ls sniffer-detect.nse -l<br>
+-rw-r&ndash;r&ndash; 1 root root 4327 mar 23  2020 <strong>sniffer-detect.nse</strong></p>
+</blockquote>
+<h1 id="conclusão">Conclusão</h1>
+<p>O nmap, que é um software amplamente conhecido como ferramente preliminar a um ataque, pode ser usado também como ferramente de defesa pelos administradores de rede.</p>
+<p>Esse script, contudo, foi criado para verificar uma rede Ethernet (cabeada). Rodar o script contra uma rede WIFI pode trazer resultados estranhos e inesperados,
+então o uso mais apropriado seria numa rede Ethernet corporativa.</p>
+<p>Além disso, o script utiliza heurísticas para descobrir o sniffer, então pode haver casos de falsos negativos e falsos positivos, mas é um excelente ponto de partida para investigação.</p>
+<p>O código fonte do script está disponível no diretório informado no corpo do artigo para quem quiser conhecer a implementação.</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/debian/" rel="tag">Debian</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/mint/" rel="tag">Mint</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/terminal/" rel="tag">terminal</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/rede/" rel="tag">rede</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/seguran%C3%A7a/" rel="tag">segurança</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/nmap/" rel="tag">nmap</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/sniffer/" rel="tag">sniffer</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/hacker/" rel="tag">hacker</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/dicas/configurar-versao-padrao-comando/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">Configurando uma versão padrão para comandos no Ubuntu Linux 20.04</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/dicas/desframentacao-disco/" rel="next">
+			<span class="pager__subtitle">Próximo&thinsp;»</span>
+			<p class="pager__title">Desfragmentando discos no Ubuntu Linux</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2023 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2217338589613653"
+     crossorigin="anonymous"></script>
+</body>
+</html>

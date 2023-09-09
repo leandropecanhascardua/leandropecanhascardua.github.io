@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Benchmarking de performance de navegador - Leandro Peçanha Scardua</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		
+		<meta property="og:title" content="Benchmarking de performance de navegador" />
+<meta property="og:description" content="Eu tenho um computador com uma configuração modesta e, se isso não fosse suficiente, com sérios problemas no disco rígido.
+Por isso eu preciso aproveitar cada byte da memória RAM. Sendo assim, eu gasto um bom tempo pesquisando sugestões para melhorar a performance do meu equipamento.
+Porém, sempre surge um problema: Como ter certeza de que uma configuração é efetiva? Como saber se realmente houve alguma melhoria (e não uma piora)
+no desempenho? Para não confiar no subjetivismo da opinião pessoal, precisamos traduzir a performance em um valor e de uma ferramenta
+para fazer a medição." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://leandropecanhascardua.github.io/dicas/web-basemark/" />
+<meta property="article:published_time" content="2022-10-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-10-12T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Benchmarking de performance de navegador">
+<meta itemprop="description" content="Eu tenho um computador com uma configuração modesta e, se isso não fosse suficiente, com sérios problemas no disco rígido.
+Por isso eu preciso aproveitar cada byte da memória RAM. Sendo assim, eu gasto um bom tempo pesquisando sugestões para melhorar a performance do meu equipamento.
+Porém, sempre surge um problema: Como ter certeza de que uma configuração é efetiva? Como saber se realmente houve alguma melhoria (e não uma piora)
+no desempenho? Para não confiar no subjetivismo da opinião pessoal, precisamos traduzir a performance em um valor e de uma ferramenta
+para fazer a medição.">
+<meta itemprop="datePublished" content="2022-10-12T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-10-12T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="562">
+
+
+
+<meta itemprop="keywords" content="ubuntu,linux,Android," />
+		
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Benchmarking de performance de navegador"/>
+<meta name="twitter:description" content="Eu tenho um computador com uma configuração modesta e, se isso não fosse suficiente, com sérios problemas no disco rígido.
+Por isso eu preciso aproveitar cada byte da memória RAM. Sendo assim, eu gasto um bom tempo pesquisando sugestões para melhorar a performance do meu equipamento.
+Porém, sempre surge um problema: Como ter certeza de que uma configuração é efetiva? Como saber se realmente houve alguma melhoria (e não uma piora)
+no desempenho? Para não confiar no subjetivismo da opinião pessoal, precisamos traduzir a performance em um valor e de uma ferramenta
+para fazer a medição."/>
+
+
+	<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="https://leandropecanhascardua.github.io/favicon.ico">
+
+	
+		
+	 <link rel="stylesheet" href="/post.css">
+</head>
+<body class="body">
+	<header class="header">
+	
+	<div class="logo logo--mixed">
+		<div class="container">
+			<a class="logo__link" href="/" title="Leandro Peçanha Scardua" rel="home">
+				<div class="logo__item logo__imagebox">
+						<img class="logo__img" src="/img/rei-leao.png" alt="Logo image">
+					</div><div class="logo__item logo__text">
+						<div class="logo__title">Leandro Peçanha Scardua</div>
+						<div class="logo__tagline">Tecnologia e Desenvolvimento de sistemas</div>
+					</div>
+			</a>
+		</div>
+	</div>
+
+</header>
+
+<nav class="menu">
+	<div class="container">
+		<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+			<span class="menu__btn-title" tabindex="-1">Menu</span>
+		</button>
+		<ul class="menu__list">
+			<li class="menu__item">
+				<a class="menu__link" href="/">
+					
+					<span class="menu__text">Home</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/artigos/">
+					
+					<span class="menu__text">Artigos</span>
+					
+				</a>
+			</li>
+			<li class="menu__item">
+				<a class="menu__link" href="/dicas/">
+					
+					<span class="menu__text">Dicas</span>
+					
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+
+	<div class="container wrapper flex">
+		<div class="primary">
+		
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Benchmarking de performance de navegador</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Leandro Peçanha Scardua</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2022-10-12T00:00:00Z">12.10.2022</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linux/" rel="category">Linux</a>, <a class="meta__link" href="/categories/dicas/" rel="category">Dicas</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			<p>Eu tenho um computador com uma configuração modesta e, se isso não fosse suficiente, com sérios problemas no disco rígido.</p>
+<p>Por isso eu preciso aproveitar cada byte da memória RAM. Sendo assim, eu gasto um bom tempo pesquisando sugestões para melhorar a performance do meu equipamento.</p>
+<p>Porém, sempre surge um problema: Como ter certeza de que uma configuração é efetiva? Como saber se realmente houve alguma melhoria (e não uma piora)
+no desempenho? Para não confiar no subjetivismo da opinião pessoal, precisamos traduzir a performance em um valor e de uma ferramenta
+para fazer a medição.</p>
+<p>Por isso eu trouxe como sugestão o Web Basemark, uma ferramenta para medir o desempenho do navegador usando vários testes gráficos e
+de sistema e que implementa algumas recomendações de usabilidade para a web além de testar várias funcionalidades.</p>
+<p>Disponível online no endereço <a href="https://web.basemark.com">https://web.basemark.com</a> ele é muito simples e fácil de usar, como pode ser visto abaixo:</p>
+<p><img src="/img/post/dica05/basemark01.png" alt="teste"></p>
+<p>Para rodar o teste, basta clicar no imenso botão <strong>Start</strong>. Podemos também obter algumas informações sobre o sistema clicando em
+<strong>Device Info</strong> e sobre o tipo de teste em <strong>configuration</strong>.</p>
+<p>É importante destacar que, para obtermos um resultado o mais fiel e preciso possível, é necessário que nenhum outro programa ou aplicação
+esteja aberto ou rodando ao mesmo tempo.</p>
+<p>Depois de rodarmos o teste, obtemos nosso score:</p>
+<p><img src="/img/post/dica05/basemark02.png" alt="teste"></p>
+<p>Temos, assim, um valor que reflete o nível de desempenho do navegador. No meu caso eu fiz o teste usando o navegador Mozila Firefox versão 102.0 no sistema
+operacional Ubuntu 20.04 em um laptop com processador Intel.</p>
+<p>Esses dados são importantes, visto que eu posso querer, por exemplo, saber se o Google Chrome seria mais rápido na minha máquina.</p>
+<p>Nesse caso, eu posso usar o Basemark novamente, mas desta vez no Google Chrome e comparar a performance dos dois:</p>
+<p><img src="/img/post/dica05/basemark03.png" alt="teste"></p>
+<p>Podemos ver assim que além de uma performance pior que aquela que obtivemos no Firefox, o Chrome ainda apresentou algum problema,destacado na mensagem em vermelho.
+Isso já é suficiente para concluirmos que o Firefox se deu melhor que seu concorrente.</p>
+<p>Pode ser também que eu queira comparar não dois navegadores, mas dois sistemas! Eu posso instalar o Pop OS, Ubuntu, Arch e Fedora e
+calcular a performance nos quatro para decidir com qual deles vou ficar, por exemplo.</p>
+<p>Ou mesmo decidir entre versões do mesmo sistema, como as versões 20.04, 21.10 ou 22.04 do Ubuntu e decidir se atualizo ou não um sistema instalado.</p>
+<p>Uma coisa importante a se notar é que essa medição não é estática, isto é, fixa. Cada vez que rodarmos o Basemark podemos obter um
+valor diferente e isso é natural visto que debaixo dos panos o sistema operacional continua ocupado processando informações.</p>
+<p>Eu gosto de imaginar uma sessão de análise de performance como o ato de rodar a ferramenta algumas vezes e tirar alguns valores
+estatísticos como média, mediana, mínimo, máximo e desvio padrão. E usar esses números para fazer a comparação.</p>
+<p>Ainda podemos comparar o resultado que obtivemos com várias configurações disponíveis no mercado (outros usuários)clicando no botão &ldquo;see more results from Power Board&rdquo;.</p>
+<p>Dessa forma somos conduzidos até o site <a href="https://powerboard.basemark.com">https://powerboard.basemark.com</a> onde de fato podemos comparar nossa performance com a de outros sistemas de forma bastante ampla.</p>
+<p>Agora, será que podemos melhorar essa pontuação fazendo alterações na configuração do navegador? E na configuração do sistema operacional? Eu pretendo responder
+a essa pergunta em um próximo artigo.</p>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/ubuntu/" rel="tag">ubuntu</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/android/" rel="tag">Android</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Leandro Peçanha Scardua avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre Leandro Peçanha Scardua</span>
+	</div>
+	<div class="authorbox__description">
+		Desenvolvedor e entusiasta de Software Livre
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/dicas/oneko/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Anterior</span>
+			<p class="pager__title">Diversão para as crianças pequititinhas no Linux</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/dicas/firefox-na-ram/" rel="next">
+			<span class="pager__subtitle">Próximo&thinsp;»</span>
+			<p class="pager__title">Melhorando o desempenho da navegação Web do usuário movendo dados para a memória RAM</p>
+		</a>
+	</div>
+</nav>
+
+
+
+		</div>
+		
+	</div>
+	<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2023 Leandro Peçanha Scardua.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/pfadfinder-konstanz/hugo-dpsg/" rel="nofollow noopener" target="_blank">DPSG</a>.</span>
+			
+		</div>
+		
+
+	</div>
+</footer>
+
+	<script async defer src="/js/menu.js"></script>
+	<script src="/js/custom.js"></script>
+	
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2217338589613653"
+     crossorigin="anonymous"></script>
+</body>
+</html>
