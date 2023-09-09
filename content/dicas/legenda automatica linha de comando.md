@@ -1,0 +1,139 @@
+---
+title: Adicionando legendas em vídeo de forma automatica por reconhecimento automático de fala
+date: 2023-09-07
+tags:
+  - "ubuntu"
+  - "linux"
+
+categories:
+  - "Linux"
+  - "Dicas"
+---
+
+Que tal adicionar legenda naquele filme que você baixou rodando apenas uma linha de comando? 
+
+Usando reconhecimento automático de fala em áudio isso é possível! E muito mais!
+<!--more-->
+
+Vosko é um toolkit reconhecimento de fala que fornece um aplicativo de linha de comando para transcrição automática de áudio. 
+Ele tem a vantagem de trabalhar offline e não necessita de uma chave de registro em API proprietária tal como Google, IBM, Bing etc.
+
+Tem suporte a mais de 20 idiomas, como inglês, espanhol, português, francês entre outros e também fornece módulos para desenvolvimento, permitindo ao desenvolvedor criar seu próprio código caso queira. Contudo, este artigo se refere à ferramenta de linha de comando
+que vem junto com a instalação, o **vosk-transcriber**.
+
+Devemos ter em conta sempre que a trascrição não será perfeita e que ajustes sempre serão necessários. Às vezes mais, às vezes menos. Se a transcrição que você deseja fizer parte de um trabalho importante,
+sempre revise o resultado!
+
+Devemos também ter em mente que a transcrição de conteúdo que tenha mais de um idioma sendo falado, como é comum no ramo da informática não será bom. Mais uma razão para uma revisão posterior!
+
+A instalação é simples. É necessário ter Python versão 3 instalado- o que já é pré-requisitos nos sistemas Linux atuais-- além do pip. Então:
+
+> leandro@Mint-Sala:~$**pip3 install vosk**
+
+e pronto!A mágica já está feita! Este comando vai instalar o vosk-transcriber, que já pode ser chamado pela linha de comando:
+
+>leandro@Mint-Sala:~$ **vosk-transcriber -h**  
+>usage: vosk-transcriber [-h] [--model MODEL] [--server] [--list-models] [--list-languages] [--model-name MODEL_NAME] [--lang LANG] [--input INPUT] [--output OUTPUT]
+>                        [--output-type OUTPUT_TYPE] [--tasks TASKS] [--log-level LOG_LEVEL]
+>  
+>**Transcribe audio file and save result in selected format**  
+>  
+>optional arguments:  
+>  -h, --help            show this help message and exit  
+>  --model MODEL, -m MODEL  
+>                        model path  
+>  --server, -s          use server for recognition  
+>  --list-models         list available models   
+>  --list-languages      list available languages  
+>  --model-name MODEL_NAME, -n MODEL_NAME: select model by name  
+>  --lang LANG, -l LANG : select model by language  
+>  --input INPUT, -i INPUT : audiofile  
+>  --output OUTPUT, -o OUTPUT : optional output filename path  
+>  --output-type OUTPUT_TYPE, -t OUTPUT_TYPE : optional arg output data type  
+>  --tasks TASKS, -ts TASKS :number of parallel recognition tasks  
+>  --log-level LOG_LEVEL : logging level  
+
+Se desejar consultar o site do projeto, basta acessar o site **https://alphacephei.com/vosk/**
+um guia rápido das opções do comando:
+
+-i => arquivo de entrada, arquivo com o áudio a ser processado   
+-o => arquivo de saída em formato texto  
+-t =>  tipo de saída (podemos informar que queremos um formato de legenda)  
+--list-languages => listar os idiomas disponíveis para transcrição  
+--list-models => listar os modelos treinados disponíveis. Um modelo com mais dados pode fornecer uma transcrição mais precisa  
+-n => seleciona o modelo  
+-l => linguagem do áudio  
+
+Estes são os comandos mais básicos. Rodando com a opção -h como fizemos no exemplo acima fornece as opções completas.
+
+Agora  alguns exemplos práticos.
+
+Vamos supor que temos um arquivo que desejamos transcrever, mas que não queremos fazer isso manualmente, isto é, ouvindo e escrevendo, ou pelo menos desejamos diminuir ao máximo nosso trabalho.
+É sempre importante sabermos de antemão o idioma falado no áudio que desejamos transcrever.
+ 
+Como exemplo, baixei em meu hd o conteúdo do vídeo disponível em https://www.youtube.com/watch?v=-bX4pf-s8-E.
+
+Já sei que o vídeo está no idioma português. Saber o idioma é fundamental para um uso eficaz e produtivo da ferramenta como falei no início.
+
+Assim, eu tenho o arquivo **Como-fazer-a-sua-prpria-distro-Linux-do-zero-Linux-From-Scratch-YouTube.mp4** e desejo obter uma transcrição dele. Se eu rodar:
+
+> leandro@Mint-Sala:~$ **vosk-transcriber -i 'Como-fazer-a-sua-prpria-distro-Linux-do-zero-Linux-From-Scratch-YouTube.mp4'**
+
+
+Imediatamente o Vosk-transcriber começa a fazer seu trabalho. Porém, o resultado do processamento é exibido na tela (em vez de ser salvo em arquivo). 
+Outro problema é que é usado o idioma inglês (por padrão), o que resultará em um grande erro.
+
+Portanto, nossa primeira intervenção será para salvarmos o resultado em um arquivo (digamos, com o nome **Como-fazer-a-sua-prpria-distro-Linux-do-zero-Linux-From-Scratch-YouTube.txt**). 
+
+Assim, podemo executar:
+
+> leandro@Mint-Sala:~$ **vosk-transcriber -i 'Como-fazer-a-sua-prpria-distro-Linux-do-zero-Linux-From-Scratch-YouTube.mp4' -o 'Como-fazer-a-sua-prpria-distro-Linux-do-zero-Linux-From-Scratch-YouTube.txt'**
+
+Mas isso ainda vai usar o inglês por padrão. Portanto,vamos usar o idioma português para fazer o reconhecimento do áudio usando opção -l:
+
+> leandro@Mint-Sala:~$ **vosk-transcriber -l pt  -i 'Como-fazer-a-sua-prpria-distro-Linux-do-zero-Linux-From-Scratch-YouTube.mp4' -o 'Como-fazer-a-sua-prpria-distro-Linux-do-zero-Linux-From-Scratch-YouTube.txt'**
+
+Agora podemos ver que o resultado começa a se tornar interessante!
+
+Agora entra em cena a questão dos modelos. Com eles é possível melhorar ainda mais a precisão do reconhecimento selecionando modelos com mais dados (maiores). 
+Mas tenha em mente que isso terá um custo! O modelo será baixado pela internet e, se for maior, maior carga de processamento será utilizada, representando mais tempo de transcrição!
+
+Modelos são os conjuntos usados para fazer o treinamento dentro do algoritmo.
+Por exemplo, o modelo **vosk-model-small-pt-0.3** tem 31Mb enquanto o modelo **vosk-model-pt-fb-v0.1.1-20220516_2113** tem 1.6 Gb!
+A lista dos modelos disponíveis pode ser obtida com:
+
+> leandro@Mint-Sala:~/Leandro/linux/python/transcricao$ **vosk-transcriber --list-models**
+
+a lista de idiomas suportados pode ser obtida com:
+
+> leandro@Mint-Sala:~$ **vosk-transcriber --list-languages**
+
+para facilitar nossa vida podemos filtrar os modelos disponíveis para um idioma usando o grep. Por exemplo, para o idioma português:
+
+> leandro@Mint-Sala:~$ **vosk-transcriber --list-models| grep pt**
+> vosk-model-pt-fb-v0.1.1-20220516_2113
+> vosk-model-pt-fb-v0.1.1-pruned
+> vosk-model-small-pt-0.3
+
+Uma descrição online (assim como o tamanho de cada modelo) pode ser consultada em **https://alphacephei.com/vosk/models**. Mas é bom ter em mente que essa página não é muito atualizada, tendo em vista que alguns modelos não estão
+listadas lá!
+
+Assim, se quisermos fazer nossa transcrição usando o modelo vosk-model-pt-fb-v0.1.1-20220516_2113 (que tem 1.6Gb!), podemos rodar:
+
+> leandro@Mint-Sala:~$ **vosk-transcriber -l pt  -i 'Como-fazer-a-sua-prpria-distro-Linux-do-zero-Linux-From-Scratch-YouTube.mp4' -o 'Como-fazer-a-sua-prpria-distro-Linux-do-zero-Linux-From-Scratch-YouTube.txt' -n vosk-model-pt-fb-v0.1.1-20220516_2113**
+
+Se você rodou os exemplos acima percebeu que o resultado é apenas um arquivo de texto plano com o resultado das frases ditas no vídeo.
+
+Falta cumprir nossa promessa de obter um arquivo de legendas. Para isso podemos passar o parâmetro -t:
+
+> leandro@Mint-Sala:~$ **vosk-transcriber -l pt -t srt  -i 'Como-fazer-a-sua-prpria-distro-Linux-do-zero-Linux-From-Scratch-YouTube.mp4' -o 'Como-fazer-a-sua-prpria-distro-Linux-do-zero-Linux-From-Scratch-YouTube.srt'**
+
+Feito isso podemos abrir nosso programa de vídeo favorito e carregar nossa legenda recém criada! Podemos legendar nosso filme favorito com apenas um comando!!!!! Eita Linux danado!!!!
+
+## Conclusão
+
+Faz tempo que eu queria uma ferramenta para fazer transcrição automática de áudio. Eu cheguei mesmo a desenvolver alguns aplicativos em Python usando a biblioteca **SpeechRecognizer**, 
+mas o resultado foi deplorável e deixou muito a desejar.
+
+Usando **vosk-transcriber** eu consegui meu intento de forma fácil, pela linha de comando e que me permite desenvolver minha própria aplicação se eu assim desejar.
+

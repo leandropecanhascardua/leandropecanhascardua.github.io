@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Leandro Peçanha Scardua</title>
+    <link>https://leandropecanhascardua.github.io/categories/</link>
+    <description>Recent content in Categories on Leandro Peçanha Scardua</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt</language>
+    <lastBuildDate>Thu, 07 Sep 2023 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://leandropecanhascardua.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dicas</title>
+      <link>https://leandropecanhascardua.github.io/categories/dicas/</link>
+      <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/categories/dicas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://leandropecanhascardua.github.io/categories/linux/</link>
+      <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Artigos</title>
+      <link>https://leandropecanhascardua.github.io/categories/artigos/</link>
+      <pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/categories/artigos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PHP</title>
+      <link>https://leandropecanhascardua.github.io/categories/php/</link>
+      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://leandropecanhascardua.github.io/categories/php/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
